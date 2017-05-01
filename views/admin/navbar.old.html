@@ -1,0 +1,56 @@
+<style>
+  .horizontal-collapse {
+    height: 70px;
+  }
+  .navbar-collapse.in {
+    overflow-y: hidden;
+  }
+</style>
+<div class="row" ng-controller="navbarController">
+	<nav class="navbar navbar-default">
+	  <div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+				<span class="sr-only"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">Qplan</a>
+		</div>
+		<div uib-collapse="!isNavCollapsed" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li  dropdown ng-repeat="m in menu" class="dropdown">
+					<a dropdown-toggle href="#">{{m.name}}<span class="caret"></span></a>
+					<ul class="dropdown-menu" >
+						<li ng-repeat-start="(key,item) in m.items" role="separator" class="divider"></li>
+						<li class="nav-header"><em>{{item.label}}</em></li>
+						<li ng-repeat-end ng-repeat="r in item.items"><a href="#!/{{r.href}}">{{r.label}}</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<!-- <li><a href="#">Link</a></li> -->
+				<li class="dropdown">
+					<a>Administración<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class="nav-header"><em>Sistema</em></li>
+						<li class="active"><a href="#!/users">Usuarios</a></li>
+						<li><a href="#!/users">Roles</a></li>
+						<li><a href="#!/users">Recursos</a></li>
+						<li><a href="#!/users">Clientes</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="" ng-click="logout()">
+						<span class="glyphicon glyphicon-off"></span>
+						Logout
+				</a>
+				</li>
+			</ul>
+		</div>
+	  </div><!-- /.container-fluid -->
+	</nav>
+</div>

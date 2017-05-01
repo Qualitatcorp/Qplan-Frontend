@@ -1,0 +1,43 @@
+{
+  "js": {
+    "modules": [
+      "node_modules/angular/angular.min.js",
+      "node_modules/angular-animate/angular-animate.min.js",
+      "node_modules/angular-route/angular-route.min.js",
+      "node_modules/angular-i18n/angular-locale_es-cl.js",
+      "node_modules/angular-strap/dist/angular-strap.min.js",
+      "node_modules/angular-strap/dist/angular-strap.tpl.min.js",
+      "node_modules/angular-toastr/dist/angular-toastr.tpls.min.js",
+      "app/shared/directive/angular-rut.min.js"
+    ],
+    "vendors": [
+      "node_modules/moment/min/moment.min.js",
+      "node_modules/underscore/underscore-min.js",
+      "node_modules/video.js/dist/video.min.js",
+      "node_modules/video.js/dist/lang/es.js",
+      "node_modules/vjs-video/dist/vjs-video.min.js",
+      "node_modules/angular-sanitize/angular-sanitize.js"
+    ],
+    "app": [
+      "app/shared/services/REST/qplanRest.js",
+      "app/shared/services/trabajadorStorage.js",
+      "app/shared/services/evaluacionStorage.js",
+      "app/shared/services/apiServices.js",
+      "app/shared/services/sessionServices.js",
+      "app/shared/services/authenticationServices.js",
+      "app/components/trabajador/trabajador.js",
+      "app/components/trabajador/loginController.js",
+      "app/components/trabajador/antecedentesController.js",
+      "app/components/trabajador/experienciaController.js",
+      "app/components/trabajador/evaluacionControlller.js",
+      "app/components/trabajador/terminoController.js",
+      "app/components/trabajador/authController.js"
+    ]
+  },
+  "css": [
+    "css/bootstrap.cerulean.min.css",
+    "node_modules/video.js/dist/alt/video-js-cdn.min.css",
+    "node_modules/angular-toastr/dist/angular-toastr.min.css",
+    "node_modules/angular-motion/dist/angular-motion.min.css"
+  ]
+}

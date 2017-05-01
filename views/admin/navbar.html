@@ -1,0 +1,47 @@
+<style>
+  .horizontal-collapse {
+    height: 70px;
+  }
+  .navbar-collapse.in {
+    overflow-y: hidden;
+  }
+</style>
+<div class="row" ng-controller="navbarController">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+					<span class="sr-only"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Qplan</a>
+			</div>
+			<div uib-collapse="isNavCollapsed" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li dropdown ng-repeat="m in menu" class="dropdown"  uib-dropdown>
+						<a role="button" uib-dropdown-toggle>{{m.name}}<span class="caret"></span></a>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<!-- <li  role="separator" class="divider"></li> -->
+							<li ng-repeat-start="(key,item) in m.items" class="nav-header"><em>{{item.label}}</em></li>
+							<li ng-repeat-end ng-repeat="r in item.items"><a href="#!/{{r.href}}">{{r.label}}</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li dropdown class="dropdown" uib-dropdown>
+						<a href="#" role="button" uib-dropdown-toggle>Cuenta<span class="caret"></span></a>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<!-- <li  role="separator" class="divider"></li> -->
+							<li ng-show="menu.length>0"><a ng-click="logout()">Cerrar sesión</a></li>
+							<li ng-show="menu.length>0"><a href="#!/changepassword">Cambiar contraseña</a></li>
+							<li ng-show="menu.length>0"><a href="#!/updateUser">Cambiar Informacion de Perfil</a></li>
+							<li ng-show="menu.length==0"><a href="#!/login">Ingresar al sistema</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+</div>

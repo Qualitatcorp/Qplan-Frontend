@@ -1,0 +1,84 @@
+<div class="page-header">
+  <h1>Orden de servicio<small> N°{{model.id}}</small></h1>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">Orden de servicio</div>
+	<table class="table table-hover" name="trabajador">
+		<tbody>
+			<tr>
+				<th>Fecha Solicitud</th>
+				<td ng-bind="model.solicitud.inicio"></td>
+				<th>Solicitado por</th>
+				<td><a href="users/{{model.usuario.id}}"></a>{{model.usuario.nombre}} {{model.usuario.materno}} {{model.usuario.paterno}} </td>
+			</tr>
+			<tr>
+				<th>Empresa Contratista</th>
+				<td ng-bind="model.empresa.razon"></td>
+				<th>Empresa Mandante</th>
+				<td ng-bind="model.mandante.nombre"></td>
+			</tr>	
+			<tr>
+				<th>Tipo de personal</th>
+				<td ng-bind="model.personal"></td>
+				<th>Tipo de Certificación</th>
+				<td ng-bind="model.tipo"></td>
+			</tr>			
+			<tr>
+				<th>Fechas de inicio</th>
+				<td ng-bind="model.inicio"></td>
+				<th>Fecha de termino</th>
+				<td ng-bind="model.termino"></td>
+			</tr>
+			<tr>
+				<th>Especialidad</th>
+				<td ng-bind="model.perfil.nombre"></td>
+				<th>Direccion de Servicio</th>
+				<td ng-bind="model.direccion"></td>
+			</tr>
+		</tbody>
+	</table>
+ 	<div class="panel-body">
+ 		<div class="pull-right">
+ 		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+ 		<a href="#!/ot/{{model.id}}/summary"  class="btn btn-primary">Resumen de avance</a>
+ 			
+ 		</div>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		Orden de trabajo 
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>RUT</th>
+				<th>Nombre</th>
+				<th>Paterno</th>
+				<th>Materno</th>
+				<th>Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(key, t) in model.trabajador">
+				<td>{{key+1}}</td>
+				<td><a href="#!/worker/{{t.id}}">{{t.rut}}</a></td>
+				<td>{{t.nombre}}</td>
+				<td>{{t.paterno}}</td>
+				<td>{{t.materno}}</td>
+				<td><button ng-click="rmTrabajador(key)" class="btn btn-xs btn-danger">Quitar</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="panel-body">
+		<div class="pull-right">
+			<a href="#!/ot/{{model.id}}/add" class="btn btn-default">Agregar trabajador</a>
+			<label class="btn btn-default ">
+				Agregar por Excel
+				<js-xls onread="read" onerror="error" ng-show="false"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"></js-xls>
+			</label>
+			<button ng-click="downloadPlantilla()" class="btn btn-success">Descargar plantilla</button>
+		</div>
+	</div>
+</div>

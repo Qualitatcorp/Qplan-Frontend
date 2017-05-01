@@ -1,0 +1,154 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Antecedentes Trabajador</h1>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<form name="loginForm" class="form-horizontal">
+		<div class="col-md-6">
+			<!-- form -->
+			<div class="form-group">
+				<label class="col-sm-4 control-label">RUT</label>
+				<div class="col-sm-8">
+					<input type="text" ng-disabled="true" ng-model="trabajador.rut" class="form-control" placeholder="Ingrese su RUT">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Nombres</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="trabajador.nombre" class="form-control" placeholder="Ingrese sus nombres">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Apellido Paterno</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="trabajador.paterno" class="form-control" placeholder="Ingrese su apellido parterno">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Apellido Materno</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="trabajador.materno" class="form-control" placeholder="Ingrese su apellido materno">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Estado civil</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" ng-model="trabajador.civil" bs-options="n as n for n in Select.estado_civil" bs-select></button>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Fecha Nacimiento</label>
+				<div class="col-sm-8">
+					<input 
+					type="text" 
+					ng-model="trabajador.nacimiento" 
+					class="form-control" 
+					placeholder="Ingrese sus fecha de nacimiento" 
+					data-date-format="yyyy-MM-dd"
+					data-start-view="2" 
+					bs-datepicker>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Nacionalidad</label>
+				<div class="col-sm-8">
+					<input 
+					type="text" 
+					ng-model="interface.pais"
+					class="form-control"
+					placeholder="Ingrese su pais de origen" 
+					bs-options="pais as pais.nombre for pais in getPaises($viewValue)"
+					data-auto-select="true" 
+					
+					bs-typeahead>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Cantidad de hijos</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" ng-model="trabajador.hijos" bs-options="l as l for l in [0,1,2,3,4,5,6,7,8,9]" bs-select></button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Nivel Educacional</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" ng-model="trabajador.nivel" bs-options="n as n for n in Select.niveles" bs-select></button>
+				</div>
+			</div>			
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Años experiencia</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" ng-model="trabajador.antiguedad" bs-options="l as l for l in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20,25,30,35,40,50,60]" bs-select></button>
+				</div>
+			</div>			
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Licencia</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" data-multiple="true" ng-model="interface.licencia" bs-options="l as l for l in Select.licencias" bs-select></button>
+				</div>
+			</div>
+<!-- 			<div class="form-group">
+				<label class="col-sm-4 control-label">Talla</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" ng-model="trabajador.talla" bs-options="n as n for n in Select.tallas" bs-select></button>
+				</div>
+			</div> -->
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Residencia</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" ng-model="trabajador.direccion" placeholder="Ingrese su residencia">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Comuna</label>
+				<div class="col-sm-8">
+					<input 
+					type="text" 
+					class="form-control" 
+					ng-model="interface.comuna"
+					placeholder="Ingrese su comuna"
+					data-auto-select="true" 
+					data-min-length="2" 
+					bs-options="comuna as comuna.nombre for comuna in getComuna($viewValue)"
+					bs-typeahead>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Fono de contacto</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" ng-model="trabajador.contacto" placeholder="Ingrese su numero de contacto">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Email</label>
+				<div class="col-sm-8">
+					<input type="mail" class="form-control" ng-model="trabajador.mail" placeholder="Ingrese su correo electronico">
+				</div>
+			</div>
+<!-- 			<div class="form-group">
+				<label class="col-sm-4 control-label">Plan de pensión</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" ng-model="trabajador.afp" bs-options="n as n for n in Select.afp" bs-select></button>
+				</div>
+			</div>			
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Previsión de Salud</label>
+				<div class="col-sm-8">
+					<button placeholder="Seleccione..." type="button" class="btn btn-default" ng-model="trabajador.prevision" bs-options="n as n for n in Select.salud" bs-select></button>
+				</div>
+			</div> -->
+			<!-- fin form -->
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-4 col-sm-8">
+				<button type="submit" class="btn btn-primary pull-right" ng-click="siguiente()">Siguiente</button>
+			</div>
+		</di>			
+	</form>
+</div>

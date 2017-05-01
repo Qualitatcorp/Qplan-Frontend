@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Administrador <small>Orden de servicio</small></h1>
+		</div>
+	</div>
+	<div class="col-md-12">
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped table-bordered table-hover table-responsive">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Numero Orden</th>
+					<th>Estado Orden</th>
+					<th>Empresa Contratista</th>
+					<th>Empresa Mandatoria</th>
+					<th>Tipo Certificación</th>
+					<th>Usuario Encargado</th>
+					<th>Fecha Solicitud</th>
+					<th>Fecha Servicio</th>
+					<th>Cantidad Trabajadores</th>
+				</tr>
+				<tr>
+					<th>#</th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.id"></th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.estado"></th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.empresa.razon"></th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.mandante.nombre"></th>
+					<th><input type="text" class="form-control input-sm"></th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.usuario.nombre"></th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.solicitud.creacion"></th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.inicio"></th>
+					<th><input type="number" class="form-control input-sm" ng-model="buscar.countfic"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, model) in list | filter:buscar | orderBy:model.inicio | limitTo:20">
+					<th>{{key+1}}</th>
+					<td>{{model.id}}</td>
+					<td>{{model.estado}}</td>
+					<td><a href="#!/empresa/{{model.empresa.id}}">{{model.empresa.razon}}</a></td>
+					<td><a href="#!/empresa/{{model.mandante.id}}">{{model.mandante.nombre}}</a></td>
+					<td>Certificación</td>
+					<td><a href="#!/users/{{model.usuario.id}}">{{model.usuario.nombre}}</a></td>
+					<td>{{model.solicitud.creacion}}</td>
+					<td>{{model.inicio}}</td>
+					<td><a href="#!/ot/{{model.id}}">{{model.counttra}}</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

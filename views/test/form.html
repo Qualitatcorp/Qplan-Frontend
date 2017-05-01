@@ -1,0 +1,68 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+<form name="personaForm">
+	<div class="form-group">
+		<label>Nombre</label>
+		<input 
+		type="text" 
+		class="form-control" 
+		ng-model="persona.nombre">
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': personaForm.nacimiento.$touched && personaForm.nacimiento.$invalid }">
+		<label>Nacimiento</label>
+		<input 
+		type="text" 
+		name="nacimineto" 
+		class="form-control" 
+		ng-model="persona.nacimiento" 
+		data-max-date="today" 
+		data-autoclose="1"
+		data-date-type="date"
+		data-date-format="fullDate"
+		required 
+		bs-datepicker>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': personaForm.hijos.$touched && personaForm.hijos.$invalid }">
+		<label>Hijos *</label>
+		<input 
+		name="hijos"
+		type="number"
+		class="form-control"
+		ng-model="persona.hijos"
+		min="0"
+		required>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': personaForm.civil.$touched && personaForm.civil.$invalid }">
+		<label>Estado Civil *</label>
+		<input 
+		type="text" 
+		name="civil" 
+		class="form-control" 
+		ng-model="persona.civil" 
+		required>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': personaForm.licencia.$touched && personaForm.licencia.$invalid }">
+		<label>Licencia de Conducir</label>
+		<input 
+		type="text" 
+		name="licencia"
+		class="form-control" 
+		ng-model="persona.licencia" 
+		required>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': personaForm.estatura.$touched && personaForm.estatura.$invalid }">
+		<label>Estatura</label>
+		<input 
+		type="number" 
+		name="estatura" 
+		class="form-control" 
+		ng-model="persona.estatura" 
+		step="0.01" 
+		required>
+	</div>
+	<div class="form-group">
+		<label>Comuna</label>
+		<input type="text" class="form-control" ng-model="persona.comuna">
+	</div>
+	<a href="#!/admin" class="btn btn-default">Volver</a>
+	<button ng-disabled="personaForm.$invalid" type="submit" class="btn btn-primary" ng-click="guardar()">Guardar</button>
+</form>

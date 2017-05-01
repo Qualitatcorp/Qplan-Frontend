@@ -1,0 +1,93 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+<form name="modelForm">
+<div class="col-md-4">
+	<div class="form-group" ng-class="{ 'has-error': modelForm.username.$touched && modelForm.username.$invalid }">
+		<label>Usuario*</label>
+		<input 
+		name="username"
+		type="text" 
+		class="form-control" 
+		ng-model="model.username"
+		required>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': modelForm.password.$touched && modelForm.password.$invalid }">
+		<label>Contraseña*</label>
+		<input 
+		name="password"
+		type="password" 
+		class="form-control" 
+		ng-model="model.password"
+		minlength="6" 
+		required>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': modelForm.rut.$touched && modelForm.rut.$invalid }">
+		<label>RUT</label>
+		<input 
+		name="rut"
+		type="text" 
+		class="form-control" 
+		ng-model="model.rut"
+		ng-rut
+		rut-format="live">
+	</div>
+</div>
+<div class="col-md-4">
+	<div class="form-group" ng-class="{ 'has-error': modelForm.nombre.$touched && modelForm.nombre.$invalid }">
+		<label>Nombre*</label>
+		<input 
+		name="nombre"
+		type="mail" 
+		class="form-control" 
+		ng-model="model.nombre"
+		required>
+	</div>	
+	<div class="form-group" ng-class="{ 'has-error': modelForm.paterno.$touched && modelForm.paterno.$invalid }">
+		<label>Apellido Paterno</label>
+		<input 
+		name="paterno"
+		type="text" 
+		class="form-control" 
+		ng-model="model.paterno">
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': modelForm.materno.$touched && modelForm.materno.$invalid }">
+		<label>Apellido Materno</label>
+		<input 
+		name="materno"
+		type="text" 
+		class="form-control" 
+		ng-model="model.materno">
+	</div>	
+</div>
+<div class="col-md-4">
+	<div class="form-group" ng-class="{ 'has-error': modelForm.cargo.$touched && modelForm.cargo.$invalid }">
+		<label>Cargo</label>
+		<input 
+		name="cargo"
+		type="text" 
+		class="form-control" 
+		ng-model="model.cargo">
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': modelForm.mail.$touched && modelForm.mail.$invalid }">
+		<label>Correo electronico</label>
+		<input 
+		name="mail"
+		type="email" 
+		class="form-control" 
+		ng-model="model.mail">
+	</div>	
+	<div class="form-group" ng-class="{ 'has-error': modelForm.nacimiento.$touched && modelForm.nacimiento.$invalid }">
+		<label>Nacimiento</label>
+		<input 
+		type="date" 
+		name="nacimineto" 
+		class="form-control" 
+		ng-model="model.nacimiento" >
+	</div>
+</div>
+<div class="col-md-12">
+	
+<!-- <button ng-click="back()" class="btn btn-default">Volver</button> -->
+<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+<button ng-disabled="modelForm.$invalid" type="submit" class="btn btn-primary" ng-click="save(model)">Guardar</button>
+</div>
+</form>

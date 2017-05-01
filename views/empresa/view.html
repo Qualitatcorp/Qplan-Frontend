@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-md-3">
+		<ul class="nav nav-pills nav-stacked">
+  		<li><a href="#!/empresa/createclasificacion">Crear Clasificación</a></li>
+  		<li><a href="#">Menu 1</a></li>
+  		<li><a href="#">Menu 2</a></li>
+  		<li><a href="#">Menu 3</a></li>
+		</ul>
+	</div>	
+	<div class="col-md-9">
+	<div class="page-header">
+			<h1>Ver <small>a {{empresa.nombre}}</small></h1>
+		</div>
+		<h2>Datos</h2>
+		<div class="table-responsive">          
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>Nombre</th>
+						<td>{{empresa.nombre}}</td>
+						<th>RUT</th>
+						<td>{{empresa.rut}}</td>
+					</tr>
+					<tr>
+						<th>Razón Social</th>
+						<td>{{empresa.razon}}</td>
+						<th>Giro</th>
+						<td>{{empresa.giro}}</td>
+					</tr>
+					<tr>
+						<th>Fono</th>
+						<td>{{empresa.fono}}</td>
+						<th>Email</th>
+						<td>{{empresa.mail}}</td>
+					</tr>
+					<tr>
+						<th>Pais</th>
+						<td>{{empresa.comuna.nombre}}</td>
+						<th>Comuna</th>
+						<td>{{empresa.pais.nombre}}</td>
+					</tr>
+					<tr>
+						<th>Habilitada</th>
+						<td>{{empresa.habilitada}}</td>
+						<th>Creada</th>
+						<td>{{empresa.creada}}</td>			
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+	</div>
+</div>

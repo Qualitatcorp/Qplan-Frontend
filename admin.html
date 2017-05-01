@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="admin">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="img/favicon.ico" rel="shortcut icon">
+	<title>Q-Plan</title>
+	<!-- Dependencias CSS -->
+	<link href="css/bootstrap.cerulean.min.css" rel="stylesheet">
+	<link href="node_modules/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet">
+	<link href="node_modules/angular-motion/dist/angular-motion.min.css" rel="stylesheet">
+	<!-- css perzonalice -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="node_modules/video.js/dist/ie8/videojs-ie8.min.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+	<div class="container">
+		<ng-include src="'views/admin/navbar.html'"></ng-include>
+		<ng-view></ng-view>
+	</div>
+	<!-- Angular -->
+	<script src="node_modules/angular/angular.min.js"></script>
+	<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+	<script src="node_modules/angular-route/angular-route.min.js"></script>
+	<script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+	<script src="node_modules/angular-i18n/angular-locale_es-cl.js"></script>
+	<!-- Modulos -->
+	<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+	<script src="node_modules/angular-bootstrap-confirm/dist/angular-bootstrap-confirm.min.js"></script>
+	<script src="node_modules/angular-file-saver/dist/angular-file-saver.bundle.min.js"></script>
+	<!-- Directiva -->
+	<script src="app/shared/directive/angular-rut.min.js"></script>
+	<!-- xls -->
+	<script src="node_modules/xlsx/dist/xlsx.core.min.js"></script>
+	<script src="node_modules/angular-js-xlsx/angular-js-xlsx.js"></script>
+	<!-- toastr -->
+	<script src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+	<!-- Moments -->
+	<script src="node_modules/moment/min/moment.min.js"></script>
+	<!-- Underscore -->
+	<script src="node_modules/underscore/underscore-min.js"></script>
+	<!-- App -->
+	<script src="app/components/admin/admin.js"></script>
+	<script src="app/components/admin/loginController.js"></script>
+	<script src="app/components/admin/navbarController.js"></script>
+	<!-- Modulos -->
+	<script src="app/shared/modules/user/user.js"></script>
+	<script src="app/shared/modules/user/adminController.js"></script>
+	<script src="app/shared/modules/user/createController.js"></script>
+	<script src="app/shared/modules/user/updateController.js"></script>
+	<script src="app/shared/modules/ot/ot.js"></script>
+	<script src="app/shared/modules/ot/adminControlller.js"></script>
+	<script src="app/shared/modules/ot/createController.js"></script>
+	<script src="app/shared/modules/ot/updateController.js"></script>
+	<script src="app/shared/modules/ot/viewController.js"></script>
+	<script src="app/shared/modules/ot/createTrabajadorController.js"></script>
+	<script src="app/shared/modules/ot/summaryController.js"></script>
+	<script src="app/shared/modules/trabajador/worker.js"></script>
+	<script src="app/shared/modules/trabajador/adminController.js"></script>
+	<script src="app/shared/modules/trabajador/createController.js"></script>
+	<script src="app/shared/modules/trabajador/editController.js"></script>
+	<script src="app/shared/modules/trabajador/viewController.js"></script>
+	<script src="app/shared/modules/empresa/empresa.js"></script>
+	<script src="app/shared/modules/empresa/adminController.js"></script>
+	<script src="app/shared/modules/empresa/createController.js"></script>
+	<script src="app/shared/modules/empresa/editController.js"></script>
+	<script src="app/shared/modules/empresa/viewController.js"></script>
+	<script src="app/shared/modules/evaluation/evaluationmantenedor.js"></script>
+	<script src="app/shared/modules/evaluation/adminevaluationController.js"></script>
+	<script src="app/shared/modules/evaluation/createevaluationController.js"></script>
+	<script src="app/shared/modules/evaluation/editevaluationController.js"></script>
+	<script src="app/shared/modules/evaluation/viewevaluationController.js"></script>
+	<script src="app/shared/modules/evaluation/admintipoController.js"></script>
+	<script src="app/shared/modules/evaluation/createtipoController.js"></script>
+	<script src="app/shared/modules/evaluation/edittipoController.js"></script>
+	<script src="app/shared/modules/evaluation/viewtipoController.js"></script>
+	<script src="app/shared/modules/evaluation/editpreguntaController.js"></script>
+	<script src="app/shared/modules/evaluation/createpreguntaController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/adminclasificacionController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/createclasificacionController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/editclasificacionController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/viewclasificacionController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/adminclasificacionperfilController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/createclasificacionperfilController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/editclasificacionperfilController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/viewclasificacionperfilController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/admincategoriaController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/createcategoriaController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/editcategoriaController.js"></script>
+	<script src="app/shared/modules/evaluation/clasificacion/viewcategoriaController.js"></script>
+	<script src="app/shared/modules/perfil/perfil.js"></script>
+	<script src="app/shared/modules/perfil/adminperfilController.js"></script>
+	<script src="app/shared/modules/perfil/createperfilController.js"></script>
+	<script src="app/shared/modules/perfil/editperfilController.js"></script>
+	<script src="app/shared/modules/perfil/viewperfilController.js"></script>
+	<!-- Servicios -->
+	<script src="app/shared/services/REST/ApiRest.js"></script>
+	<script src="app/shared/services/sessionServices.js"></script>
+	<script src="app/shared/services/authenticationServices.js"></script>
+	<script src="app/shared/services/authInterceptor.js"></script>
+	<script src="app/shared/services/userServices.js"></script>
+	<script src="app/shared/services/otServices.js"></script>
+	<script src="app/shared/services/apiServices.js"></script>
+	<script src="app/shared/services/paisServices.js"></script>
+	<script src="app/shared/services/comunaServices.js"></script>
+	<script src="app/shared/services/trabajadorServices.js"></script>
+	<script src="app/shared/services/empresaServices.js"></script>
+	<!-- angular-file-upload -->
+	<script src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
+
+</body>
+
+</html>

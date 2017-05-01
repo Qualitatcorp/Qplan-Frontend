@@ -1,0 +1,104 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+<form name="workerForm">
+	<!-- form -->
+	<div class="col-md-4">
+		<div class="form-group" ng-class="{ 'has-error': workerForm.rut.$touched && workerForm.rut.$invalid }">
+			<label>RUT*</label>
+			<input name="rut" type="text" ng-model="worker.rut" class="form-control" placeholder="Ingrese su RUT" required>
+		</div>
+		<div class="form-group">
+			<label>Nombres</label>			
+			<input type="text" ng-model="worker.nombre" class="form-control" placeholder="Ingrese sus nombres">		
+		</div>
+		<div class="form-group">
+			<label>Apellido Paterno</label>
+			<input type="text" ng-model="worker.paterno" class="form-control" placeholder="Ingrese su apellido parterno">
+		</div>
+		<div class="form-group">
+			<label>Apellido Materno</label>
+			<input type="text" ng-model="worker.materno" class="form-control" placeholder="Ingrese su apellido materno">
+		</div>
+		<div class="form-group">
+			<label>Estado Civil</label>
+			<select placeholder="Ingrese estado civil" class="form-control" ng-model="worker.civil" ng-init="worker.civil=worker.civil||'SOLTERO/A'" ng-options="h for h in select.civil" required></select>
+		</div>
+		<div class="form-group">
+			<label>Talla</label>
+			<select placeholder="Ingrese talla de vestir" class="form-control" ng-model="worker.talla" ng-init="worker.talla=worker.talla||'L'" ng-options="h for h in select.talla" required></select>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="form-group">
+			<label>Fecha Nacimiento</label>
+			<p class="input-group">
+				<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="worker.nacimiento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			</p>
+		</div>
+		<div class="form-group">
+			<label>Nacionalidad</label>			
+			<input 
+			type="text" 
+			ng-model="interface.pais" 
+			placeholder="Seleccione un país" 
+			uib-typeahead="pais as pais.nombre for pais in getPaises($viewValue)" 
+			class="form-control">
+		</div>
+		<div class="form-group">
+			<label>Cantidad de hijos</label>
+			<select placeholder="Ingrese cantidad de hijos" class="form-control" ng-model="worker.hijos" ng-init="worker.hijos=worker.hijos||0" ng-options="h for h in select.hijos" required></select>
+		</div>
+
+		<div class="form-group">
+			<label>Nivel Educacional</label>
+			<select placeholder="Ingrese nivel educacional" class="form-control" ng-model="worker.nivel" ng-init="worker.nivel=worker.nivel||'Profesional'" ng-options="h for h in select.nivel" required></select>
+		</div>			
+		<div class="form-group">
+			<label>Años experiencia</label>			
+			<select placeholder="Ingrese años de experiencia" class="form-control" ng-model="worker.antiguedad" ng-init="worker.antiguedad=worker.antiguedad||1" ng-options="h for h in select.antiguedad" required></select>
+		</div>	
+		<div class="form-group">
+			<label>Licencia</label>
+			<select  placeholder="Ingrese tipo de licencia de conducir" class="form-control" ng-model="worker.licencia" ng-init="worker.licencia=worker.licencia||'B'" ng-options="h for h in select.licencia" required></select>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		
+		<div class="form-group">
+			<label>Previsión</label>
+			<select placeholder="Ingrese tipo de previsión" class="form-control" ng-model="worker.prevision" ng-init="worker.prevision=worker.prevision||'FONASA'" ng-options="h for h in select.salud" required></select>
+		</div>
+		<div class="form-group">
+			<label>AFP</label>
+			<select  placeholder="Ingrese tipo de AFP" class="form-control" ng-model="worker.afp" ng-init="worker.afp=worker.afp||'AFP Habitat'" ng-options="h for h in select.afp" required></select>
+		</div>
+		<div class="form-group">
+			<label>Residencia</label>
+			<input type="text" class="form-control" ng-model="worker.direccion" placeholder="Ingrese su residencia">
+		</div>
+		<div class="form-group">
+			<label>Fono de contacto</label>
+			<input type="text" class="form-control" ng-model="worker.fono" placeholder="Ingrese su numero de contacto">
+		</div>
+
+
+		<div class="form-group">
+			<label>Email</label>			
+			<input type="email" class="form-control" ng-model="worker.mail" placeholder="Ingrese su correo electronico">
+		</div>
+
+	</div>
+
+	<div class="col-md-12">
+		<div class="form-group">
+			<!-- <a href="#!/worker/admin" class="btn btn-default">Volver</a> -->
+			<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+			<button ng-disabled="workerForm.$invalid" type="submit" class="btn btn-primary" ng-click="save()">Guardar</button>
+		</div>
+	</div>
+
+</form>

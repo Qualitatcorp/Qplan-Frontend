@@ -1,0 +1,43 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+
+<form name="empresaForm">
+	
+	<div class="col-md-12">
+		<div class="form-group" ng-class="{ 'has-error': empresaForm.nombre.$touched && empresaForm.nombre.$invalid }">
+			<label>Nombre*</label>
+			<input 
+			name="nombre" 
+			type="text" 
+			class="form-control" 
+			ng-model="perfil.nombre"
+			placeholder="Ingrese el nombre" 
+			required 
+			>		
+		</div>
+		<div class="form-group">
+			<label>Descripción</label>
+			<textarea  
+			rows="3" 
+			class="form-control" 
+			ng-model="perfil.descripcion"
+			placeholder="Ingrese la descripción del perfil" 
+			></textarea>
+		</div>
+		<div class="form-group">
+			<label>Documento*</label>
+			<textarea   
+			rows="3" 
+			class="form-control" 
+			placeholder="Ingrese el documento" 
+			ng-model="perfil.documento"
+			></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-2">
+			<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+			<button ng-disabled="empresaForm.$invalid" type="submit" class="btn btn-primary" ng-click="save()">Guardar</button>
+		</div>
+	</div>
+
+</form>
