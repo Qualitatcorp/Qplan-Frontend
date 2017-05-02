@@ -4,7 +4,16 @@
 *
 * Modulo de evaluacion del trabajador
 */
-angular.module('trabajador', ['ngRoute','ngAnimate','mgcrea.ngStrap','ApiRest','rut','toastr','vjs.video','ngSanitize'])
+angular.module('trabajador', [
+'ngRoute',
+'ngAnimate',
+'mgcrea.ngStrap',
+'ApiRest',
+'rut',
+'toastr',
+'filters',
+'vjs.video',
+'ngSanitize'])
 
 .config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvider) {
 	$routeProvider
