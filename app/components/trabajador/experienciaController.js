@@ -1,14 +1,14 @@
 'use strict'
 angular.module('trabajador')
 
-.controller('experienciaController', ['trabajadorStorage','$modal','$scope','$location','apiServices','toastr',
-	function(trabajadorStorage,$modal,$scope,$location,api,toastr){
+.controller('experienciaController', ['$filter','trabajadorStorage','$modal','$scope','$location','apiServices','toastr',
+	function($filter,trabajadorStorage,$modal,$scope,$location,api,toastr){
 		var playAudio=function(src){
 			var audio = document.getElementById('player');
 				audio.src=src;
 				audio.play();
 		}
-		playAudio("src/audio/trabajador/experiencialaboral.m4a");
+		playAudio($filter('dinamicSource')('src/audio/trabajador/experiencialaboral.m4a'));
 		var experienciaServices = api.model('trabajadorexperiencia'),
 			cargoServices = api.model('especialidadcargo');
 			

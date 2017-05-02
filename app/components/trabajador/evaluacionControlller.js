@@ -1,4 +1,4 @@
-'user strict'
+"use strict";
 angular.module('trabajador')
 .controller('evaluacionController', ['$scope','evaluacionStorage','$location','evaluacion','trabajadorStorage','toastr',
 	function($scope,evaluacionStorage,$location,evaluacion,trabajadorStorage,toastr){
