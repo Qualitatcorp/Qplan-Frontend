@@ -1,6 +1,13 @@
 angular.module('Evaluationmantenedor')
 
-.controller('evaluation.createpreguntaController', ['FileUploader','$scope','$routeParams','apiServices','$location','toastr',function(FileUploader,$scope,$routeParams,apiServices,$location,toastr){
+.controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,auth,$location,toastr){
+	//SUBIR ARCHIVOS
+    var uploader = $scope.uploader = new FileUploader({
+    	   headers:{ "Authorization": "Bearer " + sessionStorage.access_token },
+           url: WebApiConfig.resourceUrl("recursossources"),
+           autoUpload :true,
+          });
+	
 	
 	$scope.pregunta={};
 
@@ -19,7 +26,7 @@ angular.module('Evaluationmantenedor')
 	$scope.recursoshas = {};
 
 	$scope.files = [
-  		{type: "image/png", src: "click5", title :"prop2"},
+ 		{type: "image/png", src: "click5", title :"prop2"},
   		{type: "image/png", src: "click6", title :"prop3"}
 	];
 
@@ -33,10 +40,7 @@ angular.module('Evaluationmantenedor')
 	};
 	
 
-	//SUBIR ARCHIVOS
-
-	var uploader = $scope.uploader = new FileUploader();
-	uploader.autoUpload = true;
+	
 
         // FILTERS
       

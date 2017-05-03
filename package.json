@@ -25,7 +25,8 @@
     "moment": "^2.17.1",
     "underscore": "^1.8.3",
     "vjs-video": "^0.1.10",
-    "xlsx": "^0.9.11"
+    "xlsx": "^0.9.11",
+    "kartik-v/yii2-mpdf": "*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
