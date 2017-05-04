@@ -1,7 +1,7 @@
 'use strict'
 angular.module('trabajador')
-.controller('antecendentesController', ['$scope','$location','apiServices','trabajadorStorage','toastr',
-	function($scope,$location,api,trabajadorStorage,toastr){
+.controller('antecendentesController', ['$scope','$location','apiServices','trabajadorStorage','toastr','$filter',
+	function($scope,$location,api,trabajadorStorage,toastr,$filter){
 		var playAudio=function(src){
 			var audio = document.getElementById('player');
 				audio.src=src;
@@ -13,7 +13,7 @@ angular.module('trabajador')
 					}
 				);
 		}
-		playAudio("src/audio/trabajador/antecendes.m4a");
+		playAudio($filter('dinamicSource')("src/audio/trabajador/antecendes.m4a"));
 		var paisServices=api.model('pais'),
 			comunaServices=api.model('comuna'),
 			trabajadorServices=api.model('trabajador');

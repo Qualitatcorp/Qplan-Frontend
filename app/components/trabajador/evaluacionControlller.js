@@ -1,13 +1,18 @@
 "use strict";
 angular.module('trabajador')
-.controller('evaluacionController', ['$scope','evaluacionStorage','$location','evaluacion','trabajadorStorage','toastr',
-	function($scope,evaluacionStorage,$location,evaluacion,trabajadorStorage,toastr){
+.controller('evaluacionController', ['$filter','$scope','evaluacionStorage','$location','evaluacion','trabajadorStorage','toastr',
+	function($filter,$scope,evaluacionStorage,$location,evaluacion,trabajadorStorage,toastr){
+		var audioSrc,imageSrc;
 		var audio = document.getElementById('player');
+				audio.onerror=function() {
+					audio.src=audioSrc;
+					audio.play();
+				}
 		var playAudio=function(src){
 				audio.src=src;
 				audio.play();
+				
 		}
-
 		var perfil=evaluacion.data;
 		var tipo=_.sample(_.uniq(_.pluck(perfil.preguntas,'tipo')));
 		console.log('Evaluacion '+tipo);
@@ -69,18 +74,15 @@ angular.module('trabajador')
 					}
 				}
 				setTimeout(function() {
-					console.log($scope.ficha.recurso.sources);
 					if($scope.ficha.audioPregunta){
-
-						console.log("play");
-						audio.src=$scope.ficha.audioPregunta.src;
+						audioSrc=$scope.ficha.audioPregunta.src;
+						audio.src=$filter('dinamicSource')($scope.ficha.audioPregunta.src);
 						audio.play();
 					}
 					else{
-						console.log("pausa");
 						audio.pause();		
 					}
-				}, 200);
+				}, 1000);
 			},
 			get progreso() {
 				return evaluacionStorage.count/this.preguntas.length;
