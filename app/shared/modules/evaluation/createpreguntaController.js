@@ -1,6 +1,7 @@
 angular.module('Evaluationmantenedor')
 
 .controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,auth,$location,toastr){
+	
 	//SUBIR ARCHIVOS
     var uploader = $scope.uploader = new FileUploader({
     	   headers:{ "Authorization": "Bearer " + sessionStorage.access_token },

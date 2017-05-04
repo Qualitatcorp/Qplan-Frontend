@@ -18,7 +18,8 @@ angular.module('admin', [
 	'Worker',
 	'Evaluationmantenedor',
 	'Perfil',
-	'ui.uploader'
+	'ui.uploader',
+	'angularFileUpload'
 	])
 
 .config(['$routeProvider',/*'$httpProvider',*/function($routeProvider/*,$httpProvider*/) {
