@@ -3,16 +3,18 @@ angular.module('trabajador')
 
 .controller('experienciaController', ['$filter','trabajadorStorage','$modal','$scope','$location','apiServices','toastr',
 	function($filter,trabajadorStorage,$modal,$scope,$location,api,toastr){
+		console.log(trabajadorStorage);
 		var playAudio=function(src){
 			var audio = document.getElementById('player');
 				audio.src=src;
 				audio.play();
 		}
 		playAudio($filter('dinamicSource')('src/audio/trabajador/experiencialaboral.m4a'));
-		var experienciaServices = api.model('trabajadorexperiencia'),
-			cargoServices = api.model('especialidadcargo');
-			
-		var trabajador_id=trabajadorStorage.q.id;
+		$scope.rubros=['Rubro Minero','Rubro Forestal','Rubro Energía','Rubro Petroleo','Rubro Metal-Mecánico','Rubro Telecomunicaciones'];
+		var experienciaServices = api.model('trabajadorexperiencia');
+		var trabajador=trabajadorStorage.q;
+		var trabajador_id=trabajador.id;
+
 		/*var cargo_id = 1;*/
 
 
@@ -20,22 +22,22 @@ angular.module('trabajador')
 			numbers:[0,1,2,3,4,5,6,7,8,9]
 		}
 
-		$scope.inputs = [];
-		$scope.faenas = 0;
-		$scope.proyectos = 0;
-		$scope.estables = 0;
-		$scope.getallCargo = {};
+		$scope.inputs = _.map(trabajador.experiencias,function(m) {
+			m.meses=parseInt(m.meses);
+			return m;
+		});
+		var contador=_.countBy(trabajador.experiencias,function (q) {
+		 return q.tipo
+		});
+		console.log(contador);
+
+		$scope.faenas = contador.FAENA|0;
+		$scope.proyectos = contador.PROYECTO|0;
+		$scope.estables = contador.ESTABLE|0;
 
 		$scope.tooltipfaena = {title: 'Hola, debes seleccionar la cantidad de experiencias en faenas que has hecho', checked: false};
 		$scope.tooltipestable = {title: 'Hola, debes seleccionar la cantidad de experiencias en servicios estables que has hecho', checked: false};
 		$scope.tooltipproyecto = {title: 'Hola, debes seleccionar la cantidad de experiencias en proyecto que has hecho', checked: false};
-
-
-		cargoServices.getAll().then(function(response) {
-
-			$scope.getallCargo = response.data;
-
-		});
 
 		$scope.addInputs = function(numero,tipo) {
 			
@@ -74,34 +76,16 @@ angular.module('trabajador')
 
 		}
 
-
-		$scope.getCargo=function(texto){
-			if(texto.length>2){
-				return cargoServices.search({nombre:texto}).then(
-					function(promise){
-						return promise.data;
-					}
-					);
-			}
-		}
-
-
 		$scope.guardar=function() {
 			
 			var longitud = $scope.inputs.length;
 			var i=1;
-
-			$scope.inputs.forEach(function(elemento){
-				elemento.car_id=elemento.cargo.id;
-			})
-
 			$scope.inputs.forEach(function(elemento){
 				experienciaServices.save(elemento).then(
 					function success(promise){
 						i++;
 					});
 			})
-
 			if(i=longitud){
 				toastr.success('Experiencia agregada exitosamente.', 'Atencion!');
 				$location.path('evaluacion');

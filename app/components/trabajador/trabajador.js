@@ -46,7 +46,11 @@ angular.module('trabajador', [
 				return api.model('perfil').expand('modteorica,pet,evateorica,preguntas,alternativas,recursos,rhs,sources,rho,options').get(trabajadorStorage.q.ot.per_id);
 			}],
 		}
-	})		
+	})
+	.when('/config',{
+		templateUrl:'views/trabajador/config.html',
+		controller:'configController'
+	})	
 	.when('/termino',{
 		templateUrl:'views/trabajador/termino.html',
 		controller: "terminoController"

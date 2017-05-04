@@ -1,39 +1,26 @@
-	<div class="row">	
-		<div class="col-md-12">
-			<div class="page-header">
-				<h1>Experiencia Laboral				
-				</h1>
-			</div>
+<div class="row">	
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Experiencia Laboral</h1>
 		</div>
 	</div>
-
+</div>
+<form name="formexp" class="form-horizontal" role="form">
 	<div class="row">
-
-		<form name="formexp" class="form-horizontal" role="form">
-			
-
 			<div class="form-group form-group-lg col-md-12">
-
 				<h2><label class="col-sm-2 control-label" bs-tooltip="tooltipestable" style="text-align:left;">Servicios Estables</label></h2>
 				<div class="col-sm-1">
 					<select ng-change="addInputs(estables,'ESTABLE')" class="form-control" ng-model="estables" ng-options="n as n for n in select.numbers"></select>
 				</div>
-
 			</div>
-
-			
-			<div class="panel panel-default container-fluid col-md-12">
-				
+			<div class="panel panel-default container-fluid col-md-12">			
 				<div class="panel-heading row">
 					<div class="col-md-2"><h2 class="panel-title">Meses</h2></div>
-					<div class="col-md-3"><h2 class="panel-title">Cargo</h2></div>
+					<div class="col-md-3"><h2 class="panel-title">Rubro</h2></div>
 					<div class="col-md-7"><h2 class="panel-title">Funciones Desarrolladas</h2></div>
 				</div>
-
 				<div class="panel-body row">
-					
 					<div data-ng-repeat="input in inputs | filter: { tipo: 'ESTABLE' }">
-						
 						<div class="col-md-2">
 							<div class="col-md-12">
 								<div class="form-group">								
@@ -41,32 +28,13 @@
 								</div>
 							</div>		
 						</div>
-
-
-						<!-- <div class="col-md-3">
-							<div class="col-md-12">
-								<div class="form-group">
-									<input 
-									type="text" 
-									ng-model="input.cargo"
-									class="form-control"
-									placeholder="Cargo"
-									bs-options="cargo as cargo.nombre for cargo in getCargo($viewValue)"
-									data-auto-select="true" 									
-									bs-typeahead
-									required>
-								</div>
-							</div>
-						</div> -->
 						<div class="col-md-3">
 							<div class="col-md-12">
 								<div class="form-group">
-									<select class="form-control" class="form-control" placeholder="Cargo" ng-model="input.cargo" ng-options="cargo as cargo.nombre for cargo in getallCargo"></select>
+									<button placeholder="Seleccione..." type="button"  class="btn btn-default" ng-model="input.rubro" bs-options="r as r for r in rubros" bs-select></button>
 								</div>
 							</div>
 						</div>
-						
-
 						<div class="col-md-7">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -75,30 +43,22 @@
 							</div>						
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
 			<div class="form-group form-group-lg col-md-12">
 				<h2><label class="col-sm-2 control-label" bs-tooltip="tooltipproyecto" style="text-align:left;">Proyectos</label></h2>
 				<div class="col-sm-1">
 					<select ng-change="addInputs(proyectos,'PROYECTO')" class="form-control" ng-model="proyectos" ng-options="n as n for n in select.numbers"></select>
 				</div>
 			</div>
-
 			<div class="panel panel-default container-fluid col-md-12">
-				
 				<div class="panel-heading row">
 					<div class="col-md-2"><h2 class="panel-title">Meses</h2></div>
-					<div class="col-md-3"><h2 class="panel-title">Cargo</h2></div>
+					<div class="col-md-3"><h2 class="panel-title">Rubro</h2></div>
 					<div class="col-md-7"><h2 class="panel-title">Funciones Desarrolladas</h2></div>
 				</div>
-
 				<div class="panel-body row">
-					
-					<div data-ng-repeat="input in inputs | filter: { tipo: 'PROYECTO' }">
-						
+					<div data-ng-repeat="input in inputs | filter: { tipo: 'PROYECTO' }">	
 						<div class="col-md-2">
 							<div class="col-md-12">
 								<div class="form-group">								
@@ -106,32 +66,13 @@
 								</div>
 							</div>		
 						</div>
-
-
-						<!-- <div class="col-md-3">
-							<div class="col-md-12">
-								<div class="form-group">
-									<input 
-									type="text" 
-									ng-model="input.cargo"
-									class="form-control"
-									placeholder="Cargo"
-									bs-options="cargo as cargo.nombre for cargo in getCargo($viewValue)"
-									data-auto-select="true" 									
-									bs-typeahead
-									required>
-								</div>
-							</div>
-						</div> -->
-
 						<div class="col-md-3">
 							<div class="col-md-12">
 								<div class="form-group">
-									<select class="form-control" class="form-control" placeholder="Cargo" ng-model="input.cargo" ng-options="cargo as cargo.nombre for cargo in getallCargo"></select>
+									<button placeholder="Seleccione..." type="button"  class="btn btn-default" ng-model="input.rubro" bs-options="r as r for r in rubros" bs-select></button>
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-7">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -140,30 +81,22 @@
 							</div>						
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
 			<div class="form-group form-group-lg col-md-12">
 				<h2><label class="col-sm-2 control-label" bs-tooltip="tooltipfaena" style="text-align:left;">Faenas</label></h2>
 				<div class="col-sm-1">
 					<select ng-change="addInputs(faenas,'FAENA')" class="form-control" ng-model="faenas" ng-options="n as n for n in select.numbers"></select>
 				</div>
 			</div>
-
 			<div class="panel panel-default container-fluid col-md-12">
-				
 				<div class="panel-heading row">
 					<div class="col-md-2"><h2 class="panel-title">Meses</h2></div>
-					<div class="col-md-3"><h2 class="panel-title">Cargo</h2></div>
+					<div class="col-md-3"><h2 class="panel-title">Rubro</h2></div>
 					<div class="col-md-7"><h2 class="panel-title">Funciones Desarrolladas</h2></div>
 				</div>
-
 				<div class="panel-body row">
-					
 					<div data-ng-repeat="input in inputs | filter: { tipo: 'FAENA' }">
-						
 						<div class="col-md-2">
 							<div class="col-md-12">
 								<div class="form-group">								
@@ -171,32 +104,13 @@
 								</div>
 							</div>		
 						</div>
-
-
-						<!-- <div class="col-md-3">
-							<div class="col-md-12">
-								<div class="form-group">
-									<input 
-									type="text" 
-									ng-model="input.cargo"
-									class="form-control"
-									placeholder="Cargo"
-									bs-options="cargo as cargo.nombre for cargo in getCargo($viewValue)"
-									data-auto-select="true" 									
-									bs-typeahead
-									required>
-								</div>
-							</div>
-						</div> -->
-
 						<div class="col-md-3">
 							<div class="col-md-12">
 								<div class="form-group">
-									<select class="form-control" class="form-control" placeholder="Cargo" ng-model="input.cargo" ng-options="cargo as cargo.nombre for cargo in getallCargo"></select>
+									<button placeholder="Seleccione..." type="button"  class="btn btn-default" ng-model="input.rubro" bs-options="r as r for r in rubros" bs-select></button>
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-7">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -205,16 +119,12 @@
 							</div>						
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
-
 			<div class="form-group pull-right">
 				<div class="col-sm-12">
 					<button ng-click="guardar()" ng-disabled="formexp.$invalid" type="submit" class="btn btn-primary">Siguiente</button>
 				</div>
 			</div>
-		</form>
 	</div>
+</form>

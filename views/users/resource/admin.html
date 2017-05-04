@@ -1,0 +1,47 @@
+<input type="text" ng-model="filtro" class="form-control">
+<div class="tree">
+	<ul>
+		<li role="presentation">	
+			<label>Sistema</label>
+			<ul>
+				<li ng-repeat="m in group|filter:filtro" role="presentation" >
+					<a>{{m.name}}</a>
+					<ul>
+						<li ng-repeat="c in m.controller | filter:filtro" role="presentation">
+							<!-- <h4>Controllador</h4> -->
+							<a>Controller {{c.name}}</a>
+							<ul>
+								<li ng-repeat="a in c.actions | filter:filtro">
+									<button ng-click="actions(a)" class="btn btn-default btn-sm">{{a.action}}</button>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!-- 				<li role="presentation">
+					<a href="#">Child</a>
+					<ul>
+						<li><a href="#">Grand Child</a></li>
+						<li>
+							<a href="#">Grand Child</a>
+							<ul>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+							</ul>
+						</li>
+						<li><a href="#">Grand Child</a></li>
+					</ul>
+				</li> -->
+<pre>{{group|json}}</pre>
+<pre>{{models|json}}</pre>
