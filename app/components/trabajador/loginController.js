@@ -1,7 +1,26 @@
 'user strict'
 angular.module('trabajador')
-.controller('loginController', ['$scope','$location', 'trabajadorStorage','apiServices','RutHelper','toastr','sessionServices','authenticationServices',
-	function($scope,$location,trabajadorStorage,apiServices,RutHelper,toastr,session,auth){
+.controller('loginController', [
+		'$scope',
+		'$location',
+		'trabajadorStorage',
+		'apiServices',
+		'RutHelper',
+		'toastr',
+		'sessionServices',
+		'authenticationServices',
+		'$filter',
+	function(
+		$scope,
+		$location,
+		trabajadorStorage,
+		apiServices,
+		RutHelper,
+		toastr,
+		session,
+		auth,
+		$filter
+	){
 		var playAudio=function(src){
 			var audio = document.getElementById('player');
 				audio.src=src;
@@ -11,7 +30,7 @@ angular.module('trabajador')
 					console.log(q);
 				});
 		}
-		playAudio("src/audio/trabajador/ingresorut.m4a");
+		playAudio($filter('dinamicSource')('src/audio/trabajador/ingresorut.m4a'));
 		var trabajadorServices=apiServices.model("trabajador");
 		$scope.login=function(){
 			trabajadorServices.params({rut:RutHelper.format($scope.rut)}).search().then(

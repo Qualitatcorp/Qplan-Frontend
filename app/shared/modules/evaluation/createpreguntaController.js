@@ -1,7 +1,12 @@
 angular.module('Evaluationmantenedor')
 
-.controller('evaluation.createpreguntaController', ['uiUploader','$log','$scope','$routeParams','apiServices','$location','toastr',
-	function(uiUploader,$log,$scope,$routeParams,apiServices,$location,toastr){
+.controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,auth,$location,toastr){
+	//SUBIR ARCHIVOS
+    var uploader = $scope.uploader = new FileUploader({
+    	   headers:{ "Authorization": "Bearer " + sessionStorage.access_token },
+           url: WebApiConfig.resourceUrl("recursossources"),
+           autoUpload :true,
+          });
 	
 	$scope.pregunta={};
 
@@ -20,7 +25,7 @@ angular.module('Evaluationmantenedor')
 	$scope.recursoshas = {};
 
 	$scope.files = [
-  		{type: "image/png", src: "click5", title :"prop2"},
+ 		{type: "image/png", src: "click5", title :"prop2"},
   		{type: "image/png", src: "click6", title :"prop3"}
 	];
 
@@ -32,47 +37,26 @@ angular.module('Evaluationmantenedor')
 		var lastItem = $scope.alternativas.length-1;
 		$scope.alternativas.splice(lastItem);
 	};
-	
 
-	//SUBIR ARCHIVOS
-
-	$scope.btn_remove = function(file) {
-                    uiUploader.removeFile(file);
-                };
-
-    $scope.btn_clean = function() {
-                    uiUploader.removeAll();
-                };
-
-    $scope.btn_upload = function() {
-                    uiUploader.startUpload({
-                      /*  url: 'http://localhost/Qplan-Backend/web/formupload/upload',*/
-                        url: 'https://posttestserver.com/post.php',
-                        concurrency: 2,
-                        onProgress: function(file) {
-                            $log.info(file.name + '=' + file.humanSize);
-                            $scope.$apply();
-                        },
-                        onCompleted: function(file, response) {
-                            $log.info(file + 'response' + response);
-                        }
-                    });
-                };
-
-    $scope.files = [];
-
-    $scope.createfiles = function(){
-
-    	  var element = document.getElementById('file1');          
-                	element.addEventListener('change', function(e) {
-                    var files = e.target.files;
-                    uiUploader.addFiles(files);
-                    $scope.files = uiUploader.getFiles();
-                    $scope.$apply();
-                });
-                
-
-    }; 
+        // FILTERS
+      
+        // a sync filter
+    uploader.filters.push({
+            name: 'syncFilter',
+            fn: function(item /*{File|FileLikeObject}*/, options) {
+               /* console.log('syncFilter');
+*/                return this.queue.length < 10;
+            }
+        });
+      
+        // an async filter
+    uploader.filters.push({
+            name: 'asyncFilter',
+            fn: function(item /*{File|FileLikeObject}*/, options, deferred) {
+              /*  console.log('asyncFilter');*/
+                setTimeout(deferred.resolve, 1e3);
+            }
+        });
 
 	//GUARDAR
 
