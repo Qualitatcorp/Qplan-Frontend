@@ -13,10 +13,13 @@
 			</div>
 			<div class="col-md-7" ng-switch on="ficha.pregunta.recursos.tipo">
 				<div ng-switch-when="IMAGE"><center>
-					<img 
-						ng-src="{{parse.Url(ficha.pregunta.recursos.sources[0].src)}}" 
+				<script>
+					
+				</script>
+					<img ng-init="imagen=this;console.log('imagen')"
+						ng-src="{{parse.Url(ficha.pregunta.recursos.sources[0].src|dinamicSource)}}" 
 						class="img-rounded" 
-						style="width: auto;max-width: 664px;height:250px;">
+						style="width: auto;max-width: 664px;height:250px;" id="imagePregunta" >
 				</center>
 				</div>
 				<div ng-switch-when="VIDEO">
