@@ -53,6 +53,15 @@ angular.module('admin', [
 			}]
 		}
 	})
+	.when('/users/view/:id',{
+		templateUrl:Url.to("users/view"),
+		controller:"user.viewController",
+		resolve:{
+			model:['apiServices','$route',function(apiServices,$route){
+				return apiServices.model('user').get($route.current.params.id);
+			}]
+		}
+	})
 	.when('/users/admin',{
 		templateUrl:Url.to("users/admin"),
 		controller:"user.adminController",
