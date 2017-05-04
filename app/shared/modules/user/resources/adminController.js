@@ -6,34 +6,24 @@
 angular.module('User')
 .controller('resource.adminController', ['$scope','toastr','$location','apiServices','models',function($scope,toastr,$location,apiServices,models){
 	console.log(models);
+
+	var lista=_(models.data.children).map( function(q) {
+	  return _(['id','modulo','controller','action']).object(_([q.id]).union(q.resource.split("_")));
+	});
+	var group=[];
+	var modulos=_(_(lista).pluck('modulo')).uniq();
+	modulos.forEach(function(m) {
+		var controller=[];
+		var controllers = _(_(_(lista).where({modulo:m})).pluck('controller')).uniq();
+		controllers.forEach(function(c) {
+			controller.push({name:c,actions:_(lista).where({modulo:m,controller:c})});
+		})
+		group.push({name:m,controller:controller});
+	});
+	$scope.group=group;
 	$scope.models=models.data;
 
-	// var total = models.headers('x-pagination-total-count');
-
-	// $scope.totalItems = parseInt(total);
-	// $scope.currentPage = 1;
-	// $scope.pageItems = 20;
-
-	// $scope.setPage = function (pageNo) {
-	// 	$scope.currentPage = pageNo;
-	// };
-
-	// $scope.pageChanged = function(page) {
-
-	// 	apiServices.model('user').page(page).get().then(
-	// 		function (q) {
-	// 			$scope.models = q.data;
-	// 		}
-	// 		);
-
-	// };
-
-	// $scope.remove=function(key){
-	// 	modelservices.remove($scope.models[key].id).then(function(q) {
-	// 		$scope.models.splice(key,1);
-	// 		toastr.success("Se ha eliminado con exito.","Exito");
-	// 	},function(q) {
-	// 		toastr.error("Codigo : "+q.status,"Error");
-	// 	})
-	// }
+	$scope.actions=function(actions) {
+		console.log(actions);
+	}
 }])
