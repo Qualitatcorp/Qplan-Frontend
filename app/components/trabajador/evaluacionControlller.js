@@ -4,14 +4,22 @@ angular.module('trabajador')
 	function($filter,$scope,evaluacionStorage,$location,evaluacion,trabajadorStorage,toastr){
 		var audioSrc,imageSrc;
 		var audio = document.getElementById('player');
-				audio.onerror=function() {
-					audio.src=audioSrc;
-					audio.play();
-				}
+		// audio.onerror=function() {
+		// 	audio.src=audioSrc;
+		// 	audio.play();
+		// }
 		var playAudio=function(src){
-				audio.src=src;
+				if(src){
+					audio.src=audio.src;
+				}else{
+					audio.load();
+				}
 				audio.play();
 				
+		}
+
+		$scope.repeat=function() {
+			playAudio();
 		}
 		var perfil=evaluacion.data;
 		var tipo=_.sample(_.uniq(_.pluck(perfil.preguntas,'tipo')));

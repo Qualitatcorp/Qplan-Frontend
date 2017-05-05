@@ -1,7 +1,7 @@
 angular.module('admin')
 .controller('navbarController', 
-	['$scope','toastr','$location','sessionServices','apiServices','$timeout','$uibModal',
-	function($scope,toastr,$location,session,apiServices,$timeout,$uibModal){
+	['$scope','toastr','$location','sessionServices','apiServices','$timeout','$uibModal','$route',
+	function($scope,toastr,$location,session,apiServices,$timeout,$uibModal,$route){
 		$scope.$on('$routeChangeError',function(event,current,prev,reject) {
 			switch(reject.status){
 				case 401:
@@ -108,7 +108,8 @@ angular.module('admin')
 		$scope.logout=function(){
 			session.logout();
 			sessionStorage.clear();
-			$location.path("login");
+			$route.reload();
+			$location.path("inicio");
 			console.log("Session limpiada");
 		}
 	}
