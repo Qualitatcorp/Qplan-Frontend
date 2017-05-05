@@ -19,7 +19,8 @@ angular.module('admin', [
 	'Evaluationmantenedor',
 	'Perfil',
 	'ui.uploader',
-	'angularFileUpload'
+	'angularFileUpload',
+	'ui.select'
 	])
 
 .config(['$routeProvider',/*'$httpProvider',*/function($routeProvider/*,$httpProvider*/) {

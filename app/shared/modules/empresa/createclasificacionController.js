@@ -2,13 +2,13 @@ angular.module('Empresa')
 
 .controller('empresa.createclasificacionController', ['$scope','apiServices','$location','toastr', function($scope,apiServices,$location,toastr){
 	
-	$scope.empresa={}
+	$scope.empresaclasificacion={}
 
 	$scope.save=function() {
-		apiServices.model('empresa').save($scope.empresa).
+		apiServices.model('empresaclasificacion').save($scope.empresaclasificacion).
 		then(function(q){
-			$location.path("empresa");
-			toastr.success("Se ha registrado la empresa con exito.","Exito");
+			$location.path("empresaclasificacion");
+			toastr.success("Se ha registrado la clasificacion con éxito.","Exito");
 		},
 		function(q) {
 			toastr.error("Codigo : "+q.status,"Error");
