@@ -61,32 +61,22 @@ angular.module('Evaluationmantenedor')
                 setTimeout(deferred.resolve, 1e3);
             }
         });
+    uploader.onCompleteItem = function(fileItem, response, status, headers) {
+    	//lista de recursos
+     		console.info(response['data']);
+           
+        };
 
-
-	//GUARDAR
+	uploader.onCompleteAll = function() {
+	            console.info('onCompleteAll');
+	        };
 
 	$scope.save=function() {
 
 		apiServices.model('evaluacionpregunta').save($scope.pregunta).
 		then(function(q){
 			
-			$scope.recursos.pre_id = q.data.id;
-			apiServices.model('recursos').save($scope.recursos).then(
-				function(q){					
-				});
-
-			$scope.files.forEach(function(elemento){
-				apiServices.model('recursossources').save(elemento).then(
-				function(q){
-					console.log(q);
-				}
-			)
-			});
-
-
-			/*apiServices.model('recursoshassources').save();*/
-
-
+			 
 			$scope.alternativas.forEach(function(elemento){
 				elemento.pre_id = q.data.id;
 				apiServices.model('evaluacionalternativa').save(elemento).then(
