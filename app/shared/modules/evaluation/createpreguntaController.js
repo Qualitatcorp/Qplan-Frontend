@@ -1,13 +1,13 @@
 angular.module('Evaluationmantenedor')
 
 .controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,auth,$location,toastr){
+	
 	//SUBIR ARCHIVOS
     var uploader = $scope.uploader = new FileUploader({
     	   headers:{ "Authorization": "Bearer " + sessionStorage.access_token },
            url: WebApiConfig.resourceUrl("recursossources"),
            autoUpload :true,
           });
-	
 	
 	$scope.pregunta={};
 
@@ -38,9 +38,6 @@ angular.module('Evaluationmantenedor')
 		var lastItem = $scope.alternativas.length-1;
 		$scope.alternativas.splice(lastItem);
 	};
-	
-
-	
 
         // FILTERS
       
@@ -61,7 +58,6 @@ angular.module('Evaluationmantenedor')
                 setTimeout(deferred.resolve, 1e3);
             }
         });
-
 
 	//GUARDAR
 
