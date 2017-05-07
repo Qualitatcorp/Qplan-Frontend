@@ -1,6 +1,7 @@
 angular.module('Evaluationmantenedor')
 
-.controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,auth,$location,toastr){
+.controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',
+function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toastr){
 	
 	
 	$scope.pregunta={};
@@ -19,10 +20,7 @@ angular.module('Evaluationmantenedor')
 
 	$scope.recursoshas = {};
 
-	$scope.files = [
- 		{type: "image/png", src: "click5", title :"prop2"},
-  		{type: "image/png", src: "click6", title :"prop3"}
-	];
+	$scope.files = [];
 
 	$scope.addNewChoice = function() {		
 		$scope.alternativas.push({});
@@ -60,9 +58,13 @@ angular.module('Evaluationmantenedor')
                 setTimeout(deferred.resolve, 1e3);
             }
         });
+
     uploader.onCompleteItem = function(fileItem, response, status, headers) {
     	//lista de recursos
-     		console.info(response['data']);
+     		/*console.info(response['data']);*/
+     		/*console.log(response.data.id);*/
+     		$scope.files.push(response.data);
+     		console.log($scope.files);
            
         };
 
@@ -73,16 +75,17 @@ angular.module('Evaluationmantenedor')
 	$scope.save=function() {
 
 		apiServices.model('evaluacionpregunta').save($scope.pregunta).
-		then(function(q){
-			
-			 
+		then(function(q){	 
 			$scope.alternativas.forEach(function(elemento){
 				elemento.pre_id = q.data.id;
-				apiServices.model('evaluacionalternativa').save(elemento).then(
-					function success(q){
-					});
-			})
-			toastr.success("La pregunta se ha creado con exito.","Exito");
+				apiServices.model('evaluacionalternativa').save(elemento).then(function(j)
+					{});
+			});
+			$scope.recursos.pre_id=q.data.id;
+			apiServices.model('recursos').save($scope.recursos).then(function(m){
+				console.log(m);
+			});
+			toastr.success("Se ha creado la pregunta con éxito.","Exito");
 			$location.path("evaluation/"+$routeParams.id);
 		}
 		);
