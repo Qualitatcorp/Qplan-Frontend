@@ -67,7 +67,7 @@
 		<button class="btn btn-primary addfields" ng-click="addNewChoice()">Añadir Alternativas</button>
 	</div>
 
-	<h1>Recursos</h1>
+	<h1>Fuentes</h1>
 
 	<div class="row">
 		<div class="col-md-2">
@@ -83,7 +83,6 @@
     			<option>AUDIO</option>
     			<option>VIDEO</option>
     			<option>IMAGE</option>
-    			<option>SFW</option>
   				</select>
 			</div>
 		</div>
@@ -103,7 +102,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in uploader.queue">
+                            <tr ng-repeat="(key,item) in uploader.queue">
                                 <td><strong>{{ item.file.name }}</strong></td>
                                 <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
                                 <td ng-show="uploader.isHTML5">
@@ -123,7 +122,7 @@
                                     <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
                                         <span class="glyphicon glyphicon-ban-circle"></span> Cancelar
                                     </button> -->
-                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="remove(item,key)">
                                         <span class="glyphicon glyphicon-trash"></span> Borrar
                                     </button>
                                 </td>
@@ -151,10 +150,26 @@
 
                 </div>
 
+     <h1>Tipos de Fuentes</h1>
 
-
-	</div>
-
+     <div class="row" style="margin-bottom: 40px">
+     	<div class="col-md-12">
+					  <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Nombre</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="file in files">
+                                <td><strong>{{file.src}}</strong></td>
+                                <td><select name="tipofuente" class="form-control" ng-model="file.tipo" ng-options="n for n in select.fuentes" required></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+     </div>
 
 	<div class="form-group">
 		<!-- <a href="#!/evaluation/adminevaluation" class="btn btn-default">Volver</a> -->

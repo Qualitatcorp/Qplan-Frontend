@@ -12,7 +12,8 @@ function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toa
 	$scope.select={
 		habilitado:["SI","NO"],
 		level: ["BASICA","MEDIA","AVANZADA"],
-		correcta: ["SI","NO"]
+		correcta: ["SI","NO"],
+		fuentes: ["CONTENIDO","AUDIO-PREGUNTA","POSTER"]
 	}
 
 	$scope.alternativas = [];
@@ -58,7 +59,7 @@ function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toa
 
     uploader.onCompleteItem = function(fileItem, response, status, headers) {
     	//lista de recursos
-     		$scope.files.push({"src_id":response.data.id});
+     		$scope.files.push({"src_id":response.data.id,"src":response.data.src,"tipo":""});
            
         };
 
@@ -66,6 +67,12 @@ function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toa
 	            console.info('onCompleteAll');
 	        };
 
+
+	$scope.remove = function(item,key){
+			item.remove();	
+			var lastItem = $scope.files.length-1;
+			$scope.files.splice(lastItem);		
+	};
 
 	 //       
 
@@ -80,11 +87,11 @@ function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toa
 				})
 			})
 			$scope.recursos.pre_id=q.data.id;
+			console.log($scope.files);
 			apiServices.model('recursos').save($scope.recursos).then(function(j){
 				$scope.files.forEach(function(fileitem){
 				fileitem.rec_id = j.data.id;
 				apiServices.model('recursoshassources').save(fileitem).then(function(m){
-				console.log(m);
 				})
 			})		
 			});
