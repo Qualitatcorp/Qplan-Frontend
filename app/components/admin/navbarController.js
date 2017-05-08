@@ -22,8 +22,8 @@ angular.module('admin')
 								{"name":"Empresa","items":[{"label":"Empresa","items":[{"label":"Crear","href":"empresa/create"},{"label":"Administrar","href":"empresa"}]}]},
 								{"name":"Trabajador","items":[{"label":"Trabajadores","items":[{"label":"Crear","href":"worker/create"},{"label":"Administrar","href":"worker/admin"}]}]},
 								{"name":"Orden de Servicio","items":[{"label":"Orden de Servicio","items":[{"label":"Crear","href":"ot/create"},{"label":"Administrar","href":"ot/admin"}]}]},
-								{"name":"Evaluación","items":[{"label":"Clasificación","items":[{"label":"Crear Categoría","href":"evaluation/createcategoria"},{"label":"Administrar Categoría","href":"evaluation/admincategoria"},{"label":"Crear Clasificación","href":"evaluation/createclasificacion"},{"label":"Administrar Clasificación","href":"evaluation/adminclasificacion"},{"label":"Crear Clasificación-Perfil","href":"evaluation/createclasificacionperfil"},{"label":"Administrar Clasificación-Perfil","href":"evaluation/adminclasificacionperfil"}]},{"label":"Evaluación","items":[{"label":"Crear Evaluación","href":"evaluation/createevaluation"},{"label":"Administrar Evaluación","href":"evaluation/adminevaluation"},{"label":"Crear Tipo","href":"evaluation/createtipo"},{"label":"Administrar Tipo","href":"evaluation/admintipo"}]},{"label":"Fichas de evaluación","items":[{"label":"Crear","href":"ficha/create"},{"label":"Administrar","href":"ficha/admin"}]}]},
-								{"name":"Perfil","items":[{"label":"Perfil","items":[{"label":"Crear","href":"perfil/create"},{"label":"Administrar","href":"perfil/admin"}]}]}
+								{"name":"Evaluación","items":[{"label":"Evaluación","items":[{"label":"Crear Evaluación","href":"evaluation/createevaluation"},{"label":"Administrar Evaluación","href":"evaluation/adminevaluation"},{"label":"Crear Tipo","href":"evaluation/createtipo"},{"label":"Administrar Tipo","href":"evaluation/admintipo"}]}]},
+								{"name":"Perfil","items":[{"label":"Perfil","items":[{"label":"Crear","href":"perfil/create"},{"label":"Administrar","href":"perfil/admin"}]},{"label":"Clasificación","items":[{"label":"Crear Categoría","href":"evaluation/createcategoria"},{"label":"Administrar Categoría","href":"evaluation/admincategoria"},{"label":"Crear Clasificación","href":"evaluation/createclasificacion"},{"label":"Administrar Clasificación","href":"evaluation/adminclasificacion"}]}]}
 							];
 					}
 					if(session.timeOut.getMinutes()<10){
@@ -113,3 +113,6 @@ angular.module('admin')
 		}
 	}
 ])
+
+
+							

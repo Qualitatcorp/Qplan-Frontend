@@ -6,22 +6,6 @@ angular.module('Perfil')
 
 	$scope.clasificaciones = [];
 
-/*	$scope.interface={
-
-		set clasificacion(value){
-			$scope.cla.comuna=value;
-			if(angular.isObject($scope.empresa.comuna)){
-				$scope.empresa.com_id=$scope.empresa.comuna.com_id;
-			}
-		},
-		get clasificacion(){
-			if(angular.isObject($scope.empresa.comuna))
-				return $scope.empresa.comuna.nombre;
-			return $scope.empresa.comuna;
-		},
-		
-	}*/
-
 	$scope.getClasificaciones=function(texto){
 		return apiServices.model('clasificacion').params({nombre:texto}).search().then(
 			function(promise){
@@ -40,9 +24,17 @@ angular.module('Perfil')
 	};
 
 	$scope.save=function() {
+
 		apiServices.model('perfil').save($scope.perfil).
 		then(function(q){
-			$location.path("perfil");
+			$scope.clasificaciones.forEach(function(elemento){
+			elemento.cla_id = elemento.clasificacion.id;
+			elemento.per_id = q.data.id;
+			apiServices.model('clasificacionperfil').save(elemento).then(function(m){
+			console.log(m);
+				})
+			})
+			$location.path("perfil/admin");
 			toastr.success("Se ha registrado el perfil con exito.","Exito");
 		},
 		function(q) {
