@@ -59,7 +59,7 @@ function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toa
 
     uploader.onCompleteItem = function(fileItem, response, status, headers) {
     	//lista de recursos
-     		$scope.files.push({"src_id":response.data.id,"src":response.data.src,"tipo":""});
+     		$scope.files.push({"src_id":response.data.id,"src":response.data.src,"title":response.data.title,"tipo":""});
            
         };
 
@@ -68,10 +68,8 @@ function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toa
 	        };
 
 
-	$scope.remove = function(item,key){
-			item.remove();	
-			var lastItem = $scope.files.length-1;
-			$scope.files.splice(lastItem);		
+	$scope.remove = function(key){
+			$scope.files.splice(key,1);		
 	};
 
 	 //       

@@ -2,9 +2,21 @@
 	<div class="well col-md-3">
 		<ul class="nav nav-pills nav-stacked">
 		<li><span>Opciones</span></li>
+		<li><a href="#!/empresa/create">Crear</a></li>
   		<li><a href="#!/empresa/edit/{{empresa.id}}">Editar</a></li>
-  		<li><a href="#">Eliminar</a></li>
-  		<li><span>Usuario</span></li>
+  		<li><a   
+						mwl-confirm
+						title="Eliminar a empresa {{empresa.nombre}}"
+						message="Seguro que desea quitar a {{ empresa.nombre }}"
+						placement="right"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(empresa.id)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar
+					</a></li>
+  		<!-- <li><span>Usuario</span></li>
   		<li><a href="#">Ver Usuarios</a></li>
   		<li><a href="#">Crear Usuarios</a></li>
   		<li><span>Evaluación</span></li>
@@ -12,7 +24,7 @@
   		<li><a href="#">Crear Clasificación</a></li>
   		<li><span>Orden de Trabajo</span></li>
   		<li><a href="#">Ver Órdenes</a></li>
-  		<li><a href="#">Ingresar Orden</a></li>
+  		<li><a href="#">Ingresar Orden</a></li> -->
 		</ul>
 	</div>	
 	<div class="col-md-9">

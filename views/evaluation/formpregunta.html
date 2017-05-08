@@ -2,7 +2,7 @@
 
 <form name="preguntaForm">
 	
-<div class="col-md-12">
+<div class="row">
 		<div class="col-md-6">
 		<div class="form-group" ng-class="{ 'has-error': preguntaForm.pregunta.$touched && preguntaForm.pregunta.$invalid }">
 		<label>Pregunta*</label>
@@ -79,7 +79,7 @@
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
-				<select class="form-control" ng-model="recursos.tipo" ng-init="recursos.tipo='AUDIO'" id="se">
+				<select class="form-control" ng-model="recursos.tipo" ng-init="recursos.tipo=recursos.tipo||'AUDIO'" id="se">
     			<option>AUDIO</option>
     			<option>VIDEO</option>
     			<option>IMAGE</option>
@@ -122,7 +122,7 @@
                                     <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
                                         <span class="glyphicon glyphicon-ban-circle"></span> Cancelar
                                     </button> -->
-                                    <button type="button" class="btn btn-danger btn-xs" ng-click="remove(item,key)">
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
                                         <span class="glyphicon glyphicon-trash"></span> Borrar
                                     </button>
                                 </td>
@@ -143,9 +143,9 @@
                         <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
                             <span class="glyphicon glyphicon-ban-circle"></span> Cancelar Todos
                         </button> -->
-                        <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                        <!-- <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
                             <span class="glyphicon glyphicon-trash"></span> Borrar Todos
-                        </button>
+                        </button> -->
                     </div>
 
                 </div>
@@ -159,12 +159,17 @@
                             <tr>
                                 <th width="50%">Nombre</th>
                                 <th>Tipo</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="file in files">
-                                <td><strong>{{file.src}}</strong></td>
-                                <td><select name="tipofuente" class="form-control" ng-model="file.tipo" ng-options="n for n in select.fuentes" required></select></td>
+                            <tr ng-repeat="(key,file) in files">
+                                <td><strong>{{file.title}}</strong></td>
+                                <td><select name="tipofuente" class="form-control" ng-model="file.tipo" ng-options="n for n in select.fuentes" required></select>
+                                </td>
+                                <td> <button type="button" class="btn btn-danger btn-xs" ng-click="remove(key)">
+                                        <span class="glyphicon glyphicon-trash"></span> Borrar
+                                    </button></td>
                             </tr>
                         </tbody>
                     </table>

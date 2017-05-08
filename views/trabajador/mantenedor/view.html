@@ -4,7 +4,18 @@
 		<li><span>Opciones</span></li>
 		<li><a href="#!/worker/create">Crear Trabajador</a></li>
   		<li><a href="#!/worker/edit/{{worker.id}}">Editar Trabajador</a></li>
-  		<li><a href="#">Eliminar Trabajador</a></li>
+  		<li><a   
+						mwl-confirm
+						title="Eliminar a empresa {{worker.nombre}}"
+						message="Seguro que desea quitar a {{ worker.nombre }}"
+						placement="right"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(worker.id)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar Trabajador
+					</a></li>
 		</ul>
 		</div>
 	<div class="col-md-9">

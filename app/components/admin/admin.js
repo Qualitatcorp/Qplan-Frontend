@@ -343,7 +343,7 @@ angular.module('admin', [
 		controller:'evaluation.editpreguntaController',
 		resolve:{
 			pregunta:['apiServices','$route',function(apiServices,$route){
-				return apiServices.model("evaluacionpregunta").expand('alternativas').get($route.current.params.id);
+				return apiServices.model("evaluacionpregunta").expand('alternativas,recursos,rhs,sources').get($route.current.params.id);
 			}]
 		}
 	})
