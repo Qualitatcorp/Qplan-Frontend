@@ -19,7 +19,8 @@ angular.module('admin', [
 	'Evaluationmantenedor',
 	'Perfil',
 	'ui.uploader',
-	'angularFileUpload'
+	'angularFileUpload',
+	'ui.select'
 	])
 
 .config(['$routeProvider',/*'$httpProvider',*/function($routeProvider/*,$httpProvider*/) {
@@ -47,6 +48,15 @@ angular.module('admin', [
 	.when('/users/update/:id',{
 		templateUrl:Url.to("users/update"),
 		controller:"user.updateController",
+		resolve:{
+			model:['apiServices','$route',function(apiServices,$route){
+				return apiServices.model('user').get($route.current.params.id);
+			}]
+		}
+	})
+	.when('/users/view/:id',{
+		templateUrl:Url.to("users/view"),
+		controller:"user.viewController",
 		resolve:{
 			model:['apiServices','$route',function(apiServices,$route){
 				return apiServices.model('user').get($route.current.params.id);
@@ -333,7 +343,7 @@ angular.module('admin', [
 		controller:'evaluation.editpreguntaController',
 		resolve:{
 			pregunta:['apiServices','$route',function(apiServices,$route){
-				return apiServices.model("evaluacionpregunta").expand('alternativas').get($route.current.params.id);
+				return apiServices.model("evaluacionpregunta").expand('alternativas,recursos,rhs,sources').get($route.current.params.id);
 			}]
 		}
 	})

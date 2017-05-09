@@ -1,12 +1,23 @@
 <div class="row">
-	<div class="col-md-3">
+	<div class="well col-md-3">
 		<ul class="nav nav-pills nav-stacked">
-  		<li><a href="#!/perfil/createclasificacion"></a></li>
-  		<li><a href="#">Menu 1</a></li>
-  		<li><a href="#">Menu 2</a></li>
-  		<li><a href="#">Menu 3</a></li>
+		<li><span>Opciones</span></li>
+		<li><a href="#!/perfil/admin">Administrar Perfiles</a></li>
+		<li><a href="#!/perfil/edit/{{perfil.id}}">Editar Perfil</a></li>
+  		<li><a   
+						mwl-confirm
+						title="Eliminar a perfil {{perfil.nombre}}"
+						message="Seguro que desea quitar a {{ perfil.nombre }}"
+						placement="right"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(perfil.id)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar Perfil
+					</a></li>
 		</ul>
-	</div>	
+		</div>	
 	<div class="col-md-9">
 	<div class="page-header">
 			<h1>Ver <small>a {{perfil.nombre}}</small></h1>
@@ -18,8 +29,12 @@
 					<tr>
 						<th>Nombre</th>
 						<td>{{perfil.nombre}}</td>
+					</tr>
+					<tr>
 						<th>Descripción</th>
 						<td>{{perfil.descripcion}}</td>
+					</tr>
+					<tr>
 						<th>Documento</th>
 						<td>{{perfil.documento}}</td>
 					</tr>

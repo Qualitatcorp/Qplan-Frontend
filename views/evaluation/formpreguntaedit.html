@@ -1,0 +1,80 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+
+<form name="preguntaForm">
+	
+<div class="row">
+		<div class="col-md-6">
+		<div class="form-group" ng-class="{ 'has-error': preguntaForm.pregunta.$touched && preguntaForm.pregunta.$invalid }">
+		<label>Pregunta*</label>
+		<input 
+		name="pregunta" 
+		type="text" 
+		class="form-control" 
+		ng-model="pregunta.pregunta"
+		placeholder="Ingrese la pregunta" 
+		required 
+		>		
+	</div>
+		<div class="form-group">
+			<label>Comentario</label>
+			<textarea 
+			ng-model="pregunta.comentario" 
+			placeholder="Ingrese un comentario" 
+			class="form-control" 
+			rows="1" 
+			id="comment"></textarea>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Nivel*</label> 
+			<select name="nivel" class="form-control" ng-model="pregunta.nivel" ng-init="pregunta.nivel=pregunta.nivel||'BASICA'" ng-options="n for n in select.level" required></select>
+		</div>
+		<div class="form-group">
+			<label>Habilitada*</label> 
+			<select name="habilitada" class="form-control" ng-model="pregunta.habilitado" ng-init="pregunta.habilitado=pregunta.habilitado||'SI'" ng-options="h for h in select.habilitado" required></select>
+		</div>
+	</div>	
+</div>
+
+
+	
+	<h1>Alternativas</h1>
+
+	<div class="row">
+		<div class="col-md-7"><label>Alternativa*</label></div>
+		<div class="col-md-2"><label>Ponderación*</label></div>
+		<div class="col-md-2"><label>Correcta*</label></div>
+	</div>
+
+	<div class="row" data-ng-repeat="alternativa in alternativas">
+		<div class="form-group col-md-7" ng-class="{ 'has-error': preguntaForm.altenativa{{$index + 1}}.$touched && preguntaForm.altenativa{{$index + 1}}.$invalid }">
+			<input class="form-control" type="text" ng-model="alternativa.altenativa" name="altenativa{{$index + 1}}" placeholder="Ingresa la alternativa" required>
+		</div>
+		<div class="form-group col-md-2" ng-class="{ 'has-error': preguntaForm.poderacion{{$index + 1}}.$touched && preguntaForm.poderacion{{$index + 1}}.$invalid }">
+			<input class="form-control" type="number" ng-model="alternativa.poderacion" name="poderacion{{$index + 1}}" placeholder="Ponderación" required>
+		</div>
+		<div class="form-group col-md-2" ng-class="{ 'has-error': preguntaForm.correcta{{$index + 1}}.$touched && preguntaForm.correcta{{$index + 1}}.$invalid }">
+			<select name="correcta{{$index + 1}}" class="form-control" ng-model="alternativa.correcta" ng-init="alternativa.correcta=alternativa.correcta||'NO'" ng-options="n for n in select.correcta" required></select>
+		</div>
+		<div class="form-group col-md-1">
+			<button class="btn btn-danger remove" ng-show="$last" ng-click="removeChoice()">Eliminar</button>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary addfields" ng-click="addNewChoice()">Añadir Alternativas</button>
+	</div>
+
+	<div class="form-group">
+		<!-- <a href="#!/evaluation/adminevaluation" class="btn btn-default">Volver</a> -->
+		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+		<button ng-disabled="preguntaForm.$invalid" type="submit" class="btn btn-primary" ng-click="save()">Guardar</button>
+	</div>
+
+</form>
+
+
+
+ 			

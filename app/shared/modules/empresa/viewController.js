@@ -1,6 +1,6 @@
 angular.module('Empresa')
 
-.controller('empresa.viewController', ['$scope','empresa','empresaServices','comunaServices','paisServices','$location', function($scope,empresa,empresaServices,comunaServices,paisServices,$location){
+.controller('empresa.viewController', ['apiServices','$scope','empresa','empresaServices','comunaServices','paisServices','$location','toastr', function(apiServices,$scope,empresa,empresaServices,comunaServices,paisServices,$location,toastr){
 	
 	$scope.empresa=empresa.data;
 
@@ -18,5 +18,15 @@ angular.module('Empresa')
 			$scope.empresa.pais=q.data;
 		}
 		);
+
+	$scope.remove=function(id){
+		apiServices.model('empresa').remove(id).then(function(q) {
+			toastr.success("Se ha eliminado con exito.","Exito");
+			$location.path("empresa");
+		},function(q) {
+			toastr.error("Codigo : "+q.status,"Error");
+		})
+	}
+
 
 }])
