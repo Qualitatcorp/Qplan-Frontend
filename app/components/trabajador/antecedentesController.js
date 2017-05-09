@@ -24,7 +24,8 @@ angular.module('trabajador')
 			estado_civil:["SOLTERO/A","CASADO/A","DIVORCIADO/A","SEPARADO","CONVIVIENTE"],
 			tallas:['XXS','XS','S','M','L','XL','XXL','XXXL'],
 			afp:['AFP Cuprum','AFP Habitat','AFP PlanVital','ProVida AFP','AFP Capital','AFP Modelo'],
-			salud:['FONASA','BANMEDICA','CONSALUD','CRUZ BLANCA','ING','CAPREDENA','DIPRECA','MASVIDA','SIN PREVISIÓN']
+			salud:['FONASA','BANMEDICA','CONSALUD','CRUZ BLANCA','ING','CAPREDENA','DIPRECA','MASVIDA','SIN PREVISIÓN'],
+			sexo: ['MASCULINO','FEMENINO']
 		}
 		$scope.interface={
 			set comuna(value){
