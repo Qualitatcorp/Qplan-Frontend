@@ -17,8 +17,6 @@ angular.module("ApiRest")
 			var respuestasSistema=[],
 			createModules=function(f,modulos) {
 				moduloSistema=[];
-				console.log(f);
-				console.log("hola");
 				if(f.ficteoricas)f.ficteoricas.forEach(function(fp) {
 					fichateoricoServices.remove(fp.id);
 				})
@@ -36,7 +34,6 @@ angular.module("ApiRest")
 					fichaServices.params({tra_id:idTrabajador,ot_id:idOt}).search().then(
 						function(q) {
 							fichaServices.expand('ficteoricas').get(q.data[0].id).then(function(success) {
-								console.log(success);
 								success.data.creacion=moment().format("YYYY-MM-DD HH:mm:ss");
 								var proceso=success.data.proceso.split(',');
 								proceso.push('EN PROGRESO TEORICO');
@@ -61,7 +58,6 @@ angular.module("ApiRest")
 							}).then(function(f){
 								fichaSistema=f.data;
 								createModules(fichaSistema,modulos);
-								console.log(fichaSistema);
 							});
 						}
 					)
@@ -84,7 +80,7 @@ angular.module("ApiRest")
 					if(respuestaSistema){
 						respuestaSistema.alt_id=idAlternativa;
 						ficharespuestaServices.save(respuestaSistema).then(function(q) {
-							console.log(q);
+							// console.log(q);
 						});
 					}else{
 						var modulo=this.getModulo(idModulo);
@@ -95,7 +91,7 @@ angular.module("ApiRest")
 						.then(function(q) {
 							q.data.idPregunta=idPregunta
 							respuestasSistema.push(q.data);
-							console.log(q);
+							// console.log(q);
 						});
 					}
 				},

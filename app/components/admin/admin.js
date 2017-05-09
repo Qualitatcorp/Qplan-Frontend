@@ -17,8 +17,10 @@ angular.module('admin', [
 	'Empresa',
 	'Worker',
 	'Evaluationmantenedor',
+	'Perfil',
+	'ui.uploader',
 	'angularFileUpload',
-	'Perfil'
+	'ui.select'
 	])
 
 .config(['$routeProvider',/*'$httpProvider',*/function($routeProvider/*,$httpProvider*/) {
@@ -31,14 +33,10 @@ angular.module('admin', [
 		templateUrl:Url.to("login/form"),
 		controller:"loginController",
 	})
-
 	// Pantalla De Inicio
-
-
-
 	.when('/inicio',{
 		templateUrl:Url.to("admin/inicio"),
-		controller:"inicioController",
+		// controller:"inicioController",
 	})
 
 
@@ -56,12 +54,39 @@ angular.module('admin', [
 			}]
 		}
 	})
+	.when('/users/view/:id',{
+		templateUrl:Url.to("users/view"),
+		controller:"user.viewController",
+		resolve:{
+			model:['apiServices','$route',function(apiServices,$route){
+				return apiServices.model('user').get($route.current.params.id);
+			}]
+		}
+	})
 	.when('/users/admin',{
 		templateUrl:Url.to("users/admin"),
 		controller:"user.adminController",
 		resolve:{
 			users:['apiServices','$route',function(apiServices){
 				return apiServices.model('user').get();
+			}]
+		}
+	})
+	.when('/users/role',{
+		templateUrl:Url.to("users/admin"),
+		controller:"user.adminController",
+		resolve:{
+			users:['apiServices','$route',function(apiServices){
+				return apiServices.model('user').get();
+			}]
+		}
+	})
+	.when('/users/resource',{
+		templateUrl:Url.to("users/resource/admin"),
+		controller:"resource.adminController",
+		resolve:{
+			models:['apiServices','$route',function(apiServices){
+				return apiServices.model('userresource').expand('children').get(1);
 			}]
 		}
 	})
@@ -318,7 +343,7 @@ angular.module('admin', [
 		controller:'evaluation.editpreguntaController',
 		resolve:{
 			pregunta:['apiServices','$route',function(apiServices,$route){
-				return apiServices.model("evaluacionpregunta").expand('alternativas').get($route.current.params.id);
+				return apiServices.model("evaluacionpregunta").expand('alternativas,recursos,rhs,sources').get($route.current.params.id);
 			}]
 		}
 	})

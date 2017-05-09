@@ -1,17 +1,36 @@
 <div class="row">
-	<div class="col-md-3">
+	<div class="well col-md-3">
 		<ul class="nav nav-pills nav-stacked">
-  		<li><a href="#!/empresa/createclasificacion">Crear Clasificación</a></li>
-  		<li><a href="#">Menu 1</a></li>
-  		<li><a href="#">Menu 2</a></li>
-  		<li><a href="#">Menu 3</a></li>
+		<li><span>Opciones</span></li>
+		<li><a href="#!/empresa/create">Crear</a></li>
+  		<li><a href="#!/empresa/edit/{{empresa.id}}">Editar</a></li>
+  		<li><a   
+						mwl-confirm
+						title="Eliminar a empresa {{empresa.nombre}}"
+						message="Seguro que desea quitar a {{ empresa.nombre }}"
+						placement="right"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(empresa.id)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar
+					</a></li>
+  		<!-- <li><span>Usuario</span></li>
+  		<li><a href="#">Ver Usuarios</a></li>
+  		<li><a href="#">Crear Usuarios</a></li>
+  		<li><span>Evaluación</span></li>
+  		<li><a href="#">Ver Fichas</a></li>
+  		<li><a href="#">Crear Clasificación</a></li>
+  		<li><span>Orden de Trabajo</span></li>
+  		<li><a href="#">Ver Órdenes</a></li>
+  		<li><a href="#">Ingresar Orden</a></li> -->
 		</ul>
 	</div>	
 	<div class="col-md-9">
 	<div class="page-header">
-			<h1>Ver <small>a {{empresa.nombre}}</small></h1>
+			<h1>{{empresa.nombre}} <small>Empresa</small></h1>
 		</div>
-		<h2>Datos</h2>
 		<div class="table-responsive">          
 			<table class="table table-bordered">
 				<tbody>

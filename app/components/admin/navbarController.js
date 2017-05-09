@@ -1,7 +1,7 @@
 angular.module('admin')
 .controller('navbarController', 
-	['$scope','toastr','$location','sessionServices','apiServices','$timeout','$uibModal',
-	function($scope,toastr,$location,session,apiServices,$timeout,$uibModal){
+	['$scope','toastr','$location','sessionServices','apiServices','$timeout','$uibModal','$route',
+	function($scope,toastr,$location,session,apiServices,$timeout,$uibModal,$route){
 		$scope.$on('$routeChangeError',function(event,current,prev,reject) {
 			switch(reject.status){
 				case 401:
@@ -20,10 +20,10 @@ angular.module('admin')
 							$scope.menu=[
 								{"name":"Administración","items":[{"label":"Sistema","items":[{"label":"Usuarios","href":"users/admin"},{"label":"Roles","href":"role"},{"label":"Recursos","href":"resource"},{"label":"Clientes","href":"clients"},{"label":"Accesos","href":"access"}]}]},
 								{"name":"Empresa","items":[{"label":"Empresa","items":[{"label":"Crear","href":"empresa/create"},{"label":"Administrar","href":"empresa"}]}]},
-								{"name":"Orden de Servicio","items":[{"label":"Orden de Servicio","items":[{"label":"Crear","href":"ot/create"},{"label":"Administrar","href":"ot/admin"}]}]},
 								{"name":"Trabajador","items":[{"label":"Trabajadores","items":[{"label":"Crear","href":"worker/create"},{"label":"Administrar","href":"worker/admin"}]}]},
-								{"name":"Evaluación","items":[{"label":"Clasificación","items":[{"label":"Crear Categoría","href":"evaluation/createcategoria"},{"label":"Administrar Categoría","href":"evaluation/admincategoria"},{"label":"Crear Clasificación","href":"evaluation/createclasificacion"},{"label":"Administrar Clasificación","href":"evaluation/adminclasificacion"},{"label":"Crear Clasificación-Perfil","href":"evaluation/createclasificacionperfil"},{"label":"Administrar Clasificación-Perfil","href":"evaluation/adminclasificacionperfil"}]},{"label":"Evaluación","items":[{"label":"Crear Evaluación","href":"evaluation/createevaluation"},{"label":"Administrar Evaluación","href":"evaluation/adminevaluation"},{"label":"Crear Tipo","href":"evaluation/createtipo"},{"label":"Administrar Tipo","href":"evaluation/admintipo"}]},{"label":"Fichas de evaluación","items":[{"label":"Crear","href":"ficha/create"},{"label":"Administrar","href":"ficha/admin"}]}]},
-								{"name":"Perfil","items":[{"label":"Perfil","items":[{"label":"Crear","href":"perfil/create"},{"label":"Administrar","href":"perfil/admin"}]}]}
+								{"name":"Orden de Servicio","items":[{"label":"Orden de Servicio","items":[{"label":"Crear","href":"ot/create"},{"label":"Administrar","href":"ot/admin"}]}]},
+								{"name":"Evaluación","items":[{"label":"Evaluación","items":[{"label":"Crear Evaluación","href":"evaluation/createevaluation"},{"label":"Administrar Evaluación","href":"evaluation/adminevaluation"},{"label":"Crear Tipo","href":"evaluation/createtipo"},{"label":"Administrar Tipo","href":"evaluation/admintipo"}]}]},
+								{"name":"Perfil","items":[{"label":"Perfil","items":[{"label":"Crear","href":"perfil/create"},{"label":"Administrar","href":"perfil/admin"}]},{"label":"Clasificación","items":[{"label":"Crear Categoría","href":"evaluation/createcategoria"},{"label":"Administrar Categoría","href":"evaluation/admincategoria"},{"label":"Crear Clasificación","href":"evaluation/createclasificacion"},{"label":"Administrar Clasificación","href":"evaluation/adminclasificacion"}]}]}
 							];
 					}
 					if(session.timeOut.getMinutes()<10){
@@ -108,8 +108,12 @@ angular.module('admin')
 		$scope.logout=function(){
 			session.logout();
 			sessionStorage.clear();
-			$location.path("login");
+			$route.reload();
+			$location.path("inicio");
 			console.log("Session limpiada");
 		}
 	}
 ])
+
+
+							

@@ -1,34 +1,24 @@
 angular.module('Evaluationmantenedor')
 
-.controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,auth,$location,toastr){
-	//SUBIR ARCHIVOS
-    var uploader = $scope.uploader = new FileUploader({
-    	   headers:{ "Authorization": "Bearer " + sessionStorage.access_token },
-           url: WebApiConfig.resourceUrl("recursossources"),
-           autoUpload :true,
-          });
+.controller('evaluation.createpreguntaController', ['FileUploader','WebApiConfig','$scope','$routeParams','apiServices','$location','toastr',
+function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toastr){
 	
 	
 	$scope.pregunta={};
 
 	$scope.pregunta.eva_id = $routeParams.id;
+	var evaluacionid = $routeParams.id;
 
 	$scope.select={
 		habilitado:["SI","NO"],
 		level: ["BASICA","MEDIA","AVANZADA"],
-		correcta: ["SI","NO"]
+		correcta: ["SI","NO"],
+		fuentes: ["CONTENIDO","AUDIO-PREGUNTA","POSTER"]
 	}
 
 	$scope.alternativas = [];
-
 	$scope.recursos = {};
-
-	$scope.recursoshas = {};
-
-	$scope.files = [
- 		{type: "image/png", src: "click5", title :"prop2"},
-  		{type: "image/png", src: "click6", title :"prop3"}
-	];
+	$scope.files = [];
 
 	$scope.addNewChoice = function() {		
 		$scope.alternativas.push({});
@@ -39,8 +29,13 @@ angular.module('Evaluationmantenedor')
 		$scope.alternativas.splice(lastItem);
 	};
 	
-
-	
+	//SUBIR ARCHIVOS
+    
+    var uploader = $scope.uploader = new FileUploader({
+    	   headers:{ "Authorization": "Bearer " + sessionStorage.access_token },
+           url: WebApiConfig.resourceUrl("recursossources"),
+           autoUpload :true,
+          });
 
         // FILTERS
       
@@ -61,9 +56,10 @@ angular.module('Evaluationmantenedor')
                 setTimeout(deferred.resolve, 1e3);
             }
         });
+
     uploader.onCompleteItem = function(fileItem, response, status, headers) {
     	//lista de recursos
-     		console.info(response['data']);
+     		$scope.files.push({"src_id":response.data.id,"src":response.data.src,"title":response.data.title,"tipo":""});
            
         };
 
@@ -71,20 +67,34 @@ angular.module('Evaluationmantenedor')
 	            console.info('onCompleteAll');
 	        };
 
+
+	$scope.remove = function(key){
+			$scope.files.splice(key,1);		
+	};
+
+	 //       
+
 	$scope.save=function() {
 
 		apiServices.model('evaluacionpregunta').save($scope.pregunta).
-		then(function(q){
-			
-			 
+		then(function(q){	 
 			$scope.alternativas.forEach(function(elemento){
 				elemento.pre_id = q.data.id;
-				apiServices.model('evaluacionalternativa').save(elemento).then(
-					function success(q){
-					});
+				apiServices.model('evaluacionalternativa').save(elemento).then(function(m){
+				console.log(m);
+				})
 			})
-			toastr.success("La pregunta se ha creado con exito.","Exito");
-			$location.path("evaluation/"+$routeParams.id);
+			$scope.recursos.pre_id=q.data.id;
+			console.log($scope.files);
+			apiServices.model('recursos').save($scope.recursos).then(function(j){
+				$scope.files.forEach(function(fileitem){
+				fileitem.rec_id = j.data.id;
+				apiServices.model('recursoshassources').save(fileitem).then(function(m){
+				})
+			})		
+			});
+			toastr.success("Se ha creado la pregunta con éxito.","Exito");
+			$location.path("evaluation/"+evaluacionid);
 		}
 		);
 	}

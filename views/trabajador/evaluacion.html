@@ -13,10 +13,13 @@
 			</div>
 			<div class="col-md-7" ng-switch on="ficha.pregunta.recursos.tipo">
 				<div ng-switch-when="IMAGE"><center>
-					<img 
-						ng-src="{{parse.Url(ficha.pregunta.recursos.sources[0].src)}}" 
+				<script>
+					
+				</script>
+					<img ng-init="imagen=this;console.log('imagen')"
+						ng-src="{{parse.Url(ficha.pregunta.recursos.sources[0].src)|dinamicSource}}" 
 						class="img-rounded" 
-						style="width: auto;max-width: 664px;height:250px;">
+						style="width: auto;max-width: 664px;height:250px;" id="imagePregunta" >
 				</center>
 				</div>
 				<div ng-switch-when="VIDEO">
@@ -59,7 +62,10 @@
 		<div class="panel-footer">Pregunta<span class="badge pull-right">{{(ficha.current+1)+" de "+(evaluacion.preguntas.length)}}</span></div>
 	</div>
 	<!-- Grupo de Botones -->
-	<div class="list-group col-xs-12" role="group">
+	<div class="list-group col-md-12" role="group">
+		<div class="col-md-6">
+			<button ng-click="repeat()" class="btn btn-success"><span class="glyphicon glyphicon-volume-up"></span> Repetir Audio</button>
+		</div>
 		<div class="btn-group pull-right">
 			<button type="button"  ng-click="buttons.Omitir.action()" ng-disabled="buttons.Omitir.disable" class="btn btn-warning">No sé</button>
 			<button type="button"  ng-click="buttons.Anterior.action()" ng-disabled="buttons.Anterior.disable" class="btn btn-primary">Anterior</button>
