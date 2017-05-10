@@ -137,8 +137,6 @@ angular.module('trabajador')
 			get audioPregunta(){
 				return _.findWhere($scope.ficha.recurso.sources,{title:"pregunta"});
 			}
-
-
 		};
 		$scope.parse={
 			Url:function(url){

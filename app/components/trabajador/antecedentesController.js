@@ -18,6 +18,7 @@ angular.module('trabajador')
 			comunaServices=api.model('comuna'),
 			trabajadorServices=api.model('trabajador');
 		$scope.trabajador=trabajadorStorage.q;
+
 		$scope.Select={
 			niveles:["Basica completa","Media incompleta","Media completa","Tecnica","Técnico en nivel superior incompleta","Técnico en nivel superior","Profesional incompleta","Profesional"],
 			licencias:["A1","A2","A3","A4","A5","B","C","D","E","F"],
@@ -72,7 +73,15 @@ angular.module('trabajador')
 			$scope.trabajador.licencia=$scope.interface.licencia.join(',');
 			trabajadorServices.save($scope.trabajador).then(
 				function(q){
-					$location.path('experiencia');
+					var ficha ={};
+					ficha.ot_id = trabajadorStorage.q.ot.id;
+					ficha.tra_id = trabajadorStorage.q.id;
+					ficha.proceso = 'EN PROGRESO TEORICO';
+					api.model('ficha').save(ficha).then(
+						function(q){
+							console.log(q);
+							$location.path('experiencia');
+						});
 				},
 				function(q){
 					console.log(q);

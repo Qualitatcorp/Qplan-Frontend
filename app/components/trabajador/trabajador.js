@@ -55,7 +55,7 @@ angular.module('trabajador', [
 		templateUrl:'views/trabajador/termino.html',
 		controller: "terminoController",
 		resolve:{
-			fichas:['apiServices','trabajadorStorage',function(api,trabajadorStorage){
+			ficha:['apiServices','trabajadorStorage',function(api,trabajadorStorage){
 				return api.model('ficha').params({"tra_id":trabajadorStorage.q.id,"ot_id":trabajadorStorage.q.ot.id}).search();
 			}],
 		}
