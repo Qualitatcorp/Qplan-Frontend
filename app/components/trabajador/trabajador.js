@@ -53,7 +53,12 @@ angular.module('trabajador', [
 	})	
 	.when('/termino',{
 		templateUrl:'views/trabajador/termino.html',
-		controller: "terminoController"
+		controller: "terminoController",
+		resolve:{
+			fichas:['apiServices','trabajadorStorage',function(api,trabajadorStorage){
+				return api.model('ficha').params({"tra_id":trabajadorStorage.q.id,"ot_id":trabajadorStorage.q.ot.id}).search();
+			}],
+		}
 	})	
 	.when('/404',{
 		template:'Error 404 :)'
