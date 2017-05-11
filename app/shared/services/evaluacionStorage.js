@@ -14,16 +14,17 @@ angular.module("ApiRest")
 			var ficha={respuesta:[]};
 			var fichaSistema={};
 			var moduloSistema=[];
-			var respuestasSistema=[],
-			createModules=function(f,modulos) {
+			var respuestasSistema=[];
+
+			var	createModules=function(ficha,modulos) {
 				moduloSistema=[];
-				if(f.ficteoricas)f.ficteoricas.forEach(function(fp) {
+				if(ficha.ficteoricas)ficha.ficteoricas.forEach(function(fp) {
 					fichateoricoServices.remove(fp.id);
 				})
 				modulos.forEach(function(m) {
 					fichateoricoServices.save({
 						mod_id:m.id,
-						fic_id:f.id
+						fic_id:ficha.id
 					}).then(function(mNew) {
 						moduloSistema.push(mNew.data);
 					})
@@ -53,8 +54,7 @@ angular.module("ApiRest")
 								tra_id:idTrabajador,
 								ot_id:idOt,
 								creacion:moment().format("YYYY-MM-DD HH:mm:ss"),
-								proceso:'EN PROGRESO TEORICO',
-								respuesta:[],
+								proceso:'EN PROGRESO TEORICO'
 							}).then(function(f){
 								fichaSistema=f.data;
 								createModules(fichaSistema,modulos);

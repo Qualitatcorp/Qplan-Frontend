@@ -83,6 +83,7 @@ angular.module('trabajador')
 			$scope.inputs.forEach(function(elemento){
 				experienciaServices.save(elemento).then(
 					function success(promise){
+						console.log(promise);
 						i++;
 					});
 			})
