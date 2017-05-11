@@ -156,7 +156,9 @@ angular.module('trabajador')
 					return false;
 				},
 				action:function() {
+
 					$scope.ficha.respuesta=null;
+					$scope.buttons.Siguiente.action();
 				}
 			},
 			Anterior:{
@@ -180,7 +182,7 @@ angular.module('trabajador')
 				disable:true,
 				action:function() {
 					evaluacionStorage.terminarEvaluacion().then(function(s){
-						$location.path("termino");
+						$location.path("psicologicoPca");
 					}
 					);
 				}

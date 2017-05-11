@@ -51,6 +51,15 @@ angular.module('trabajador', [
 		templateUrl:'views/trabajador/config.html',
 		controller:'configController'
 	})	
+	.when('/psicologicoPca',{
+		templateUrl:'views/trabajador/iframe.html',
+		controller: "psicologicoPcaController"
+		// resolve:{
+		// 	ficha:['apiServices','trabajadorStorage',function(api,trabajadorStorage){
+		// 		return api.model('ficha').params({"tra_id":trabajadorStorage.q.id,"ot_id":trabajadorStorage.q.ot.id}).search();
+		// 	}],
+		// }
+	})		
 	.when('/termino',{
 		templateUrl:'views/trabajador/termino.html',
 		controller: "terminoController",
