@@ -107,7 +107,8 @@ angular.module("ApiRest")
 					console.log("Evaluacion eliminada");
 				},
 				terminarEvaluacion:function() {
-					fichaSistema.proceso='FINALIZADO TEORICO';
+					/*fichaSistema.proceso={'FINALIZADO TEORICO','EN PROGRESO SICOLOGICO'};*/
+					fichaSistema.proceso='FINALIZADO TEORICO,EN PROGRESO SICOLOGICO';
 					return fichaServices.save(fichaSistema);
 				},
 				// variables dinamicas
