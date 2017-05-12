@@ -13,7 +13,7 @@ angular.module('trabajador', [
 'toastr',
 'filters',
 'vjs.video',
-'ngSanitize'])
+'ngSanitize',])
 
 .config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvider) {
 	$routeProvider
@@ -64,7 +64,7 @@ angular.module('trabajador', [
 		templateUrl:'views/trabajador/termino.html',
 		controller: "terminoController",
 		
-		}
+		
 	})	
 	.when('/404',{
 		template:'Error 404 :)'

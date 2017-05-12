@@ -11,22 +11,34 @@ angular.module('trabajador')
 	
 
     //console.log($scope.ficha);
-    $scope.url = $sce.trustAsResourceUrl('http://tma.timshr.com/pca/f9e91068-912c-4303-82a3-5ae344332622/8');
+    // $scope.url = $sce.trustAsResourceUrl('http://tma.timshr.com/pca/f9e91068-912c-4303-82a3-5ae344332622/8');
         
-    $scope.changeIt = function () {
-        $scope.url = $sce.trustAsResourceUrl('https://docs.angularjs.org/tutorial');
-    }
+    // $scope.changeIt = function () {
+    //     $scope.url = $sce.trustAsResourceUrl('https://docs.angularjs.org/tutorial');
+    // }
      
+    // $scope.trabajador=trabajadorStorage.q;
+    // var inscripcion = 
+    // { 
+    //     rut:$scope.trabajador.rut,
+    //     sexo:$scope.trabajador.sexo,
+    //     mail:$scope.trabajador.mail,
+    //     nombre:$scope.trabajador.nombre,
+    //     paterno:$scope.trabajador.paterno,
+    //     materno:$scope.trabajador.materno,
+    //     ficha:$scope.trabajador.ficha.id
+    // }
+    // console.log($scope.trabajador);
     
-    $scope.trabajador=trabajadorStorage.q;
-    //console.log($scope.trabajador);
-    var pca = { trabajador: $scope.trabajador, ficha :$scope.ficha}
-    p = psicologicopcaServices.send(pca );
-    p.then(function(request) {
-      console.log(request);
-    }, function(request) {
-       console.warn(request);
-    });
+    // p = psicologicopcaServices.send(inscripcion);
+    // p.then(function(response) {
+    //     //$scope.url = $sce.trustAsResourceUrl(response.data.AddSurveyResult._x003C_PcaLink_x003E_k__BackingField);
+   
+        
+    //   console.log(response.data);
+    // }, function(response) {
+    //    console.warn(response.data);
+    // });
 
 }])
 
