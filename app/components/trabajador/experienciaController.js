@@ -1,15 +1,15 @@
 'use strict'
 angular.module('trabajador')
 
-.controller('experienciaController', ['$filter','trabajadorStorage','$modal','$scope','$location','apiServices','toastr',
-	function($filter,trabajadorStorage,$modal,$scope,$location,api,toastr){
+.controller('experienciaController', ['$filter','trabajadorStorage','$modal','$scope','$location','apiServices','toastr','$timeout',
+	function($filter,trabajadorStorage,$modal,$scope,$location,api,toastr,$timeout){
 		console.log(trabajadorStorage);
 		var playAudio=function(src){
 			var audio = document.getElementById('player');
 				audio.src=src;
 				audio.play();
 		}
-		playAudio($filter('dinamicSource')('src/audio/trabajador/experiencialaboral.m4a'));
+		playAudio($filter('dinamicSource')('src/audio/trabajador/EXP.mp3'));
 		$scope.rubros=['Rubro Minero','Rubro Forestal','Rubro Energía','Rubro Petroleo','Rubro Metal-Mecánico','Rubro Telecomunicaciones'];
 		var experienciaServices = api.model('trabajadorexperiencia');
 		var trabajador=trabajadorStorage.q;
@@ -40,8 +40,6 @@ angular.module('trabajador')
 		$scope.tooltipproyecto = {title: 'Hola, debes seleccionar la cantidad de experiencias en proyecto que has hecho', checked: false};
 
 		$scope.addInputs = function(numero,tipo) {
-			
-
 			var filtro = $scope.inputs.filter(function(obj) {
 				return (obj.tipo === tipo);
 			});
@@ -75,7 +73,12 @@ angular.module('trabajador')
 			}			
 
 		}
-
+		function siguiente() {
+			playAudio($filter('dinamicSource')('src/audio/trabajador/EXP_NEXT.mp3'));
+			setTimeout(function() {
+				$location.path('evaluacion');
+			}, 3500);
+		}
 		$scope.guardar=function() {
 			
 			var longitud = $scope.inputs.length;
@@ -88,11 +91,11 @@ angular.module('trabajador')
 					});
 			})
 			if(i=longitud){
+				siguiente();
 				toastr.success('Experiencia agregada exitosamente.', 'Atencion!');
-				$location.path('evaluacion');
-			}
-			else{
-				toastr.error('Error al registrar la experiencia. Intente nuevamente', 'Atención');
+			}else{
+				playAudio($filter('dinamicSource')('src/audio/trabajador/EXP_ERROR.mp3'));
+				toastr.warning('Para poder continuar debe ingresar al menos una experiencia laboral.', 'Atención');
 			}
 		}
 

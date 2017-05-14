@@ -31,36 +31,23 @@ angular.module("ApiRest")
 				});
 			}
 			return {
-				nuevaEvaluacion:function(idTrabajador,idOt,modulos) {
-					fichaServices.params({tra_id:idTrabajador,ot_id:idOt}).search().then(
-						function(q) {
-							fichaServices.expand('ficteoricas').get(q.data[0].id).then(function(success) {
-								success.data.creacion=moment().format("YYYY-MM-DD HH:mm:ss");
-								var proceso=success.data.proceso.split(',');
-								proceso.push('EN PROGRESO TEORICO');
-								success.data.proceso=proceso.join(',');
+				nuevaEvaluacion:function(ficha,modulos) {
+							fichaServices.expand('ficteoricas').get(ficha.id).then(function(success) {
+								if(success.data.proceso){					
+									var proceso=success.data.proceso.split(',');
+									proceso.push('EN PROGRESO TEORICO');
+									ficha.proceso=proceso.join(',');
+								}else{
+									ficha.proceso=['EN PROGRESO TEORICO'];
+								}
 								fichaServices.save(success.data).then(function(f){
 									fichaSistema=f.data;
 									createModules(success.data,modulos);
 								});
 								ficha={respuesta:[]};
-							},
-							function(error) {
-								console.warn(error);
-							})
-						},
-						function() {
-							fichaServices.save({
-								tra_id:idTrabajador,
-								ot_id:idOt,
-								creacion:moment().format("YYYY-MM-DD HH:mm:ss"),
-								proceso:'EN PROGRESO TEORICO'
-							}).then(function(f){
-								fichaSistema=f.data;
-								createModules(fichaSistema,modulos);
+							},function(q) {
+								console.warn("q");
 							});
-						}
-					)
 				},
 				addRespuesta:function(idPregunta,idAlternativa,idModulo){
 					var respuesta = this.getRespuesta(idPregunta);
@@ -107,8 +94,8 @@ angular.module("ApiRest")
 					console.log("Evaluacion eliminada");
 				},
 				terminarEvaluacion:function() {
-					/*fichaSistema.proceso={'FINALIZADO TEORICO','EN PROGRESO SICOLOGICO'};*/
-					fichaSistema.proceso='FINALIZADO TEORICO,EN PROGRESO SICOLOGICO';
+					/*fichaSistema.proceso={'FINALIZADO TEORICO','EN PROGRESO PSICOLOGICO'};*/
+					fichaSistema.proceso='FINALIZADO TEORICO,EN PROGRESO PSICOLOGICO';
 					return fichaServices.save(fichaSistema);
 				},
 				// variables dinamicas

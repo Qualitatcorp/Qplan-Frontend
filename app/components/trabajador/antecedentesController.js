@@ -15,7 +15,7 @@ angular.module('trabajador')
 					}
 				);
 		}
-		playAudio($filter('dinamicSource')("src/audio/trabajador/antecendes.m4a"));
+		playAudio($filter('dinamicSource')("src/audio/trabajador/ANTECEDENTES.mp3"));
 		var paisServices=api.model('pais'),
 			comunaServices=api.model('comuna'),
 			trabajadorServices=api.model('trabajador'),

@@ -2,8 +2,10 @@
 angular.module('trabajador')
 .controller('evaluacionController', ['$filter','$scope','evaluacionStorage','$location','evaluacion','trabajadorStorage','toastr',
 	function($filter,$scope,evaluacionStorage,$location,evaluacion,trabajadorStorage,toastr){
+		console.log(perfil);
 		var audioSrc,imageSrc;
 		var audio = document.getElementById('player');
+		var error = document.getElementById('error');
 		// audio.onerror=function() {
 		// 	audio.src=audioSrc;
 		// 	audio.play();
@@ -15,12 +17,12 @@ angular.module('trabajador')
 					audio.load();
 				}
 				audio.play();
-				
 		}
 
 		$scope.repeat=function() {
 			playAudio();
 		}
+		// Seleccion Aleatoria de evaluaciones
 		var perfil=evaluacion.data;
 		var tipo=_.sample(_.uniq(_.pluck(perfil.preguntas,'tipo')));
 		console.log('Evaluacion '+tipo);
@@ -30,7 +32,7 @@ angular.module('trabajador')
 		evaluacionSerializada.preguntas=[];
 		var modulos=[];
 		var evaSerial={};
-		var preguntas=_.where(perfil.preguntas,{tipo:tipo})
+		var preguntas=_.where(perfil.preguntas,{tipo:tipo});
 		preguntas.forEach(function(p){
 			angular.extend(p,{
 				alternativas:_.where(perfil.alternativas,{
@@ -50,9 +52,11 @@ angular.module('trabajador')
 				},
 				modulo:_.findWhere(perfil.modteorica,{id:_.findWhere(perfil.pet,{evt_id:_.findWhere(perfil.evateorica,{id:p.eva_id}).id}).mop_id})
 			});
-		})
+		});
 
-		evaluacionStorage.nuevaEvaluacion(trabajadorStorage.q.id,trabajadorStorage.q.ot.id,perfil.modteorica);
+
+
+		evaluacionStorage.nuevaEvaluacion(trabajadorStorage.q.ficha,perfil.modteorica);
 
 		$scope.evaluacion={
 			perfil:perfil.nombre,
@@ -174,7 +178,10 @@ angular.module('trabajador')
   					if($scope.ficha.respuesta!==undefined){
 						$scope.ficha.current++;
   					}else{
-  						toastr.info('Antes de continuar, seleccione una alternativa, en caso contrario responda en el boton naranjo "Nose".', 'Información');
+  						audio.pause();
+						error.src='src/audio/trabajador/EVA_ERROR.mp3';
+						error.play();
+  						toastr.info('Para poder continuar seleccione una alternativa, si no sabe la respuesta presione el botón naranja "No sé".', 'Información');
   					}
 				}
 			},
