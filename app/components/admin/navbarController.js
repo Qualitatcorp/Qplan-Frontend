@@ -18,7 +18,7 @@ angular.module('admin')
 				}else{
 					if($scope.menu.length==0){
 							$scope.menu=[
-								{"name":"Administración","items":[{"label":"Sistema","items":[{"label":"Usuarios","href":"users/admin"},{"label":"Roles","href":"role"},{"label":"Recursos","href":"resource"},{"label":"Clientes","href":"clients"},{"label":"Accesos","href":"access"}]}]},
+								{"name":"Administración","items":[{"label":"Sistema","items":[{"label":"Usuarios","href":"users/admin"},{"label":"Roles","href":"role"},{"label":"Recursos","href":"resource"},{"label":"Clientes","href":"clients"},{"label":"Accesos","href":"users/authentication"}]}]},
 								{"name":"Empresa","items":[{"label":"Empresa","items":[{"label":"Crear","href":"empresa/create"},{"label":"Administrar","href":"empresa"}]}]},
 								{"name":"Trabajador","items":[{"label":"Trabajadores","items":[{"label":"Crear","href":"worker/create"},{"label":"Administrar","href":"worker/admin"}]}]},
 								{"name":"Orden de Servicio","items":[{"label":"Orden de Servicio","items":[{"label":"Crear","href":"ot/create"},{"label":"Administrar","href":"ot/admin"}]}]},

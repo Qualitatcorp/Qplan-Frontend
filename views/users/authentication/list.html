@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+		  <h1>Autenticación <small>Usuarios</small></h1>
+		</div>
+		<div class="panel panel-primary">
+	  		<div class="panel-heading">Historial de accesos</div>
+			<table class="table table-condensed table-hover table-responsive">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Nombre</th>
+						<th>Cargo</th>
+						<th>Cliente</th>
+						<th>Expira</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="(key, value) in models">
+						<td>{{value.user.username}}</td>
+						<td>{{value.user.nombre}}</td>
+						<td>{{value.user.cargo}}</td>
+						<td>{{value.client.name}}</td>
+						<td>{{value.expire*1000 |date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+  		<ul class="pull-right" 
+  		uib-pagination 
+  		total-items="page.total"
+  		items-per-page="page.perPage"
+  		ng-model="page.current"
+  		ng-change="page.change()"
+  		first-text="Primera"
+  		next-text="Siguiente"
+  		previous-text="Anterior"></ul>
+		<!-- <pre>{{models|json}}</pre> -->
+	</div>
+</div>

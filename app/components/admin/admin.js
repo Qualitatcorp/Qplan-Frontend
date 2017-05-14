@@ -90,6 +90,15 @@ angular.module('admin', [
 			}]
 		}
 	})
+	.when('/users/authentication',{
+		templateUrl:Url.to("users/authentication/list"),
+		controller:"authentication.adminCtrl",
+		resolve:{
+			models:['apiServices',function(apiServices){
+				return apiServices.model('userauthentication').expand('user,client').sort('-expire').get();
+			}]
+		}
+	})
 	//Orden de trabajo
 	.when('/ot/create',{
 		templateUrl:Url.to("ot/create"),

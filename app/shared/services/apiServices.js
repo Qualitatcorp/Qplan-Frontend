@@ -42,8 +42,16 @@ angular.module('ApiRest')
 				angular.extend(this._params,{expand:r});
 				return this;
 			},			
+			sort:function(r){
+				angular.extend(this._params,{sort:r});
+				return this;
+			},			
 			page:function(r){
 				angular.extend(this._params,{page:r});
+				return this;
+			},
+			perPage:function(r){
+				angular.extend(this._params,{'per-page':r});
 				return this;
 			},
 			model:function(r,p){
