@@ -1,12 +1,14 @@
-<div class="row">
+<!-- <div class="row">
 	<div class="col-sm-4">
 		<img src="img/logo.png" class="img-responsive">
 	</div>
-</div>
-<div class="row">
-    <iframe ng-src="{{url}}" class="col-md-11 thumbnail" height="650"></iframe>
-
-<!-- 	<div class="col-md-8 col-md-offset-2" style="position: relative;top: 20px;"> 
+</div> -->
+<div class="container">
+	<br><br>
+	<div class="row">
+		<iframe ng-src="{{url}}" class="col-md-12 thumbnail" height="800"></iframe>
+	<!-- 	
+	<div class="col-md-8 col-md-offset-2" style="position: relative;top: 20px;"> 
 		<div class="jumbotron">
 			<h3 class="text-center">Termino de evaluación teoríca</h3>
 			<video class="video-js vjs-big-play-centered vjs-16-9" vjs-video vjs-setup="{autoplay:true,controls:false,preload:'auto'}" style="background-color: #eee">
@@ -16,11 +18,21 @@
 			<a href="#!/login" class="btn btn-success pull-right">Ir a evaluación</a>
 			<br>
 		</div>
-	</div> -->
- 
-	<div class="col-md-1">
-	 
-		<button class="btn btn-info  col-md-auto" ng-click="termino()" >Terminar</button>
-	 
+	</div> 
+	-->
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-md-auto ">
+			<div class=" col-md-2">
+				<button class="btn btn-info " ng-click="termino()" >He Finalizado!!</button>	
+			</div>
+
+			<div class="col-md-offset-4 col-md-1">
+				<img  class= "col-md-auto {{hide}}" src="img/loader.gif">  
+			</div>
+			
+
+		</div>
 	</div>
 </div>
