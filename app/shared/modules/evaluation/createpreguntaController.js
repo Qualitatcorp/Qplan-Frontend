@@ -58,8 +58,9 @@ function(FileUploader,WebApiConfig,$scope,$routeParams,apiServices,$location,toa
         });
 
     uploader.onCompleteItem = function(fileItem, response, status, headers) {
+    	console.log(response.id);
     	//lista de recursos
-     		$scope.files.push({"src_id":response.data.id,"src":response.data.src,"title":response.data.title,"tipo":""});
+     	 	$scope.files.push({"src_id":response.id,"src":response.src,"title":response.title,"tipo":""});
            
         };
 
