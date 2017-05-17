@@ -4,106 +4,109 @@
 * Termino del sistema
 */
 angular.module('trabajador')
-.controller('psicologicoPcaController', ['$scope','$sce','$location','$timeout','toastr','psicologicopcaServices','trabajadorStorage', function($scope,$sce,$location,$timeout,toastr,psicologicopcaServices,trabajadorStorage){
-   //$scope.url = $sce.trustAsResourceUrl('https://timshr.com/pruebapca//default.aspx?codigo=276bb6d9-a531-46cc-b851-db7fa6567c44&correo=&lang=es-cl&pS=0&inv=1&uD=0&iFrm=1');
+.controller('psicologicoPcaController', ['apiServices','$scope','$sce','$location','$timeout','toastr','psicologicopcaServices','trabajadorStorage', function(apiServices,$scope,$sce,$location,$timeout,toastr,psicologicopcaServices,trabajadorStorage){
 
-    if(trabajadorStorage.q){
-        $scope.trabajador=trabajadorStorage.q;
-        if($scope.trabajador.identity){
-            $scope.cod_pc = $scope.trabajador.identity;
-            gotSurvey();
-            console.log( trabajadorStorage.q.identity);
-        }else{
-            inscripcion();
-            console.log(trabajadorStorage.q.identity);
+    $scope.hide = 'hide';  //para usar loader
+    var trabajador=function(){
+        if(trabajadorStorage.q){
+            $scope.trabajador=trabajadorStorage.q;
+            if($scope.trabajador.identity){
+                gotoSurvey($scope.trabajador.identity);
+            }else{ 
+                ComprobarIdentityDB();   
+            }
         }
-
-    }else{
-       
-        console.warn('Redireccionar'); //  
-        $scope.hide = 'hide';
-    }
-
-
-
-
-    $scope.termino = function()
-    {
-       if(trabajadorStorage.q){  
-            console.warn(trabajadorStorage.q);
-            $scope.hide = '';
-            var consulta = {  codpca: $scope.cod_pc};
-            p = psicologicopcaServices.getresult(consulta);
-            p.then(function(request){
-                if  (request.data.GetResultResult._x003C_Ok_x003E_k__BackingField)
-                    {
-                        console.log(request.data.GetResultResult);
-                        $scope.hide = 'hide';
-                        toastr.info('a finalizado la Evaluación', 'Información');
-                    }
-                else if (request.data.GetResultResult._x003C_Info_x003E_k__BackingField == "Evaluación no finalizada") 
-                    {
-                        console.log('pendiente');
-                        toastr.info('Aún no ha finalizado la evaluación', 'Información');
-                        $scope.hide = 'hide';
-                    }
-                 
-                }, 
-            function(request) 
-            {
-                console.warn(request.data);
-            });
-        } 
-    };
-
-
-
-
-
-
-    function inscripcion() {
-        var inscripcion = 
-        { 
-            rut:$scope.trabajador.rut,
-            sexo:$scope.trabajador.sexo,
-            mail:$scope.trabajador.mail,
-            nombre:$scope.trabajador.nombre,
-            paterno:$scope.trabajador.paterno,
-            materno:$scope.trabajador.materno,
-            ficha:$scope.trabajador.ficha.id
-        }
-        p = psicologicopcaServices.inscripcion(inscripcion);
-        p.then(function(request) {
-            if(request.data.AddSurveyResult._x003C_Ok_x003E_k__BackingField){
-                $scope.url = $sce.trustAsResourceUrl(request.data.AddSurveyResult._x003C_PcaLink_x003E_k__BackingField);
-                $scope.cod_pc = request.data.AddSurveyResult._x003C_PcaCod_x003E_k__BackingField;
-                $scope.trabajador.identity= $scope.cod_pc;
-                trabajadorStorage.q = $scope.trabajador;
-                $scope.hide = 'hide';
-                console.log( $scope.cod_pc);
-            }else{
-                    //depurar
-                    console.log('renviar informacion');
-                }
-
-            }, function(request) {
-             console.warn(request.data);
-         });
-
-    }
-    function gotSurvey(){
-        $scope.hide = '';
-        var survey = {  codpca: $scope.cod_pc};
-        p = psicologicopcaServices.gotosurvey(survey);
-        p.then(function(request){
-            $scope.url = $sce.trustAsResourceUrl(request.data.GoToSurveyResult._x003C_PcaLink_x003E_k__BackingField);
-              $scope.hide = 'hide';       
-        }, 
-        function(request) 
+        else
         {
-            console.warn(request.data.GoToSurveyResult);
+           console.warn("no hay registros de trabajador, en session");
+        }
+    }
+    
+    var gotoSurvey =  function(codpca){
+        var survey = {codpca: codpca};
+        p = psicologicopcaServices.gotosurvey(survey)
+        .then(function(success){
+            $scope.url = $sce.trustAsResourceUrl(success.data.GoToSurveyResult._x003C_PcaLink_x003E_k__BackingField);
+               
+        }, 
+        function(error) 
+        {  
+            console.warn(error.data);
         });
 
     }
+    var ComprobarIdentityDB = function (){//verifica si esta en db
+       
+       apiServices.model('fichatercero').params({fic_id: $scope.trabajador.ficha.id}).search()
+           .then( 
+                function(q){ 
+                    if(q.data[0].identity){
+                        gotoSurvey(q.data[0].identity);
+                        $scope.trabajador.identity =q.data[0].identity ;
+                        trabajadorStorage.q = $scope.trabajador;
+                        // console.log('recupera');
+                    }else{
+                        inscribir();
+                        // console.log('inscribe');
+                    }
+                   
+                   
+                } 
+            );
+        
+    }
 
-    }])
+    var inscribir =  function() {
+    var inscripcion =  
+    { 
+        rut:$scope.trabajador.rut,
+        sexo:$scope.trabajador.sexo,
+        mail:$scope.trabajador.mail,
+        nombre:$scope.trabajador.nombre,
+        paterno:$scope.trabajador.paterno,
+        materno:$scope.trabajador.materno,
+        ficha:$scope.trabajador.ficha.id
+    }
+    p = psicologicopcaServices.inscripcion(inscripcion).then(function(success){
+        if(success.data.AddSurveyResult._x003C_Ok_x003E_k__BackingField){
+            $scope.url = $sce.trustAsResourceUrl(success.data.AddSurveyResult._x003C_PcaLink_x003E_k__BackingField);
+            $scope.cod_pc = success.data.AddSurveyResult._x003C_PcaCod_x003E_k__BackingField;
+            $scope.trabajador.fichaterceroId= success.data.fichaterceroId;
+            $scope.trabajador.identity= $scope.cod_pc;
+            trabajadorStorage.q = $scope.trabajador;
+            console.log(success.data.fichaterceroId);
+        }else{ 
+            console.log('renviar informacion');
+        }
+    }, function(error) {
+        console.warn(error.data);
+        });
+    }
+    $scope.termino = function()
+    { 
+        toastr.info('verificando información', 'Información');
+        var consulta = {  codpca:$scope.trabajador.identity, fichaterceroId:trabajadorStorage.q.fichaterceroId };
+        psicologicopcaServices.getresult(consulta)
+        .then(function(success){
+               if  (success.data.GetResultResult._x003C_Ok_x003E_k__BackingField)
+                    {
+                        console.log("success test: "+success.data);
+                        $scope.hide = 'hide';
+                        toastr.info('a finalizado la Evaluación', 'Información');
+                    }
+                else //if (success.data.GetResultResult._x003C_Info_x003E_k__BackingField == "Evaluación no finalizada") 
+                    {
+                       
+                        toastr.info('Aún no ha finalizado la evaluación', 'Información');
+                        $scope.hide = 'hide';
+                    }
+            
+        }, 
+        function(error) 
+        {  
+            console.warn(error.data);
+        });
+    }
+
+     trabajador();
+}])
