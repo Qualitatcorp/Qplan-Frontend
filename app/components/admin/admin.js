@@ -18,6 +18,7 @@ angular.module('admin', [
 	'Worker',
 	'Evaluationmantenedor',
 	'Perfil',
+	'filters',
 	'ui.uploader',
 	'angularFileUpload',
 	'ui.select'
@@ -38,8 +39,6 @@ angular.module('admin', [
 		templateUrl:Url.to("admin/inicio"),
 		// controller:"inicioController",
 	})
-
-
 	//	Usuarios
 	.when('/users/create',{
 		templateUrl:Url.to("users/create"),
@@ -123,9 +122,6 @@ angular.module('admin', [
 			services:'otServices'
 		}
 	})
-
-
-	
 	.when('/ot/:id/add',{
 		templateUrl:Url.to("ot/createTrabajador"),
 		controller:"ot.createTrabajadorController"
@@ -139,11 +135,10 @@ angular.module('admin', [
 		controller:"ot.summaryController",
 		resolve:{
 			ot:['apiServices','$route',function(api,$route){
-				return api.model('ordentrabajo').expand("solicitud,trabajador,empresa,mandante,usuario,perfil,fichas").get($route.current.params.id);
+				return api.model('ordentrabajo').expand("solicitud,trabajador,empresa,mandante,usuario,perfil,fichanotas,modulos"/*,modpractica,modtercero,modprimario"*/).get($route.current.params.id);
 			}],
 		}
 	})
-
 	.when('/ot/:id',{
 		templateUrl:Url.to("ot/view"),
 		controller:"ot.viewController",

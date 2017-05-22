@@ -5,6 +5,7 @@
 */
 angular.module('User')
 .controller('authentication.adminCtrl', ['$scope','models','apiServices', function ($scope,models,api) {
+	$scope.now=Date.now();
 	var authenticationServices=api.model('userauthentication').expand('user,client').sort('-expire');
 	$scope.models=models.data;
 	$scope.page={

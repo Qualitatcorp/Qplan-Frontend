@@ -7,8 +7,7 @@ angular.module('ApiRest', [])
 .factory('WebApiConfig',function(){
 	return {
 		REST:{
-			app:'evaluacion',
-			host:'/api',
+			host:'/Qplan-Backend/web',
 			auth:'authentication',
 			token:'token',
 			refresh:'refresh',

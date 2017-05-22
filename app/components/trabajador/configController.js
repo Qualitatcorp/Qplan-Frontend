@@ -17,4 +17,8 @@ angular.module('trabajador').controller('configController', ['$scope', 'toastr',
 			toastr.success('Se ha guardado el Host Alternativo','Exito');
 		}
 	}
+	$scope.clearSession=function() {
+		sessionStorage.clear();
+		toastr.success('Se han limpiado las credenciales','Exito');
+	}
 }])

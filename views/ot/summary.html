@@ -47,43 +47,42 @@
 	</div>
 </div>
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		Orden de trabajo 
-	</div>
+	<div class="panel-heading">Orden de trabajo</div>
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>#</th>
+				<th>Ficha</th>
 				<th>RUT</th>
 				<th>Nombre</th>
-				<th>Especialidad</th>
 				<th>Curricular</th>
-				<th>Tecnica</th>
+				<th>Teorica</th>
 				<th>Practica</th>
-				<th>Seguridad</th>
+				<th ng-repeat="t in tercero">{{t.nombre}}</th>
 				<th>Final</th>
 				<th>Opciones</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, t) in model.trabajador">
+			<tr ng-repeat="(key, f) in model.fichanotas">
 				<td>{{key+1}}</td>
-				<td><a href="#!/worker/{{t.id}}">{{t.rut}}</a></td>
-				<td>{{t.nombre}}</td>
-				<td>{{t.nombre}}</td>
-				<td>7.0</td>
-				<td>7.0</td>
-				<td>7.0</td>
-				<td>{{t.paterno}}</td>
-				<td>{{t.materno}}</td>
+				<td>{{f.id}}</td>
+				<td><a href="#!/worker/{{t.id}}">{{f.trabajador.rut}}</a></td>
+				<td>{{f.trabajador.nombre}}</td>
+				<td>{{f.notas.curricular|Calificacion}}</td>
+				<td>{{f.notas.teorica|Calificacion}}</td>
+				<td>{{f.notas.practica|Calificacion}}</td>
+				<td ng-repeat="t in tercero">{{f.notas.tercero[t.nombre]|Calificacion}}</td>
+				<td>{{f.final|Calificacion}}</td>
 				<td>
-					<button ng-click="addPractica(t.id)" class="btn btn-xs btn-success">+Practica</button>
+					<button ng-click="addPractica(f)" class="btn btn-xs btn-success">+Practica</button>
 					<button ng-click="" class="btn btn-xs btn-warning">+Informe</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-<!-- 	<div class="panel-body">
+<!-- 	
+	<div class="panel-body">
 		<div class="pull-right">
 			<a href="#!/ot/{{model.id}}/add" class="btn btn-default">Agregar trabajador</a>
 			<label class="btn btn-default ">
@@ -92,5 +91,6 @@
 			</label>
 			<button ng-click="downloadPlantilla()" class="btn btn-success">Descargar plantilla</button>
 		</div>
-	</div> -->
+	</div> 
+-->
 </div>

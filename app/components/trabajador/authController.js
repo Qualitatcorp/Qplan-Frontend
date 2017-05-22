@@ -8,7 +8,7 @@ angular.module('trabajador')
 	function(session,auth,$timeout,toastr,$scope){
 	var login=function() {
 		session.logout();
-		auth.credential("trabajador-qplan","qualitat-2017","true").then(
+		auth.credential("qplan-evaluacion","0X7AR4Byme","true").then(
 			function(success) {
 				session.token=success.data.access_token;
 				session.refresh=success.data.refresh;

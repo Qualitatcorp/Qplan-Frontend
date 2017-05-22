@@ -4,7 +4,7 @@
 * modulo para user
 */
 angular.module('Ot')
-.controller('ot.createController', ['$scope','toastr','$location','services',function($scope,toastr,$location,services){
+.controller('ot.createController', ['$scope','toastr','$location','apiServices',function($scope,toastr,$location,api){
 	$scope.back=function() {
 		window.history.back();
 	};

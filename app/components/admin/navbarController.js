@@ -108,9 +108,10 @@ angular.module('admin')
 		$scope.logout=function(){
 			session.logout();
 			sessionStorage.clear();
-			$route.reload();
 			$location.path("inicio");
+			sessionStatus();
 			console.log("Session limpiada");
+			$route.reload();
 		}
 	}
 ])

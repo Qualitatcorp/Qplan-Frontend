@@ -9,8 +9,8 @@
   <tbody>
     <tr ng-repeat="(key, m) in modulos">
       <td>{{key+1}}</td>
-      <td>{{m.nombre}}</td>
-      <td><input class="form-control input-sm" type="number" ng-init="practica.push({id:m.id,nota:1})" ng-model="practica[key].nota" min="1" max="7" step="0.1"></td>
+      <td>{{m.modulo.nombre}}</td>
+      <td><input class="form-control input-sm" type="number" ng-model="m.notaTemp" min="1" max="7" step="0.1"></td>
     </tr>
   </tbody>
 </table>

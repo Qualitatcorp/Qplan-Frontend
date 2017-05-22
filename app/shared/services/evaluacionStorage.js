@@ -71,7 +71,9 @@ angular.module("ApiRest")
 						});
 					}else{
 						var modulo=this.getModulo(idModulo);
+						console.log(modulo);
 						ficharespuestaServices.save({
+							pre_id:idPregunta,
 							fict_id:modulo.id,
 							alt_id:idAlternativa,
 							creado:moment().format("YYYY-MM-DD HH:mm:ss")})

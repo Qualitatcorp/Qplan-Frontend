@@ -7,14 +7,14 @@ angular.module('ApiRest', [])
 .factory('WebApiConfig',function(){
 	return {
 		REST:{
-			app:'evaluacion',
+			app:'admin',
 			host:'/api',
 			auth:'authentication',
 			token:'token',
 			refresh:'refresh',
 			version:'v1',
-			client_id:'qplan-evaluacion',
-			client_secret:'8GiPyTX5wk'
+			client_id:'qplan-admin',
+			client_secret:'8XwxUrTssx'
 		},
 		get hostUrl(){
 			return [this.REST.host,this.REST.version].join('/');
