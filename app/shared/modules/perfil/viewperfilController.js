@@ -1,7 +1,6 @@
 angular.module('Perfil')
 
 .controller('perfil.viewperfilController', ['toastr','apiServices','$scope','perfil','$location', function(toastr,apiServices,$scope,perfil,$location){
-	
 	$scope.perfil=perfil.data;
 
 		$scope.remove=function(id){

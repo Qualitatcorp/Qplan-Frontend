@@ -18,7 +18,7 @@
 			  </button>
 			  <a class="navbar-brand" href="#">Qplan</a>
 			</div>
-			<div uib-collapse="isNavCollapsed" class="navbar-collapse collapse">
+			<div ng-init="isNavCollapsed=true" uib-collapse="isNavCollapsed" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li dropdown ng-repeat="m in menu" class="dropdown"  uib-dropdown>
 						<a role="button" uib-dropdown-toggle>{{m.name}}<span class="caret"></span></a>

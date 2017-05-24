@@ -1,30 +1,13 @@
 <div class="row">
-	<div class="well col-md-3">
-		<ul class="nav nav-pills nav-stacked">
-		<li><span>Opciones</span></li>
-		<li><a href="#!/perfil/admin">Administrar Perfiles</a></li>
-		<li><a href="#!/perfil/edit/{{perfil.id}}">Editar Perfil</a></li>
-  		<li><a   
-						mwl-confirm
-						title="Eliminar a perfil {{perfil.nombre}}"
-						message="Seguro que desea quitar a {{ perfil.nombre }}"
-						placement="right"
-						confirm-text="Eliminar"
-						cancel-text="Cancelar"
-						on-confirm="remove(perfil.id)"
-						confirm-button-type="danger"
-						cancel-button-type="default">
-						Eliminar Perfil
-					</a></li>
-		</ul>
-		</div>	
-	<div class="col-md-9">
-	<div class="page-header">
-			<h1>Ver <small>a {{perfil.nombre}}</small></h1>
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Perfil <small>{{perfil.nombre}}</small></h1>
 		</div>
-		<h2>Datos</h2>
-		<div class="table-responsive">          
-			<table class="table table-bordered">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				Información
+			</div>
+			<table class="table table-condensed table-responsive table-hover table-bordered">
 				<tbody>
 					<tr>
 						<th>Nombre</th>
@@ -32,7 +15,7 @@
 					</tr>
 					<tr>
 						<th>Descripción</th>
-						<td>{{perfil.descripcion}}</td>
+						<td><p class="text-justify">{{perfil.descripcion}}</p></td>
 					</tr>
 					<tr>
 						<th>Documento</th>
@@ -40,7 +23,93 @@
 					</tr>
 				</tbody>
 			</table>
+			<div class="panel-body">
+				<div class="pull-right btn-group-sm">
+					<a class="btn btn-primary" href="#!/perfil/admin">Administrar</a>
+					<a class="btn btn-warning" href="#!/perfil/edit/{{perfil.id}}">Editar</a>
+					<button class="btn btn-danger" 
+						mwl-confirm
+						title="Eliminar a perfil {{perfil.nombre}}"
+						message="Seguro que desea quitar a {{ perfil.nombre }}"
+						placement="left"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(perfil.id)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar
+					</button>
+					<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+				</div>
+			</div>
 		</div>
-		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+  <uib-tabset active="active" justified="true">
+    <uib-tab index="0" heading="Modulos">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Modulos</div>
+			<table class="table table-condensed table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th style="width: 160px" >Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  ng-repeat="(key, model) in perfil.modulos">
+						<td>{{key+1}}</td>
+						<td>{{model.nombre}}</td>
+						<td>
+							<div class="btn-group-xs">
+								<button class="btn btn-primary">Ver</button>
+								<button class="btn btn-warning">Editar</button>
+								<button class="btn btn-danger" 
+									mwl-confirm
+									title="Eliminar a '{{model.nombre}}'"
+									message="Seguro que desea quitar a {{ model.nombre }}"
+									placement="left"
+									confirm-text="Eliminar"
+									cancel-text="Cancelar"
+									on-confirm="removeModel(model.id)"
+									confirm-button-type="danger"
+									cancel-button-type="default">
+									Eliminar
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </uib-tab>
+    <uib-tab index="1" heading="Evaluaciones">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Evaluaciones</div>
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th style="width: 160px" >Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  ng-repeat="(key, model) in perfil.evateorica">
+						<td>{{key+1}}</td>
+						<td>{{model.nombre}}</td>
+						<td>
+							<div class="btn-group-xs">
+								<button class="btn btn-primary">Ver</button>
+								<button class="btn btn-warning">Editar</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </uib-tab>
+    <!-- <uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab> -->
+  </uib-tabset>
+
 	</div>
 </div>

@@ -451,7 +451,7 @@ angular.module('admin', [
 		controller:'perfil.viewperfilController',
 		resolve:{
 			perfil:['apiServices','$route',function(apiServices,$route){
-				return apiServices.model('perfil').get($route.current.params.id);
+				return apiServices.model('perfil').expand('modulos,evateorica').get($route.current.params.id);
 			}]
 		}
 	})
