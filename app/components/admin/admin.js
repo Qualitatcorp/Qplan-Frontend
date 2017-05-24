@@ -24,7 +24,8 @@ angular.module('admin', [
 	'ui.select'
 	])
 
-.config(['$routeProvider',/*'$httpProvider',*/function($routeProvider/*,$httpProvider*/) {
+.config(['$routeProvider','uiSelectConfig',function($routeProvider,uiSelectConfig) {
+  uiSelectConfig.theme = 'bootstrap';
 	var Url={basePath:"views/",to(tpl){return this.basePath+tpl+".html";}}
 	$routeProvider
 	.when('/',{

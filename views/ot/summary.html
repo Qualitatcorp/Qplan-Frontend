@@ -67,7 +67,7 @@
 			<tr ng-repeat="(key, f) in model.fichanotas">
 				<td>{{key+1}}</td>
 				<td>{{f.id}}</td>
-				<td><a href="#!/worker/{{t.id}}">{{f.trabajador.rut}}</a></td>
+				<td><a href="#!/worker/{{f.trabajador.id}}">{{f.trabajador.rut}}</a></td>
 				<td>{{f.trabajador.nombre}}</td>
 				<td>{{f.notas.curricular|Calificacion}}</td>
 				<td>{{f.notas.teorica|Calificacion}}</td>

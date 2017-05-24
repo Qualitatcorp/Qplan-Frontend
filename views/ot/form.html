@@ -1,92 +1,75 @@
-<p class="text-muted">Los campos con * son obligatorios</p>
-<form name="modelForm">
-<div class="col-md-4">
-	<div class="form-group" ng-class="{ 'has-error': modelForm.username.$touched && modelForm.username.$invalid }">
-		<label>Usuario*</label>
-		<input 
-		name="username"
-		type="text" 
-		class="form-control" 
-		ng-model="model.username"
-		required>
+<form name="otForm" class="form-horizontal">
+	<div class="form-group input-group-sm">
+		<label class="col-sm-4 control-label">Solicitud</label>
+		<div class="col-sm-6">
+			<select class="form-control" ng-model="model.sol_id" required>
+			  <option value="{{s.id}}" ng-repeat="s in solicitud">{{s.empresa.nombre}}</option>
+			</select>
+		</div>
 	</div>
-	<div class="form-group" ng-class="{ 'has-error': modelForm.password.$touched && modelForm.password.$invalid }">
-		<label>Contraseña*</label>
-		<input 
-		name="password"
-		type="password" 
-		class="form-control" 
-		ng-model="model.password"
-		minlength="6" 
-		required>
+	<div class="form-group input-group-sm">
+		<label class="col-sm-4 control-label">Empresa Usuaria</label>
+		<div class="col-sm-6">
+			<select class="form-control" ng-model="model.emp_id" required>
+			  <option value="{{s.id}}" ng-repeat="s in empresas">{{s.nombre}}</option>
+			</select>
+		</div>
 	</div>
-	<div class="form-group" ng-class="{ 'has-error': modelForm.rut.$touched && modelForm.rut.$invalid }">
-		<label>RUT</label>
-		<input 
-		name="rut"
-		type="text" 
-		class="form-control" 
-		ng-model="model.rut"
-		ng-rut
-		rut-format="live">
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Especialidad</label>
+		<div class="col-sm-6">			
+		<select class="form-control" ng-model="model.esp_id" required>
+		  	<option value="{{s.id}}" ng-repeat="s in especialidad">{{s.nombre}}</option>
+		</select>
+		</div>
 	</div>
-</div>
-<div class="col-md-4">
-	<div class="form-group" ng-class="{ 'has-error': modelForm.nombre.$touched && modelForm.nombre.$invalid }">
-		<label>Nombre*</label>
-		<input 
-		name="nombre"
-		type="mail" 
-		class="form-control" 
-		ng-model="model.nombre"
-		required>
-	</div>	
-	<div class="form-group" ng-class="{ 'has-error': modelForm.paterno.$touched && modelForm.paterno.$invalid }">
-		<label>Apellido Paterno</label>
-		<input 
-		name="paterno"
-		type="text" 
-		class="form-control" 
-		ng-model="model.paterno">
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Perfil de evaluación</label>
+		<div class="col-sm-6">		
+			<select class="form-control" ng-model="model.per_id" required placeholder="Seleccione...">
+				<option value="{{s.id}}" ng-repeat="s in perfil">{{s.nombre}}</option>
+			</select>
+		</div>
 	</div>
-	<div class="form-group" ng-class="{ 'has-error': modelForm.materno.$touched && modelForm.materno.$invalid }">
-		<label>Apellido Materno</label>
-		<input 
-		name="materno"
-		type="text" 
-		class="form-control" 
-		ng-model="model.materno">
-	</div>	
-</div>
-<div class="col-md-4">
-	<div class="form-group" ng-class="{ 'has-error': modelForm.cargo.$touched && modelForm.cargo.$invalid }">
-		<label>Cargo</label>
-		<input 
-		name="cargo"
-		type="text" 
-		class="form-control" 
-		ng-model="model.cargo">
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Personal</label>
+		<div class="col-sm-6">
+			<label class="radio-inline"><input type="radio" ng-model="model.personal" value="ESTABLE">ESTABLE</label>
+			<label class="radio-inline"><input type="radio" ng-model="model.personal" value="TRANSITORIO">TRANSITORIO</label>
+		</div>
 	</div>
-	<div class="form-group" ng-class="{ 'has-error': modelForm.mail.$touched && modelForm.mail.$invalid }">
-		<label>Correo electronico</label>
-		<input 
-		name="mail"
-		type="email" 
-		class="form-control" 
-		ng-model="model.mail">
-	</div>	
-	<div class="form-group" ng-class="{ 'has-error': modelForm.nacimiento.$touched && modelForm.nacimiento.$invalid }">
-		<label>Nacimiento</label>
-		<input 
-		type="date" 
-		name="nacimineto" 
-		class="form-control" 
-		ng-model="model.nacimiento" >
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Tipo de Certificación</label>
+		<div class="col-sm-6">
+<label class="radio-inline"><input type="radio" ng-model="model.tipo" value="CERTIFICACIÓN">CERTIFICACIÓN</label>
+<label class="radio-inline">
+<input type="radio" ng-model="model.tipo" value="PRE-CERTIFICACIÓN">PRE-CERTIFICACIÓN</label>
+		</div>
 	</div>
-</div>
-<div class="col-md-12">
-	
-<button ng-click="back()" class="btn btn-default">Volver</button>
-<button ng-disabled="modelForm.$invalid" type="submit" class="btn btn-primary" ng-click="save(model)">Guardar</button>
-</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Fecha de inicio</label>
+		<div class="col-sm-6">
+			<input type="date" ng-model="model.inicio" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Fecha de termino</label>
+		<div class="col-sm-6">
+			<input type="date" ng-model="model.termino" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Direccion de Servicio</label>
+		<div class="col-sm-6">
+			<input type="text" ng-model="model.direccion" class="form-control">
+		</div>
+	</div>
+	<div class="form-group" ng-show="model.id">
+		<label class="col-sm-4 control-label">Estado</label>
+		<div class="col-sm-6">			
+			<label class="radio-inline"><input type="radio" ng-model="model.estado" value="TRANSITORIO">ABIERTO</label>
+			<label class="radio-inline"><input type="radio" ng-model="model.estado" value="ESTABLE">CERRADO</label>
+			<label class="radio-inline"><input type="radio" ng-model="model.estado" value="TRANSITORIO">EXTENCION</label>
+		</div>
+	</div>
 </form>
