@@ -1,8 +1,6 @@
-<style>
-  .horizontal-collapse {
-    height: 70px;
-  }
-  .navbar-collapse.in {
-    overflow-y: hidden;
-  }
-</style>
+.horizontal-collapse {
+	height: 70px;
+}
+.navbar-collapse.in {
+	overflow-y: hidden;
+}
