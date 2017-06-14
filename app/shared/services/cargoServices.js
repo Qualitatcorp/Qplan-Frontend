@@ -6,10 +6,10 @@
 angular.module('ApiRest')
 .factory('cargoServices', ['WebApiConfig','$http','$httpParamSerializer', function(WebApiConfig,$http,$httpParamSerializer){
 	return {
-		getAll(){
+		getAll:function(){
 			return $http.get(WebApiConfig.resourceUrl('especialidadcargo'));
 		},
-		search(params){
+		search:function(params){
 			return $http.get(WebApiConfig.resourceUrl('especialidadcargo')+'/search?'+$httpParamSerializer(params));
 		}
 	}

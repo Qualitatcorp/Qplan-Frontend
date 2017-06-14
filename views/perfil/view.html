@@ -109,7 +109,11 @@
 		</div>
     </uib-tab>
     <uib-tab index="2" heading="pdf">
-    <embed  ng-class="{loader:!pdf}" ng-src="'{{pdf}}'" type="application/pdf" /></uib-tab>
+    <div ng-if="pdf">
+	    <embed style="height: 500px" class="col-md-12" ng-src="{{pdf}}" type="application/pdf" />
+    </div>
+    <!-- <div ng-if="!pdf" class="loader center-block"></div> -->
+    </uib-tab>
   </uib-tabset>
 
 	</div>

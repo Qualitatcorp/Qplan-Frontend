@@ -24,11 +24,12 @@ angular.module('trabajador')
 		var playAudio=function(src){
 			var audio = document.getElementById('player');
 				audio.src=src;
-				audio.play().then(function(q) {
-					console.log(q);
-				},function(q) {
-					console.log(q);
-				});
+				audio.play();
+				// .then(function(q) {
+				// 	console.log(q);
+				// },function(q) {
+				// 	console.log(q);
+				// });
 		}
 		playAudio($filter('dinamicSource')('src/audio/trabajador/AUTH.mp3'));
 		var trabajadorServices=apiServices.model("trabajador");

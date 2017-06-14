@@ -73,7 +73,7 @@
 				<td>{{f.notas.teorica|Calificacion}}</td>
 				<td>{{f.notas.practica|Calificacion}}</td>
 				<td ng-repeat="t in tercero">{{f.notas.tercero[t.nombre]|Calificacion}}</td>
-				<td>{{f.final|Calificacion}}</td>
+				<td>{{f.nota|Calificacion}}</td>
 				<td>
 					<button ng-click="addPractica(f)" class="btn btn-xs btn-success">+Practica</button>
 					<button ng-click="" class="btn btn-xs btn-warning">+Informe</button>
