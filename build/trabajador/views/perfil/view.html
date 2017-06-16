@@ -1,0 +1,120 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Perfil <small>{{perfil.nombre}}</small></h1>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				Información
+			</div>
+			<table class="table table-condensed table-responsive table-hover table-bordered">
+				<tbody>
+					<tr>
+						<th>Nombre</th>
+						<td>{{perfil.nombre}}</td>
+					</tr>
+					<tr>
+						<th>Descripción</th>
+						<td><p class="text-justify">{{perfil.descripcion}}</p></td>
+					</tr>
+					<tr>
+						<th>Documento</th>
+						<td>{{perfil.documento}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="panel-body">
+				<div class="pull-right btn-group-sm">
+					<a class="btn btn-primary" href="#!/perfil/admin">Administrar</a>
+					<a class="btn btn-warning" href="#!/perfil/edit/{{perfil.id}}">Editar</a>
+					<button class="btn btn-danger" 
+						mwl-confirm
+						title="Eliminar a perfil {{perfil.nombre}}"
+						message="Seguro que desea quitar a {{ perfil.nombre }}"
+						placement="left"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(perfil.id)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar
+					</button>
+					<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+				</div>
+			</div>
+		</div>
+  <uib-tabset active="active" justified="true">
+    <uib-tab index="0" heading="Modulos">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Modulos</div>
+			<table class="table table-condensed table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th style="width: 160px" >Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  ng-repeat="(key, model) in perfil.modulos">
+						<td>{{key+1}}</td>
+						<td>{{model.nombre}}</td>
+						<td>
+							<div class="btn-group-xs">
+								<button class="btn btn-primary">Ver</button>
+								<button class="btn btn-warning">Editar</button>
+								<button class="btn btn-danger" 
+									mwl-confirm
+									title="Eliminar a '{{model.nombre}}'"
+									message="Seguro que desea quitar a {{ model.nombre }}"
+									placement="left"
+									confirm-text="Eliminar"
+									cancel-text="Cancelar"
+									on-confirm="removeModel(model.id)"
+									confirm-button-type="danger"
+									cancel-button-type="default">
+									Eliminar
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </uib-tab>
+    <uib-tab index="1" heading="Evaluaciones">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Evaluaciones</div>
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th style="width: 160px" >Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  ng-repeat="(key, model) in perfil.evateorica">
+						<td>{{key+1}}</td>
+						<td>{{model.nombre}}</td>
+						<td>
+							<div class="btn-group-xs">
+								<button class="btn btn-primary">Ver</button>
+								<button class="btn btn-warning">Editar</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </uib-tab>
+    <uib-tab index="2" heading="pdf">
+    <div ng-if="pdf">
+	    <embed style="height: 500px" class="col-md-12" ng-src="{{pdf}}" type="application/pdf" />
+    </div>
+    <!-- <div ng-if="!pdf" class="loader center-block"></div> -->
+    </uib-tab>
+  </uib-tabset>
+
+	</div>
+</div>

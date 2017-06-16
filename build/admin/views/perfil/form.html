@@ -1,0 +1,71 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+
+<form name="perfilForm">
+
+		<div class="form-group" ng-class="{ 'has-error': perfilForm.nombre.$touched && perfilForm.nombre.$invalid }">
+			<label>Nombre*</label>
+			<input 
+			name="nombre" 
+			type="text" 
+			class="form-control" 
+			ng-model="perfil.nombre"
+			placeholder="Ingrese el nombre" 
+			required 
+			>		
+		</div>
+		<div class="form-group">
+			<label>Descripción</label>
+			<textarea  
+			rows="3" 
+			class="form-control" 
+			ng-model="perfil.descripcion"
+			placeholder="Ingrese la descripción del perfil" 
+			></textarea>
+		</div>
+		<div class="form-group">
+			<label>Documento*</label>
+			<textarea   
+			rows="3" 
+			class="form-control" 
+			placeholder="Ingrese el documento" 
+			ng-model="perfil.documento"
+			></textarea>
+		</div>
+
+
+
+	<h1>Clasificaciones</h1>
+
+	<div class="row">
+		<div class="col-md-9"><label>Clasificación*</label></div>
+		<div class="col-md-3"><label>% de Acierto*</label></div>
+	</div>
+
+	<div class="row" data-ng-repeat="clasificacion in clasificaciones">
+		<div class="form-group col-md-9" ng-class="{ 'has-error': perfilForm.clasificacion{{$index + 1}}.$touched && perfilForm.clasificacion{{$index + 1}}.$invalid }">
+			<input 
+			type="text" 
+			name="clasificacion{{$index + 1}}" 
+			ng-model="clasificacion.clasificacion" 
+			placeholder="Seleccione una clasificación" 
+			uib-typeahead="clasificacion as clasificacion.nombre for clasificacion in getClasificaciones($viewValue)"
+			class="form-control">
+		</div>
+		<div class="form-group col-md-2" ng-class="{ 'has-error': perfilForm.acierto{{$index + 1}}.$touched && perfilForm.acierto{{$index + 1}}.$invalid }">
+			<input class="form-control" type="number" ng-model="clasificacion.acierto" name="acierto{{$index + 1}}" placeholder="Acierto" required>
+		</div>
+		<div class="form-group col-md-1">
+			<button class="btn btn-danger remove" ng-show="$last" ng-click="removeChoice()">Eliminar</button>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary addfields" ng-click="addNewChoice()">Añadir Clasificación</button>
+	</div>
+
+	<div class="form-group">
+			<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+			<button ng-disabled="perfilForm.$invalid" type="submit" class="btn btn-primary" ng-click="save()">Guardar</button>
+	</div>
+
+</form>

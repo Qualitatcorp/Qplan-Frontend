@@ -1,0 +1,189 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+
+<form name="preguntaForm">
+	
+<div class="row">
+		<div class="col-md-6">
+		<div class="form-group" ng-class="{ 'has-error': preguntaForm.pregunta.$touched && preguntaForm.pregunta.$invalid }">
+		<label>Pregunta*</label>
+		<input 
+		name="pregunta" 
+		type="text" 
+		class="form-control" 
+		ng-model="pregunta.pregunta"
+		placeholder="Ingrese la pregunta" 
+		required 
+		>		
+	</div>
+		<div class="form-group">
+			<label>Comentario</label>
+			<textarea 
+			ng-model="pregunta.comentario" 
+			placeholder="Ingrese un comentario" 
+			class="form-control" 
+			rows="1" 
+			id="comment"></textarea>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Nivel*</label> 
+			<select name="nivel" class="form-control" ng-model="pregunta.nivel" ng-init="pregunta.nivel=pregunta.nivel||'BASICA'" ng-options="n for n in select.level" required></select>
+		</div>
+		<div class="form-group">
+			<label>Habilitada*</label> 
+			<select name="habilitada" class="form-control" ng-model="pregunta.habilitado" ng-init="pregunta.habilitado=pregunta.habilitado||'SI'" ng-options="h for h in select.habilitado" required></select>
+		</div>
+	</div>	
+</div>
+
+
+	
+	<h1>Alternativas</h1>
+
+	<div class="row">
+		<div class="col-md-7"><label>Alternativa*</label></div>
+		<div class="col-md-2"><label>Ponderación*</label></div>
+		<div class="col-md-2"><label>Correcta*</label></div>
+	</div>
+
+	<div class="row" data-ng-repeat="alternativa in alternativas">
+		<div class="form-group col-md-7" ng-class="{ 'has-error': preguntaForm.altenativa{{$index + 1}}.$touched && preguntaForm.altenativa{{$index + 1}}.$invalid }">
+			<input class="form-control" type="text" ng-model="alternativa.altenativa" name="altenativa{{$index + 1}}" placeholder="Ingresa la alternativa" required>
+		</div>
+		<div class="form-group col-md-2" ng-class="{ 'has-error': preguntaForm.poderacion{{$index + 1}}.$touched && preguntaForm.poderacion{{$index + 1}}.$invalid }">
+			<input class="form-control" type="number" ng-model="alternativa.poderacion" name="poderacion{{$index + 1}}" placeholder="Ponderación" required>
+		</div>
+		<div class="form-group col-md-2" ng-class="{ 'has-error': preguntaForm.correcta{{$index + 1}}.$touched && preguntaForm.correcta{{$index + 1}}.$invalid }">
+			<select name="correcta{{$index + 1}}" class="form-control" ng-model="alternativa.correcta" ng-init="alternativa.correcta=alternativa.correcta||'NO'" ng-options="n for n in select.correcta" required></select>
+		</div>
+		<div class="form-group col-md-1">
+			<button class="btn btn-danger remove" ng-show="$last" ng-click="removeChoice()">Eliminar</button>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary addfields" ng-click="addNewChoice()">Añadir Alternativas</button>
+	</div>
+
+	<h1>Fuentes</h1>
+
+	<div class="row">
+		<div class="col-md-2">
+				<div class="form-group"> 
+				<label class="btn btn-primary">Añadir Archivos
+					<input name = "file" type="file" nv-file-select="" uploader="uploader" ng-show="false" multiple  />
+				</label>
+				</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<select class="form-control" ng-model="recursos.tipo" ng-init="recursos.tipo=recursos.tipo||'AUDIO'" id="se">
+    			<option>AUDIO</option>
+    			<option>VIDEO</option>
+    			<option>IMAGE</option>
+  				</select>
+			</div>
+		</div>
+	</div>
+
+  	<div class="row" style="margin-bottom: 40px">
+
+				<div class="col-md-12">
+					  <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Nombre</th>
+                                <th ng-show="uploader.isHTML5">Tamaño</th>
+                                <th ng-show="uploader.isHTML5">Progreso</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key,item) in uploader.queue">
+                                <td><strong>{{ item.file.name }}</strong></td>
+                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <!-- <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Subir
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+                                    </button> -->
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Borrar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+                    <div class="col-md-12">
+                        <div>
+                           	Progreso Total:
+                            <div class="progress" style="">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                            </div>
+                        </div>
+                       <!--  <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Subir Todos
+                        </button>
+                        <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancelar Todos
+                        </button> -->
+                        <!-- <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> Borrar Todos
+                        </button> -->
+                    </div>
+
+                </div>
+
+     <h1>Tipos de Fuentes</h1>
+
+     <div class="row" style="margin-bottom: 40px">
+     	<div class="col-md-12">
+					  <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Nombre</th>
+                                <th>Tipo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key,file) in files">
+                                <td><strong>{{file.title}}</strong></td>
+                                <td><select name="tipofuente" class="form-control" ng-model="file.tipo" ng-options="n for n in select.fuentes" required></select>
+                                </td>
+                                <td> <button type="button" class="btn btn-danger btn-xs" ng-click="remove(key)">
+                                        <span class="glyphicon glyphicon-trash"></span> Borrar
+                                    </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+     </div>
+
+	<div class="form-group">
+		<!-- <a href="#!/evaluation/adminevaluation" class="btn btn-default">Volver</a> -->
+		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+		<button ng-disabled="preguntaForm.$invalid" type="submit" class="btn btn-primary" ng-click="save()">Guardar</button>
+	</div>
+
+</form>
+
+
+
+ 			

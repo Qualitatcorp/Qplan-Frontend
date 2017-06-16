@@ -1,0 +1,84 @@
+<div class="row">
+		<div class="well col-md-3">
+		<ul class="nav nav-pills nav-stacked">
+		<li><span>Opciones</span></li>
+		<li><a href="#!/worker/create">Crear Trabajador</a></li>
+  		<li><a href="#!/worker/edit/{{worker.id}}">Editar Trabajador</a></li>
+  		<li><a   
+						mwl-confirm
+						title="Eliminar a empresa {{worker.nombre}}"
+						message="Seguro que desea quitar a {{ worker.nombre }}"
+						placement="right"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(worker.id)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar Trabajador
+					</a></li>
+		</ul>
+		</div>
+	<div class="col-md-9">
+		<div class="page-header">
+			<h1>{{worker.nombre +" "+worker.paterno +" "+ worker.materno}}<small> Trabajador</small></h1>
+		</div>
+		<h2>Datos</h2>
+		<div class="table-responsive">          
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>Nombre</th>
+						<td>{{worker.nombre}}</td>
+						<th>Apellidos</th>
+						<td>{{worker.paterno + " " +worker.materno}}</td>
+					</tr>
+					<tr>
+						<th>RUT</th>
+						<td>{{worker.rut}}</td>
+						<th>Fecha de nacimiento</th>
+						<td>{{worker.nacimiento}}</td>
+					</tr>
+					<tr>
+						<th>Fono</th>
+						<td>{{worker.fono}}</td>
+						<th>Email</th>
+						<td>{{worker.mail}}</td>
+					</tr>
+					<tr>
+						<th>Pais</th>
+						<td>{{worker.comuna.nombre}}</td>
+						<th>Comuna</th>
+						<td>{{worker.pais.nombre}}</td>
+
+					</tr>
+					<tr>
+						<th>Años de antigüedad</th>
+						<td>{{worker.antiguedad}}</td>
+						<th>Estado Civil</th>
+						<td>{{worker.civil}}</td>			
+					</tr>
+					<tr>
+						<th>Cantidad de hijos</th>
+						<td>{{worker.hijos}}</td>
+						<th>Licencia de conducir</th>
+						<td>{{worker.licencia}}</td>			
+					</tr>
+					<tr>
+						<th>Talla de vestir</th>
+						<td>{{worker.talla}}</td>
+						<th>Nivel educacional</th>
+						<td>{{worker.nivel}}</td>			
+					</tr>
+					<tr>
+						<th>AFP</th>
+						<td>{{worker.afp}}</td>
+						<th>Previsión de salud</th>
+						<td>{{worker.prevision}}</td>			
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+	</div>
+
+</div>

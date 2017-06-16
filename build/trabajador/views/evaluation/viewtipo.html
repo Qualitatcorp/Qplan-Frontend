@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Ver <small>a {{tipo.nombre}}</small></h1>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<h2>Datos</h2>
+		<div class="table-responsive">          
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>Nombre</th>
+						<td>{{tipo.nombre}}</td>
+					</tr>
+					<tr>
+						<th>Descripción</th>
+						<td>{{tipo.descripcion}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<!-- <a href="#!/evaluation/admintipo" class="btn btn-primary">Volver</a> -->
+		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+	</div>
+
+</div>

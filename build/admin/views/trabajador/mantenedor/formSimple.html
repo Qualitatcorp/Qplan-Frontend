@@ -1,0 +1,30 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+<form name="workerForm">
+	<!-- form -->
+	<div class="col-md-4 col-md-offset-4">
+		<div class="form-group" ng-class="{ 'has-error': workerForm.rut.$touched && workerForm.rut.$invalid }">
+			<label>RUT*</label>
+			<input ng-disabled="model.id" name="rut" ng-rut type="text" ng-model="model.rut" ng-change="exists(model.rut)" class="form-control" placeholder="Ingrese su RUT" minlength="10" required>
+		</div>
+		<div class="form-group">
+			<label>Nombres</label>			
+			<input type="text" ng-model="model.nombre" class="form-control" placeholder="Ingrese sus nombres">		
+		</div>
+		<div class="form-group">
+			<label>Apellido Paterno</label>
+			<input type="text" ng-model="model.paterno" class="form-control" placeholder="Ingrese su apellido parterno">
+		</div>
+		<div class="form-group">
+			<label>Apellido Materno</label>
+			<input type="text" ng-model="model.materno" class="form-control" placeholder="Ingrese su apellido materno">
+		</div>
+	</div>
+	<div class="col-md-4 col-md-offset-4">
+		<div class="form-group">
+			<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+			<button ng-click="clear()" class="btn btn-default">Limpiar</button>
+			<button ng-disabled="modelForm.$invalid" type="submit" class="btn btn-primary" ng-click="save(model)">Guardar</button>
+		</div>
+	</div>
+
+</form>

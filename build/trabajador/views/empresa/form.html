@@ -1,0 +1,103 @@
+<p class="text-muted">Los campos con * son obligatorios</p>
+
+<form name="empresaForm">
+	
+	<div class="col-md-4">
+		<div class="form-group" ng-class="{ 'has-error': empresaForm.nombre.$touched && empresaForm.nombre.$invalid }">
+			<label>Nombre*</label>
+			<input 
+			name="nombre" 
+			type="text" 
+			class="form-control" 
+			ng-model="empresa.nombre"
+			placeholder="Ingrese el nombre" 
+			required 
+			>		
+		</div>
+		<div class="form-group" ng-class="{ 'has-error': empresaForm.rut.$touched && empresaForm.rut.$invalid }">
+			<label>Rut*</label>
+
+			<input 
+			name="rut" 
+			type="text" 
+			class="form-control" 
+			ng-model="empresa.rut"
+			placeholder="Ingrese el rut" 
+			required
+			>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error': empresaForm.razon.$touched && empresaForm.razon.$invalid }">
+			<label>Razón Social*</label>
+			<input 
+			name="razon" 
+			type="text" 
+			class="form-control" 
+			placeholder="Ingrese la razón social" 
+			ng-model="empresa.razon"
+			required
+			>
+		</div>
+	</div>
+	
+	<div class="col-md-4">
+		
+		<div class="form-group">
+			<label>Giro</label>	
+			<input 
+			type="text" 
+			class="form-control"
+			placeholder="Ingrese el giro"  
+			ng-model="empresa.giro">
+		</div>
+		<div class="form-group">
+			<label>Fono</label>
+			<input 
+			type="text" 
+			class="form-control" 
+			placeholder="Ingrese un número de contacto" 
+			ng-model="empresa.fono">
+		</div>
+		<div class="form-group"  ng-class="{ 'has-error': empresaForm.email.$touched && empresaForm.email.$invalid }">
+			<label>Email</label>
+			<input 
+			name="email" 
+			type="email" 
+			class="form-control" 
+			placeholder="Ingrese el correo electrónico" 
+			ng-model="empresa.mail">
+		</div>
+	</div>
+	
+	<div class="col-md-4">
+		<div class="form-group">
+			<label >País</label>
+			<input 
+			type="text" 
+			ng-model="interface.pais" 
+			placeholder="Seleccione un país" 
+			uib-typeahead="pais as pais.nombre for pais in getPaises($viewValue)" 
+			class="form-control">
+		</div>
+		<div class="form-group">
+			<label>Comuna</label>
+			<input 
+			type="text" 
+			ng-model="interface.comuna" 
+			placeholder="Seleccione una comuna" 
+			uib-typeahead="comuna as comuna.nombre for comuna in getComunas($viewValue)" 
+			class="form-control">
+		</div>
+		<div class="form-group" ng-class="{ 'has-error': empresaForm.habilitada.$touched && empresaForm.habilitada.$invalid }">
+			<label>Habilitada*</label> 
+			<select class="form-control" ng-model="empresa.habilitada" ng-init="empresa.habilitada=empresa.habilitada||'SI'" ng-options="h for h in select.habilitado" required></select>
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-2">
+			<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+			<button ng-disabled="empresaForm.$invalid" type="submit" class="btn btn-primary" ng-click="save()">Guardar</button>
+		</div>
+	</div>
+
+</form>

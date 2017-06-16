@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Ver <small>a {{clasificacion.nombre}}</small></h1>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<h2>Datos</h2>
+		<div class="table-responsive">          
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>Nombre</th>
+						<td>{{clasificacion.nombre}}</td>
+					</tr>
+					<tr>
+						<th>Categoría</th>
+						<td>{{clasificacion.categoria.nombre}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<!-- <a href="#!/evaluation/adminevaluation" class="btn btn-primary">Volver</a> -->
+		<button onclick="window.history.back()" class="btn btn-default">Volver</button>
+	</div>
+</div>

@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Administrador <small>categorías</small></h1>
+		</div>
+	</div>
+	<div class="col-md-12">
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped table-bordered table-hover table-responsive">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nombre</th>
+					<th>Opciones</th>
+				</tr>
+				<tr>
+					<th>#</th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.nombre"></th>
+					<th><a href="#!/evaluation/createcategoria" class="btn btn-success btn-sm">Agregar</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, categoria) in categorias | filter:buscar">
+					<th>{{key+1}}</th>
+					<td>{{categoria.nombre}}</td>
+					<td>
+						<a href="#!/evaluation/categoria/{{categoria.id}}" class="btn btn-sm btn-primary">Ver</a>
+						<a href="#!/evaluation/editcategoria/{{categoria.id}}" class="btn btn-sm btn-warning">Editar</a>
+						<button
+						class="btn btn-sm btn-danger"
+						mwl-confirm
+						title="Eliminar a empresa {{categoria.nombre}}"
+						message="Seguro que desea quitar a {{ categoria.nombre }}"
+						placement="left"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(key)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="col-md-12">
+	<ul uib-pagination previous-text="Atrás" next-text="Siguiente" total-items="totalItems" items-per-page="pageItems" ng-model="currentPage" ng-change="pageChanged(currentPage)"></ul>
+</div>
+</div>

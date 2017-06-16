@@ -1,0 +1,75 @@
+<form name="otForm" class="form-horizontal">
+	<div class="form-group input-group-sm">
+		<label class="col-sm-4 control-label">Solicitud</label>
+		<div class="col-sm-6">
+			<select class="form-control" ng-model="model.sol_id" required>
+			  <option value="{{s.id}}" ng-repeat="s in solicitud">{{s.empresa.nombre}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group input-group-sm">
+		<label class="col-sm-4 control-label">Empresa Usuaria</label>
+		<div class="col-sm-6">
+			<select class="form-control" ng-model="model.emp_id" required>
+			  <option value="{{s.id}}" ng-repeat="s in empresas">{{s.nombre}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Especialidad</label>
+		<div class="col-sm-6">			
+		<select class="form-control" ng-model="model.esp_id" required>
+		  	<option value="{{s.id}}" ng-repeat="s in especialidad">{{s.nombre}}</option>
+		</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Perfil de evaluación</label>
+		<div class="col-sm-6">		
+			<select class="form-control" ng-model="model.per_id" required placeholder="Seleccione...">
+				<option value="{{s.id}}" ng-repeat="s in perfil">{{s.nombre}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Personal</label>
+		<div class="col-sm-6">
+			<label class="radio-inline"><input type="radio" ng-model="model.personal" value="ESTABLE">ESTABLE</label>
+			<label class="radio-inline"><input type="radio" ng-model="model.personal" value="TRANSITORIO">TRANSITORIO</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Tipo de Certificación</label>
+		<div class="col-sm-6">
+<label class="radio-inline"><input type="radio" ng-model="model.tipo" value="CERTIFICACIÓN">CERTIFICACIÓN</label>
+<label class="radio-inline">
+<input type="radio" ng-model="model.tipo" value="PRE-CERTIFICACIÓN">PRE-CERTIFICACIÓN</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Fecha de inicio</label>
+		<div class="col-sm-6">
+			<input type="date" ng-model="model.inicio" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Fecha de termino</label>
+		<div class="col-sm-6">
+			<input type="date" ng-model="model.termino" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Direccion de Servicio</label>
+		<div class="col-sm-6">
+			<input type="text" ng-model="model.direccion" class="form-control">
+		</div>
+	</div>
+	<div class="form-group" ng-show="model.id">
+		<label class="col-sm-4 control-label">Estado</label>
+		<div class="col-sm-6">			
+			<label class="radio-inline"><input type="radio" ng-model="model.estado" value="TRANSITORIO">ABIERTO</label>
+			<label class="radio-inline"><input type="radio" ng-model="model.estado" value="ESTABLE">CERRADO</label>
+			<label class="radio-inline"><input type="radio" ng-model="model.estado" value="TRANSITORIO">EXTENCION</label>
+		</div>
+	</div>
+</form>

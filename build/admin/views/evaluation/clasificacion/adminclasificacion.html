@@ -1,0 +1,54 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Administrador <small>Clasificaciones</small></h1>
+		</div>
+	</div>
+	<div class="col-md-12">
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped table-bordered table-hover table-responsive">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nombre</th>
+					<th>Categoria</th>
+					<th>Opciones</th>
+				</tr>
+				<tr>
+					<th>#</th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.nombre"></th>
+					<th><input type="text" class="form-control input-sm" ng-model="buscar.categoria.nombre"></th>
+					<th><a href="#!/evaluation/createclasificacion" class="btn btn-success btn-sm">Agregar</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, clasificacion) in clasificaciones | filter:buscar">
+					<th>{{key+1}}</th>
+					<td>{{clasificacion.nombre}}</td>
+					<td>{{clasificacion.categoria.nombre}}</td>
+					<td>
+						<a href="#!/evaluation/clasificacion/{{clasificacion.id}}" class="btn btn-sm btn-primary">Ver</a>
+						<a href="#!/evaluation/editclasificacion/{{clasificacion.id}}" class="btn btn-sm btn-warning">Editar</a>
+						<button
+						class="btn btn-sm btn-danger"
+						mwl-confirm
+						title="Eliminar a empresa {{clasificacion.nombre}}"
+						message="Seguro que desea quitar a {{ clasificacion.nombre }}"
+						placement="left"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(key)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="col-md-12">
+	<ul uib-pagination previous-text="Atrás" next-text="Siguiente" total-items="totalItems" items-per-page="pageItems" ng-model="currentPage" ng-change="pageChanged(currentPage)"></ul>
+</div>
+</div>

@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Administrador <small>Evaluaciones</small></h1>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped table-bordered table-hover table-responsive">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nombre</th>
+					<th>Descripción</th>
+					<th style="width: 190px">Opciones</th>
+				</tr>
+				<tr>
+					<th>#</th>
+					<th><input type="text" class="form-control input-sm" ng-change="searchItems(buscar)" ng-model="buscar"></th>
+					<!-- <th><input type="text" class="form-control input-sm" ng-model=""></th> -->
+					<th></th>
+					<th><a href="#!/evaluation/createevaluation" class="btn btn-success btn-sm">Agregar</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, evaluation) in evaluations | filter:buscar">
+					<th>{{key+1}}</th>
+					<td>{{evaluation.nombre}}</td>
+					<td>{{evaluation.descripcion}}</td>
+					<td>
+						<a href="#!/evaluation/{{evaluation.id}}" class="btn btn-sm btn-primary">Ver</a>
+						<a href="#!/evaluation/editevaluation/{{evaluation.id}}" class="btn btn-sm btn-warning">Editar</a>
+						<button
+						class="btn btn-sm btn-danger"
+						mwl-confirm
+						title="Eliminar a empresa {{evaluation.nombre}}"
+						message="Seguro que desea quitar a {{evaluation.nombre}}"
+						placement="left"
+						confirm-text="Eliminar"
+						cancel-text="Cancelar"
+						on-confirm="remove(key)"
+						confirm-button-type="danger"
+						cancel-button-type="default">
+						Eliminar
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="col-md-12">
+	<ul uib-pagination previous-text="Atrás" next-text="Siguiente" total-items="totalItems" items-per-page="pageItems" ng-model="currentPage" ng-change="pageChanged(currentPage,buscar)"></ul>
+</div>
+</div>
