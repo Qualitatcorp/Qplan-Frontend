@@ -27,7 +27,7 @@ angular.module('admin', [
 
 .config(['$routeProvider','uiSelectConfig',function($routeProvider,uiSelectConfig) {
   uiSelectConfig.theme = 'bootstrap';
-	var Url={basePath:"views/",to(tpl){return this.basePath+tpl+".html";}};
+	var Url={basePath:"views/",to:function(tpl){return this.basePath+tpl+".html";}};
 	$routeProvider
 	.when('/',{
 		redirectTo:'/login'

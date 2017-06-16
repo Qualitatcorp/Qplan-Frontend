@@ -21,7 +21,7 @@ angular.module('Ot')
 		}
 		$scope.rmTrabajador=function(key) {
 			var trabajador=$scope.model.trabajador[key];
-			otTServices.search({ot_id:ot.data.id,tra_id:trabajador.id}).then(
+			otTServices.params({ot_id:ot.data.id,tra_id:trabajador.id}).search().then(
 				function(q) {
 					otTServices.remove(q.data[0].id).then(function(e) {
 						$scope.model.trabajador.splice(key,1);

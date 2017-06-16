@@ -1,48 +1,76 @@
 module.exports = function(grunt) {
     
     grunt.initConfig({
-        now : new Date().toISOString().replace(/(-|:|T)/g, "_"),
+        now : Date.now()-1497543737318,
         pkg : grunt.file.readJSON('package.json'),
         // manifest: grunt.file.readJSON('manifest.json'),
-        trabajador:grunt.file.readJSON('trabajador.json'),
+        src:grunt.file.readJSON('resources.json'),
         uglify: {
-            build: {
+            options: {
+              banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> for Ruben*/\n'
+            },
+            trabajador: {
                 files : {
-                  'build/trabajador/js/trabajador.modules.min.js' : '<%= trabajador.js.modules %>',
-                  'build/trabajador/js/trabajador.vendors.min.js' : '<%= trabajador.js.vendors %>',
-                  'build/trabajador/js/trabajador.app.min.js' : '<%= trabajador.js.app %>'
-                  // 'build/js/scripts.min.js' : '<%= trabajador.js.scripts %>'
+                  'build/trabajador/js/modules.min.js' : '<%= src.trabajador.js.modules %>',
+                  'build/trabajador/js/vendors.min.js' : '<%= src.trabajador.js.vendors %>',
+                  'build/trabajador/js/app.min.js' : '<%= src.trabajador.js.app %>'
+                }
+            },
+            admin: {
+                files : {
+                  'build/admin/js/modules.min.js' : '<%= src.admin.js.modules %>',
+                  'build/admin/js/vendors.min.js' : '<%= src.admin.js.vendors %>',
+                  'build/admin/js/app.min.js' : '<%= src.admin.js.app %>'
                 }
             }
         },
-        // injector: {                
-        //     build: {
-        //         options : {
-        //             template : 'app/templates/index.tpl.html',
-        //             destFile : 'index.html',
-        //             postfix : '?v=<%= now %>'                   
-        //         },
-        //         files : {
-        //             src : [
-        //                 '../js/vendor.min.js', 
-        //                 '../js/scripts.min.js',
-        //                 '../css/vendor.min.css'
-        //             ]
-        //         }
-        //     }
-        // },
+        injector: {                
+            trabajador: {
+                options : {
+                    template : 'build/trabajador.tpl',
+                    destFile : 'build/trabajador/index.html',
+                    postfix : '?v=<%= now %>'                   
+                },
+                files : {
+                    src : [
+                        'build/trabajador/js/*.js',
+                        'build/trabajador/css/*.css'
+                    ]
+                }
+            },                
+            admin: {
+                options : {
+                    template : 'build/admin.tpl',
+                    destFile : 'build/admin/index.html',
+                    postfix : '?v=<%= now %>'                   
+                },
+                files : {
+                    src : [
+                        'build/admin/js/*.js',
+                        'build/admin/css/*.css'
+                    ]
+                }
+            },
+        },
         cssmin : {
-            build: {
+            trabajador: {
                 files: {
-                  'build/trabajador/css/trabajador.min.css' : '<%= trabajador.css %>'
+                  'build/trabajador/css/style.min.css' : '<%= src.trabajador.css %>'
+                }
+            },
+            admin: {
+                files: {
+                  'build/admin/css/style.min.css' : '<%= src.admin.css %>'
                 }
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    // grunt.loadNpmTasks('grunt-injector');
+    grunt.loadNpmTasks('grunt-injector');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.registerTask('trabajador', ['uglify', 'cssmin']);
+    grunt.registerTask('trabajador', ['uglify:trabajador', 'cssmin:trabajador','injector:trabajador']);
+    grunt.registerTask('admin', ['uglify:admin', 'cssmin:admin','injector:admin']);
+    grunt.registerTask('default', ['uglify', 'cssmin','injector']);
 
 };

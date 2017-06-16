@@ -26,7 +26,7 @@ angular.module('Ot')
 	}
 	$scope.exists=function(rut) {
 		if(rut){
-			api.Trabajador.search({rut:RutHelper.format(rut)}).then(
+			api.Trabajador.params({rut:RutHelper.format(rut)}).search().then(
 				function(q) {
 					$scope.model=q.data[0];
 				},function (q) {
