@@ -36,7 +36,7 @@
         "app/components/trabajador/authController.js",
         "app/components/trabajador/antecedentesController.js",
         "app/shared/filters/filters.js",
-        "app/shared/filters/dinamicSource.js"
+        "app/shared/filters/dinamicSourceServer.js"
       ]
     },
     "css": [
@@ -69,7 +69,7 @@
         "node_modules/angular-js-xlsx/angular-js-xlsx.js"
       ],
       "app": [
-        "app/shared/services/REST/admin/rest.js",
+        "app/shared/services/REST/admin/restServer.js",
         "app/shared/services/REST/admin/sessionServices.js",
         "app/shared/services/authenticationServices.js",
         "app/shared/services/authInterceptor.js",

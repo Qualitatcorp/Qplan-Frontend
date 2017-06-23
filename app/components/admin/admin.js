@@ -121,7 +121,6 @@ angular.module('admin', [
 			list:['apiServices',function(api){
 				return api.model("ordentrabajo").expand("solicitud,usuario,empresa,especialidad,perfil,mandante,countfic,counttra").fields("id,inicio,estado").getAll();
 			}],
-			services:'otServices'
 		}
 	})
 	.when('/ot/:id/add',{
@@ -147,7 +146,7 @@ angular.module('admin', [
 		resolve:{
 			ot:['apiServices','$route',function(api,$route){
 				return api.model('ordentrabajo').expand("solicitud,trabajador,empresa,mandante,usuario,perfil").get($route.current.params.id);
-			}],
+			}]
 		}
 
 	})	
@@ -180,7 +179,7 @@ angular.module('admin', [
 		controller:'empresa.viewController',
 		resolve:{
 			empresa:['apiServices','$route',function(apiServices,$route){
-				return apiServices.model('empresa').get($route.current.params.id);
+				return apiServices.model('empresa').expand("pais,comuna").get($route.current.params.id);
 			}]
 		}
 	})

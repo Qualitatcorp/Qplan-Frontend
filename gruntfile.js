@@ -1,13 +1,13 @@
 module.exports = function(grunt) {
     
     grunt.initConfig({
-        now : Date.now()-1497543737318,
+        now : Date.now(),
         pkg : grunt.file.readJSON('package.json'),
         // manifest: grunt.file.readJSON('manifest.json'),
         src:grunt.file.readJSON('resources.json'),
         uglify: {
             options: {
-              banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> for Ruben*/\n'
+              banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> - for Ruben Tejeda*/\n'
             },
             trabajador: {
                 files : {

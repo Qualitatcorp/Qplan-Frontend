@@ -2,14 +2,10 @@
 angular.module('trabajador')
 .controller('evaluacionController', ['$filter','$scope','evaluacionStorage','$location','evaluacion','trabajadorStorage','toastr',
 	function($filter,$scope,evaluacionStorage,$location,evaluacion,trabajadorStorage,toastr){
-		console.log(perfil);
 		var audioSrc,imageSrc;
 		var audio = document.getElementById('player');
 		var error = document.getElementById('error');
-		// audio.onerror=function() {
-		// 	audio.src=audioSrc;
-		// 	audio.play();
-		// }
+
 		var playAudio=function(src){
 				if(src){
 					audio.src=audio.src;
@@ -42,7 +38,9 @@ angular.module('trabajador')
 					var recurso= _.findWhere(perfil.recursos,{pre_id:p.id})
 					angular.extend(recurso,{
 						sources:_.map(_.where(perfil.rhs,{rec_id:recurso.id}),function(rh) {
-							return _.findWhere(perfil.sources,{id:rh.src_id});
+							var src=_.findWhere(perfil.sources,{id:rh.src_id});
+							src.tipo=rh.tipo;
+							return src;
 						}),
 						options:_.map(_.where(perfil.rho,{opt_id:recurso.id}),function(ro) {
 							return _.findWhere(perfil.options,{id:ro.src_id});
@@ -54,24 +52,18 @@ angular.module('trabajador')
 			});
 		});
 
-
-
 		evaluacionStorage.nuevaEvaluacion(trabajadorStorage.q.ficha,perfil.modteorica);
 
 		$scope.evaluacion={
 			perfil:perfil.nombre,
 			preguntas:preguntas
-			
 		};
 		$scope.ficha={
 			_current:0,
 			get current(){
-
 				return this._current;
 			},
-			set current(value){
-
-				
+			set current(value){				
 				if(value>=0&&value<this.preguntas.length){
 					this._current=value;
 					if(this._current==0){
@@ -85,6 +77,7 @@ angular.module('trabajador')
 						}
 					}
 				}
+				console.log("pregunta : "+this.pregunta.id);
 				setTimeout(function() {
 					if($scope.ficha.audioPregunta){
 						audioSrc=$scope.ficha.audioPregunta.src;
@@ -104,8 +97,9 @@ angular.module('trabajador')
 			},
 			set respuesta(value){
 				evaluacionStorage.addRespuesta(this.pregunta.id,value,this.pregunta.modulo.id);
-				if(this.progreso==1)
+				if(this.progreso==1){
 					$scope.buttons.Terminar.disable=false;
+				}
 			},
 			get preguntas(){
 				return $scope.evaluacion.preguntas;
@@ -115,6 +109,14 @@ angular.module('trabajador')
 			},
 			get recurso(){
 				return this.pregunta.recursos;
+			},
+			get imagen(){
+				var imagen=_.findWhere($scope.ficha.recurso.sources,{tipo:"CONTENIDO"});
+				if(imagen){
+					return imagen;
+				}else{
+					console.warn($scope.ficha.recurso);
+				}
 			},
 			video:{
 				get options(){
@@ -139,12 +141,16 @@ angular.module('trabajador')
 				}
 			},
 			get audioPregunta(){
-				return _.findWhere($scope.ficha.recurso.sources,{title:"pregunta"});
+				return _.findWhere($scope.ficha.recurso.sources,{tipo:"AUDIO-PREGUNTA"});
 			}
 		};
 		$scope.parse={
 			Url:function(url){
+				if(url){
 				return url.replace(' ',"%20");
+				}else{
+					console.warn("no existe url"+url);
+				}
 			},
 			Char:function(key){
 				return String.fromCharCode('a'.charCodeAt() + key)
