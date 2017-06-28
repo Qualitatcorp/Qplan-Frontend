@@ -1,0 +1,50 @@
+<div class="page-header">
+	<h1>Registro <small>Alfabetización Digital</small></h1>
+</div>
+<form class="form-horizontal" name="worksForm">
+	<div class="form-group">
+		<label class="col-sm-3 control-label">CIE</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" ng-change="find()" ng-disabled="model.id" ng-model="model.rut" placeholder="Numero de cedula de identidad y electoral" maxlength="13" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Nombres</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" ng-model="model.nombre" placeholder="Nombres">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Apellido Paterno</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" ng-model="model.paterno" placeholder="Apellido Paterno">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Apellido Materno</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" ng-model="model.materno" placeholder="Apellido Materno">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Sexo</label>
+		<div class="col-sm-8">
+			<label class="radio-inline"><input type="radio" name="sexo" ng-model="model.sexo" value="FEMENINO"> FEMENINO</label>
+			<label class="radio-inline"><input type="radio" name="sexo" ng-model="model.sexo" value="MASCULINO"> MASCULINO</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Fecha de nacimiento</label>
+		<div class="col-sm-8">
+			<input type="date" class="form-control" placeholder="Nombres" ng-model="model.nacimiento">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-8">
+			<div class="btn-group pull-right">
+				<button class="btn btn-default" ng-click="clear()">Limpiar</button>
+				<button class="btn btn-primary" ng-click="register()" type="submit" ng-disabled="worksForm.$invalid">Comenzar Evaluación</button>
+			</div>
+		</div>
+	</div>
+</form>
