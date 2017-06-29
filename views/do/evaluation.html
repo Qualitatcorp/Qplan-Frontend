@@ -42,19 +42,20 @@
 		<div class="panel-footer">Pregunta<span class="badge pull-right">{{(ficha.current+1)+" de "+(evaluacion.preguntas.length)}}</span></div>
 	</div>
 	<!-- Grupo de Botones -->
-	<div class="list-group col-md-12" role="group">
+	<div class="col-md-12">
 		<div class="btn-group pull-right">
 			<button type="button"  ng-click="buttons.Omitir.action()" ng-disabled="buttons.Omitir.disable" class="btn btn-warning">No sé</button>
 			<button type="button"  ng-click="buttons.Anterior.action()" ng-disabled="buttons.Anterior.disable" class="btn btn-primary">Anterior</button>
 			<button type="button"  ng-click="buttons.Siguiente.action()" ng-disabled="buttons.Siguiente.disable" class="btn btn-primary">Siguiente</button>
 			<button type="button"  ng-click="buttons.Terminar.action()" ng-disabled="buttons.Terminar.disable" class="btn btn-info">Terminar</button>
 		</div>
+		<br>
+		<br>
+		<br>
 	</div>
 </div>
 <div class="row">
-	<div>
-		<div class="progress">
-			<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{ficha.progreso*100}}%"></div>
-		</div>
+	<div class="progress">
+		<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{ficha.progreso*100}}%"></div>
 	</div>
 </div>

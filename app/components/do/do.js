@@ -27,7 +27,12 @@ angular.module('do', [
 	})
 	.when('/evaluation',{
 		templateUrl:Url.to('do/evaluation'),
-		controller:'do.evaluationCtrl'
+		controller:'do.evaluationCtrl',
+		resolve:{
+			perfil:['apiServices','PER_ID',function(api,PER_ID){
+				return api.model('perfil').expand('modteorica,pet,evateorica,preguntas,alternativas,recursos,rhs,sources,rho,options').get(PER_ID);
+			}],
+		}
 	})
 	.when('/finished',{
 		templateUrl:Url.to('do/finished')
@@ -39,4 +44,5 @@ angular.module('do', [
 		redirectTo:'/404'
 	});
 }])
-.value('OT',3);
+.value('OT',2)
+.value('PER_ID',5);

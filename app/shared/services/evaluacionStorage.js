@@ -41,6 +41,7 @@ angular.module("ApiRest")
 					});
 					ficha={respuesta:[]};
 				},function(q) {
+					ficha={respuesta:[]};
 					console.warn("q");
 				});
 			},
@@ -87,12 +88,16 @@ angular.module("ApiRest")
 				return _.findWhere(ficha.respuesta, {idPregunta:idPregunta});
 			},
 			eliminarEvaluacion:function() {
-				ficha=null;
+
+				ficha={respuesta:[]};
+				fichaSistema={};
+				moduloSistema=[];
+				respuestasSistema=[];
 				console.log("Evaluacion eliminada");
 			},
-			terminarEvaluacion:function() {
+			terminarEvaluacion:function(state) {
 				/*fichaSistema.proceso={'FINALIZADO TEORICO','EN PROGRESO PSICOLOGICO'};*/
-				fichaSistema.proceso='FINALIZADO TEORICO,EN PROGRESO PSICOLOGICO';
+				fichaSistema.proceso=state;
 				return fichaServices.save(fichaSistema);
 			},
 			// variables dinamicas

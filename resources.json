@@ -144,5 +144,40 @@
       "node_modules/angular-motion/dist/angular-motion.min.css",
       "node_modules/ui-select/dist/select.min.css"
     ]
+  },
+  "do": {
+    "js": {
+      "vendors": [
+        "node_modules/angular-toastr/dist/angular-toastr.tpls.min.js",
+        "node_modules/moment/min/moment.min.js",
+        "node_modules/underscore/underscore-min.js"
+      ],
+      "modules": [
+        "node_modules/angular/angular.min.js",
+        "node_modules/angular-animate/angular-animate.min.js",
+        "node_modules/angular-route/angular-route.min.js",
+        "node_modules/angular-i18n/angular-locale_es-cl.js",
+        "node_modules/angular-sanitize/angular-sanitize.js"
+      ],
+      "app": [
+        "app/shared/services/REST/do/restServer.js",
+        "app/shared/services/REST/do/sessionServices.js",
+        "app/shared/services/trabajadorStorage.js",
+        "app/shared/services/evaluacionStorage.js",
+        "app/shared/services/authenticationServices.js",
+        "app/shared/services/apiServices.js",
+        "app/shared/filters/filters.js",
+        "app/shared/filters/DominicanCIE.js",
+        "app/shared/filters/dinamicSourceServer.js",
+        "app/components/do/do.js",
+        "app/components/do/evaluation.js",
+        "app/components/do/register.js",
+        "app/components/do/auth.js"
+      ]
+    },
+    "css": [
+      "css/bootstrap.cerulean.min.css",
+      "node_modules/angular-toastr/dist/angular-toastr.min.css"
+    ]
   }
 }

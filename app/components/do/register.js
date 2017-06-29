@@ -76,6 +76,8 @@ function(
 
 	$scope.register=function(){
 		if($scope.model.rut.length==13){
+			if($scope.model.nacimiento)
+				$scope.model.nacimiento=$scope.model.nacimiento.toISOString().split('T')[0];
 			trabajadorServices.save($scope.model).then(
 				function(q){
 					registerOtTrabajador(q.data);

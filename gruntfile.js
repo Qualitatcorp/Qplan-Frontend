@@ -22,6 +22,13 @@ module.exports = function(grunt) {
                   'build/admin/js/vendors.min.js' : '<%= src.admin.js.vendors %>',
                   'build/admin/js/app.min.js' : '<%= src.admin.js.app %>'
                 }
+            },
+            do: {
+                files : {
+                  'build/do/js/modules.min.js' : '<%= src.do.js.modules %>',
+                  'build/do/js/vendors.min.js' : '<%= src.do.js.vendors %>',
+                  'build/do/js/app.min.js' : '<%= src.do.js.app %>'
+                }
             }
         },
         injector: {                
@@ -50,7 +57,20 @@ module.exports = function(grunt) {
                         'build/admin/css/*.css'
                     ]
                 }
-            },
+            },                
+            do: {
+                options : {
+                    template : 'build/do.tpl',
+                    destFile : 'build/do/index.html',
+                    postfix : '?v=<%= now %>'                   
+                },
+                files : {
+                    src : [
+                        'build/do/js/*.js',
+                        'build/do/css/*.css'
+                    ]
+                }
+            }
         },
         cssmin : {
             trabajador: {
@@ -62,6 +82,11 @@ module.exports = function(grunt) {
                 files: {
                   'build/admin/css/style.min.css' : '<%= src.admin.css %>'
                 }
+            },
+            do: {
+                files: {
+                  'build/do/css/style.min.css' : '<%= src.do.css %>'
+                }
             }
         }
     });
@@ -71,6 +96,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.registerTask('trabajador', ['uglify:trabajador', 'cssmin:trabajador','injector:trabajador']);
     grunt.registerTask('admin', ['uglify:admin', 'cssmin:admin','injector:admin']);
+    grunt.registerTask('do', ['uglify:do', 'cssmin:do','injector:do']);
     grunt.registerTask('default', ['uglify', 'cssmin','injector']);
 
 };
