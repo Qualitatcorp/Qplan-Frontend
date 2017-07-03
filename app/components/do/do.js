@@ -35,7 +35,8 @@ angular.module('do', [
 		}
 	})
 	.when('/finished',{
-		templateUrl:Url.to('do/finished')
+		templateUrl:Url.to('do/finished'),
+		controller:'do.finishedCtrl'
 	})
 	.when('/404',{
 		template:'Error 404'
@@ -44,5 +45,5 @@ angular.module('do', [
 		redirectTo:'/404'
 	});
 }])
-.value('OT',2)
-.value('PER_ID',5);
+.value('OT',3)
+.value('PER_ID',7);

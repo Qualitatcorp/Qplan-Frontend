@@ -172,6 +172,7 @@
         "app/components/do/do.js",
         "app/components/do/evaluation.js",
         "app/components/do/register.js",
+        "app/components/do/finished.js",
         "app/components/do/auth.js"
       ]
     },

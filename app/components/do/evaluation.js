@@ -24,6 +24,8 @@ angular.module('do')
 				}),
 				get recursos() {
 					var recurso= _.findWhere(perfil.recursos,{pre_id:p.id})
+					if(recurso){
+						
 					angular.extend(recurso,{
 						sources:_.map(_.where(perfil.rhs,{rec_id:recurso.id}),function(rh) {
 							var src=_.findWhere(perfil.sources,{id:rh.src_id});
@@ -34,6 +36,7 @@ angular.module('do')
 							return _.findWhere(perfil.options,{id:ro.src_id});
 						})}
 					);
+					}
 					return recurso;
 				},
 				modulo:_.findWhere(perfil.modteorica,{id:_.findWhere(perfil.pet,{evt_id:_.findWhere(perfil.evateorica,{id:p.eva_id}).id}).mop_id})
@@ -147,8 +150,8 @@ angular.module('do')
 				disable:true,
 				action:function() {
 					evaluacionStorage.terminarEvaluacion('TERMINADO').then(function(s){
-						trabajadorStorage.q=null;
-						evaluacionStorage.eliminarEvaluacion();
+						// trabajadorStorage.q=null;
+						// evaluacionStorage.eliminarEvaluacion();
 						$location.path("/finished");
 					}
 					);
